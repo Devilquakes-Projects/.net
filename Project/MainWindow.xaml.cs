@@ -23,10 +23,35 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
-            if (true)
+            if (User.LoggedIn)
             {
-
+                logoutButton.Visibility = Visibility.Visible;
             }
+            else
+            {
+                loginButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Close();
+        }
+
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            User.Logout();
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+        private void gregoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

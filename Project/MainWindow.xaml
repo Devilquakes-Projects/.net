@@ -2,7 +2,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Testing">
+                <MenuItem Header="_Joris" />
+                <MenuItem Header="_Joren" />
+                <MenuItem Header="_Christiaan" />
+                <MenuItem Header="_Gregory" Click="gregoryButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="_User">
+                <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
+                <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
+            </MenuItem>
+        </Menu>
+        <Grid DockPanel.Dock="Bottom">
+            <Label Content="Testomgevingen vind u terug onder testing. log in via login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        </Grid>
+    </DockPanel>
 </Window>
