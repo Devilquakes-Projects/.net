@@ -23,6 +23,10 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
+            if (true)
+            {
+
+            }
         }
     }
 }
