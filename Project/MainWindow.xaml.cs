@@ -23,7 +23,6 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("test");
         }
     }
 }
