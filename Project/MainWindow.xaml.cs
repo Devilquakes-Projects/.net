@@ -23,7 +23,10 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("Greg");
+            if (true)
+            {
+
+            }
         }
     }
 }
