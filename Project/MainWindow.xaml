@@ -11,9 +11,11 @@
                 <MenuItem Header="_Christiaan" />
                 <MenuItem Header="_Gregory" Click="gregoryButton_Click"/>
             </MenuItem>
-            <MenuItem Header="_User">
-                <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
-                <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
+
+            <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
+            <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
+            <MenuItem Header="_Teacher" x:Name="teacherMenu" Visibility="Collapsed">
+                <MenuItem Header="_Mathematics" x:Name="mathButton" Click="mathematicsButton_Click"/>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">

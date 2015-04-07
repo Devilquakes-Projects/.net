@@ -35,7 +35,7 @@ namespace Project
             string userName = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (User.Login(userName, pass))
+            if (UserController.Login(userName, pass))
             {
                 MainWindow mainwindow = new MainWindow();
                 mainwindow.Show();

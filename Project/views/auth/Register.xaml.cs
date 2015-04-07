@@ -43,7 +43,7 @@ namespace Project
             }
             else
             {
-                if (User.Register(userName, pass, name, lastName))
+                if (UserController.Register(userName, pass, name, lastName))
                 {
                     MainWindow hoofdvenster = new MainWindow();
                     hoofdvenster.Show();

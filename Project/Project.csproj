@@ -53,24 +53,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BCrypt.cs" />
+    <Compile Include="thirdParty\BCrypt.cs" />
     <Compile Include="Curriculum.cs" />
-    <Compile Include="GregoryTest.xaml.cs">
+    <Compile Include="views\GregoryTest.xaml.cs">
       <DependentUpon>GregoryTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="views\auth\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mathematics.cs" />
-    <Compile Include="Register.xaml.cs">
+    <Compile Include="views\auth\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
-    <Page Include="GregoryTest.xaml">
+    <Compile Include="controllers\UserController.cs" />
+    <Compile Include="views\cources\Mathematics.xaml.cs">
+      <DependentUpon>Mathematics.xaml</DependentUpon>
+    </Compile>
+    <Page Include="views\GregoryTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="views\auth\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,12 +85,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBController.cs" />
+    <Compile Include="controllers\DBController.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Register.xaml">
+    <Page Include="views\auth\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\cources\Mathematics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +126,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

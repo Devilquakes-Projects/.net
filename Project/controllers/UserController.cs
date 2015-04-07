@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    public static class User
+    public static class UserController
     {
         private static bool _loggedIn;
 
@@ -74,7 +74,7 @@ namespace Project
                 throw new ArgumentNullException("password");
             }
 
-            User.Logout();
+            UserController.Logout();
 
             string[] dbUser = DBController.FindFirst("users", "username", userName);
             if (dbUser != null)
@@ -114,7 +114,7 @@ namespace Project
                 throw new ArgumentNullException("last name");
             }
 
-            User.Logout();
+            UserController.Logout();
 
             // check als user bestaat
             string[] userExists = DBController.FindFirst("users", "username", userName);

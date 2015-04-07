@@ -23,8 +23,12 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
-            if (User.LoggedIn)
+            if (UserController.LoggedIn)
             {
+                if (UserController.Permission == 1)
+                {
+                    teacherMenu.Visibility = Visibility.Visible;
+                }
                 logoutButton.Visibility = Visibility.Visible;
             }
             else
@@ -42,7 +46,7 @@ namespace Project
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            User.Logout();
+            UserController.Logout();
 
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
