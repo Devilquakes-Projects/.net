@@ -268,7 +268,7 @@ namespace Project
                     MessageBox.Show("Ongeldige ingave bij vraag 5" + Environment.NewLine + "U krijgt voor deze vraag een 0");
                     tb5.Text = ResultOfAnswer(false, 4);
                 }
-                points = 5; difficulty = 3;
+                
                 points = (int)(points * 1.5 + difficulty * 0.84);
 
                 string[] records = DBController.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
