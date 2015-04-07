@@ -14,15 +14,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Project.Controllers;
 
-namespace Project
+namespace Project.Views
 {
     /// <summary>
     /// Interaction logic for Welkom.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class LoginWindow : Window
     {
-        public Login()
+        public LoginWindow()
         {
             InitializeComponent();
         }
@@ -35,7 +36,7 @@ namespace Project
             string userName = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (UserController.Login(userName, pass))
+            if (User.Login(userName, pass))
             {
                 MainWindow mainwindow = new MainWindow();
                 mainwindow.Show();
@@ -49,7 +50,7 @@ namespace Project
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
         {
-            Register register = new Register();
+            RegisterWindow register = new RegisterWindow();
             register.Show();
             this.Close();
         }

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Project.Controllers;
 
 namespace Project
 {
@@ -63,7 +64,7 @@ namespace Project
 
             this.studentId = studentId;
 
-            string[] studentTestCompleted = DBController.FindFirst(MathStudents, "ID", Convert.ToString(studentId));//opvragen db student
+            string[] studentTestCompleted = DB.FindFirst(MathStudents, "ID", Convert.ToString(studentId));//opvragen db student
 
             if (studentTestCompleted[5].Equals("false"))
             {
@@ -99,7 +100,7 @@ namespace Project
         {
             int totalLines;
             int visibleLines;
-            DBController.LineCount(questions, out visibleLines, out totalLines);//THE NEW WAY
+            DB.LineCount(questions, out visibleLines, out totalLines);//THE NEW WAY
 
             if (visibleLines >= 5)
             {
@@ -109,7 +110,7 @@ namespace Project
                 for (int i = 0; i < randomNumbers.Length; i++)
                 {
                     answers[i] = randomNumbers[i];
-                    isEnabled = DBController.FindFirst(questions, "ID", Convert.ToString(answers[i]));
+                    isEnabled = DB.FindFirst(questions, "ID", Convert.ToString(answers[i]));
 
                     if (isEnabled == null)
                     {
@@ -118,35 +119,35 @@ namespace Project
                 }
 
                 string[] labels;
-                labels = DBController.FindFirst(questions, "Id", Convert.ToString(randomNumbers[0]));
+                labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[0]));
                 if (labels != null)
                 {
                     l1.Content = labels[2];//show question
                     answers[0] = Convert.ToInt32(labels[3]); //save answer index
                 }
 
-                labels = DBController.FindFirst(questions, "Id", Convert.ToString(randomNumbers[1]));
+                labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[1]));
                 if (labels != null)
                 {
                     l2.Content = labels[2];
                     answers[1] = Convert.ToInt32(labels[3]);
                 }
 
-                labels = DBController.FindFirst(questions, "Id", Convert.ToString(randomNumbers[2]));
+                labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[2]));
                 if (labels != null)
                 {
                     l3.Content = labels[2];
                     answers[2] = Convert.ToInt32(labels[3]);
                 }
 
-                labels = DBController.FindFirst(questions, "Id", Convert.ToString(randomNumbers[3]));
+                labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[3]));
                 if (labels != null)
                 {
                     l4.Content = labels[2];
                     answers[3] = Convert.ToInt32(labels[3]);
                 }
 
-                labels = DBController.FindFirst(questions, "Id", Convert.ToString(randomNumbers[4]));
+                labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[4]));
                 if (labels != null)
                 {
                     l5.Content = labels[2];
@@ -269,16 +270,16 @@ namespace Project
                     tb5.Text = ResultOfAnswer(false, 4);
                 }
 
-                string[] records = DBController.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
+                string[] records = DB.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
                 records[5] = Convert.ToString(points * 2);
-                DBController.ChangeFromRead(MathStudents, studentId, records);
+                DB.ChangeFromRead(MathStudents, studentId, records);
 
                 isCompleted = true;
                 return points * 2 + (int)(difficulty * 1.67);//score op 5 + moeilijkheidsgraad * 1.67 (0-5ptn waard)
             }
             else
             {
-                string[] points = DBController.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
+                string[] points = DB.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
                 MessageBox.Show("you are not allowed to re-do this test", "Notification", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return Convert.ToInt32(points[5]);
             }
@@ -296,7 +297,7 @@ namespace Project
                 {
                     array[i] = r1.Next(minValue, maxValue + 1);
 
-                    test = DBController.FindFirst(questions, "ID", Convert.ToString(array[i]));
+                    test = DB.FindFirst(questions, "ID", Convert.ToString(array[i]));
                     if (test != null)
                     {
                         for (int j = 0; j < i; j++)

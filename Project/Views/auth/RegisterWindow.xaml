@@ -1,4 +1,4 @@
-﻿<Window x:Class="Project.Register"
+﻿<Window x:Class="Project.Views.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Registratie" Height="300" Width="300">

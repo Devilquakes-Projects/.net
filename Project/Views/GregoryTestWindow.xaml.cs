@@ -17,11 +17,11 @@ namespace Project
     /// <summary>
     /// Interaction logic for GregoryTest.xaml
     /// </summary>
-    public partial class GregoryTest : Window
+    public partial class GregoryTestWindow : Window
     {
         private Mathematics m1;
 
-        public GregoryTest()
+        public GregoryTestWindow()
         {
             InitializeComponent();
             m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 2);//labels-tboxes-stud_id-difficulty

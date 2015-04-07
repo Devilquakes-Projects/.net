@@ -17,9 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Project
+namespace Project.Controllers
 {
-    public static class DBController
+    public static class DB
     {
         private static string destination = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "01DBProject");
 

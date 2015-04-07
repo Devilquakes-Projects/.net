@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project
+namespace Project.Controllers
 {
-    public static class UserController
+    public static class User
     {
         private static bool _loggedIn;
 
@@ -74,9 +74,9 @@ namespace Project
                 throw new ArgumentNullException("password");
             }
 
-            UserController.Logout();
+            User.Logout();
 
-            string[] dbUser = DBController.FindFirst("users", "username", userName);
+            string[] dbUser = DB.FindFirst("users", "username", userName);
             if (dbUser != null)
             {
                 // 3 is het veld van het wachtwoord.
@@ -114,10 +114,10 @@ namespace Project
                 throw new ArgumentNullException("last name");
             }
 
-            UserController.Logout();
+            User.Logout();
 
             // check als user bestaat
-            string[] userExists = DBController.FindFirst("users", "username", userName);
+            string[] userExists = DB.FindFirst("users", "username", userName);
             if (userExists == null)
             {
                 string salt = BCrypt.GenerateSalt();
@@ -130,8 +130,8 @@ namespace Project
                     records[4] = "1";
                 }
 
-                DBController.AddRecord("users", records);
-                string[] dbUser = DBController.FindFirst("users", "username", userName);
+                DB.AddRecord("users", records);
+                string[] dbUser = DB.FindFirst("users", "username", userName);
                 _id = Convert.ToInt32(dbUser[0]);
                 _username = dbUser[2];
                 _name = dbUser[4];
@@ -150,9 +150,9 @@ namespace Project
         {
             try
             {
-                string[] records = DBController.FindFirst("users", "id", Convert.ToString(id));
+                string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
                 records[6] = "1";
-                DBController.ChangeRecord("users", id, records);
+                DB.ChangeRecord("users", id, records);
                 return true;
             }
             catch
@@ -165,9 +165,9 @@ namespace Project
         {
             try
             {
-                string[] records = DBController.FindFirst("users", "id", Convert.ToString(id));
+                string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
                 records[6] = "0";
-                DBController.ChangeRecord("users", id, records);
+                DB.ChangeRecord("users", id, records);
                 return true;
             }
             catch

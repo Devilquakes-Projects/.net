@@ -15,11 +15,16 @@
             <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
             <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
             <MenuItem Header="_Teacher" x:Name="teacherMenu" Visibility="Collapsed">
-                <MenuItem Header="_Mathematics" x:Name="mathButton" Click="mathematicsButton_Click"/>
+                <MenuItem Header="_Add Question" x:Name="addQuestionButton" Click="addQuestionButton_Click"/>
+                <MenuItem Header="_Edit Question" x:Name="editQuestionButton" Click="editQuestionButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Cources" Visibility="Collapsed">
+                <MenuItem Header="_Mathematics" x:Name="MathematicsButton" Click="MathematicsButton_Click"/>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">
             <Label Content="Testomgevingen vind u terug onder testing. log in via login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="testButton" Content="Test Button" HorizontalAlignment="Left" Margin="73,134,0,0" VerticalAlignment="Top" Width="75" Click="testButton_Click"/>
         </Grid>
     </DockPanel>
 </Window>

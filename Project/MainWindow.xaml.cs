@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Project.Views;
+using Project.Controllers;
 
 namespace Project
 {
@@ -23,9 +25,9 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
-            if (UserController.LoggedIn)
+            if (User.LoggedIn)
             {
-                if (UserController.Permission == 1)
+                if (User.Permission == 1)
                 {
                     teacherMenu.Visibility = Visibility.Visible;
                 }
@@ -39,30 +41,49 @@ namespace Project
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            LoginWindow newView = new LoginWindow();
+            newView.Show();
             this.Close();
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            UserController.Logout();
+            User.Logout();
 
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            MainWindow newView = new MainWindow();
+            newView.Show();
             this.Close();
         }
 
         private void gregoryButton_Click(object sender, RoutedEventArgs e)
         {
-            GregoryTest gregoryTest = new GregoryTest();
-            gregoryTest.Show();
+            GregoryTestWindow newView = new GregoryTestWindow();
+            newView.Show();
             this.Close();
         }
 
-        private void mathematicsButton_Click(object sender, RoutedEventArgs e)
+        private void addQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddQuestionWindow newView = new AddQuestionWindow();
+            newView.Show();
+            this.Close();
+        }
+
+        private void editQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditQuestionWindow newView = new EditQuestionWindow();
+            newView.Show();
+            this.Close();
+        }
+
+        private void MathematicsButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void testButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

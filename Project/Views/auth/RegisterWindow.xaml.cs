@@ -14,15 +14,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Project.Controllers;
 
-namespace Project
+namespace Project.Views
 {
     /// <summary>
     /// Interaction logic for Registratie.xaml
     /// </summary>
-    public partial class Register : Window
+    public partial class RegisterWindow : Window
     {
-        public Register()
+        public RegisterWindow()
         {
             InitializeComponent();
         }
@@ -43,7 +44,7 @@ namespace Project
             }
             else
             {
-                if (UserController.Register(userName, pass, name, lastName))
+                if (User.Register(userName, pass, name, lastName))
                 {
                     MainWindow hoofdvenster = new MainWindow();
                     hoofdvenster.Show();

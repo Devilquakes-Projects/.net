@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Project.viewCources
+namespace Project.Views
 {
     /// <summary>
     /// Interaction logic for Mathematics.xaml
     /// </summary>
-    public partial class Mathematics : Window
+    public partial class MathematicsWindow : Window
     {
-        public Mathematics()
+        public MathematicsWindow()
         {
             InitializeComponent();
         }

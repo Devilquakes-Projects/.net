@@ -1,4 +1,4 @@
-﻿<Window x:Class="Project.Login"
+﻿<Window x:Class="Project.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Welkom" Height="300" Width="300">
