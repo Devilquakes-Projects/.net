@@ -486,8 +486,13 @@ namespace Project
         // Date: 05/04/2015 11:30
         // Implemented 2 methods
 
-        // added by: Greg 5/4/15: 11:30-21:00 + 06/04 11:00-
-
+        /// <summary>
+        /// Returns length of Visible lines and total lines (column names of DB excluded).
+        /// Example:
+        ///     int visibleLines, totalLines;
+        ///     DBController.LineCount("MyDatabase", out visibleLines, out totalLines);
+        /// </summary>
+        /// <param name="dbName">Name of DB File.</param>
         public static void LineCount(string dbName, out int visibleLines, out int totalLines)
         {
             try
@@ -511,13 +516,11 @@ namespace Project
                     reader = read.ReadLine();
                 }
 
-                //return visibleLines, totalLines, read;
             }
             catch (FileNotFoundException)
             {
                 visibleLines = 0;
                 totalLines = 0;
-                //return lineCount;
             }
         }
 
@@ -540,7 +543,8 @@ namespace Project
                 }
                 records = null;
 
-                ChangeRecord(dbName, colmName, newArray);
+                //ChangeRecord(dbName, colmName, newArray);   //not performant: fixed at 07/04: 12:10-12:15 by Gregory
+                RewriteRecord(dbName, colmName, newArray);
             }
             catch
             {
