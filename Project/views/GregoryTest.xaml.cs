@@ -25,7 +25,6 @@ namespace Project
         {
             InitializeComponent();
             m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 2);//labels-tboxes-stud_id-difficulty
-            m1.LoadQuestions();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,9 +52,9 @@ namespace Project
             MessageBox.Show(result);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)//window-loaded event!
+        private void Window_Loaded_GregoryTest(object sender, RoutedEventArgs e)//07/04_13:00-13:10 updated window loaded event for this class
         {
-            Console.WriteLine("this will not run, WHYYYYYY");
+            m1.LoadQuestions();
         }
     }
 }
