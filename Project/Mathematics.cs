@@ -270,12 +270,14 @@ namespace Project
                     tb5.Text = ResultOfAnswer(false, 4);
                 }
 
-                string[] records = DB.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
-                records[5] = Convert.ToString(points * 2);
-                DB.ChangeFromRead(MathStudents, studentId, records);
+                points = (int)(points * 1.5 + difficulty * 0.84);
+
+                string[] records = DBController.FindFirst(MathStudents, "ID", Convert.ToString(studentId));
+                records[5] = Convert.ToString(points);
+                DBController.ChangeFromRead(MathStudents, studentId, records);
 
                 isCompleted = true;
-                return points * 2 + (int)(difficulty * 1.67);//score op 5 + moeilijkheidsgraad * 1.67 (0-5ptn waard)
+                return points;//score op 5 + moeilijkheidsgraad * 1.67 (0-5ptn waard)
             }
             else
             {
