@@ -1,9 +1,8 @@
 ﻿<Window x:Class="Project.GregoryTest"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GregoryTest" Height="300" Width="300" Loaded="Window_Loaded_GregoryTest">
+        Title="GregoryTest" Height="300" Width="300" Loaded="Window_Loaded_GregoryTest"> <!--loaded event runde niet, solved: added Loaded="..." 07/04 13:10 - 13:15 stackoverflow-->
     <Grid>
-
         <Label Content="De tafels" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="Azure"/>
 
         <Label Name="l1" Content="l1" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
