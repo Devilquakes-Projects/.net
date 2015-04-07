@@ -55,6 +55,13 @@ namespace Project
 
         private void gregoryButton_Click(object sender, RoutedEventArgs e)
         {
+            GregoryTest gregoryTest = new GregoryTest();
+            gregoryTest.Show();
+            this.Close();
+        }
+
+        private void mathematicsButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
