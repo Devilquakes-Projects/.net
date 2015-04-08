@@ -29,23 +29,24 @@ namespace Project
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //aanmaken database met:
-            /*string classList = "Courses_Math";
-            string questions = "Courses_Math_Questions";
-            string[] input = { "class", "surname", "firstname", "completion" };
-            DBController.MakeDB(classList, input);
-            input = new []{"tine", "achternaam", "voornaam", "*"};//stackoverflow: reuse array
-            DBController.AddRecord(classList, input);
-            input = new[] { "tine", "lastnameofsomeone", "frontname of someone", "*" };
-            DBController.AddRecord(classList, input);
-            input = new[] { "Question", "Solution" };
-            DBController.MakeDB(questions, input);
-            input = new[] { "6x6", "36" };
-            DBController.AddRecord(questions, input);
-            input = new[] { "5x5", "25" };
-            DBController.AddRecord(questions, input);
-            input = new[] { "2x2", "4" };
-            DBController.AddRecord(questions, input);*/
+            //test dbfiles die ik op dit moment gebruik:
+
+            //01DBProject\COURSES_MATH.txt:
+            //ID|VISIBLE|CLASS|SURNAME|FIRSTNAME|Math_Tasks_Score|Language_Tasks_Score|Geography_Tasks_Score
+            //1|true|tine|achternaam|voornaam|false|false|false
+
+            //01DBProject\COURSES_MATH_QUESTIONS.txt:
+            //ID|VISIBLE|QUESTION|SOLUTION
+            //1|true|1x1|1
+            //2|true|2x2|4
+            //3|true|3x3|9
+            //4|true|4x4|16
+            //5|true|5x5|25
+            //6|true|6x6|36
+            //7|true|7x7|49
+            //8|true|8x8|64
+            //9|true|9x9|81
+            //10|true|10x10|100
 
             int grade = m1.Grade();
             string result = String.Format("You earned {0}/10 points.", grade);
