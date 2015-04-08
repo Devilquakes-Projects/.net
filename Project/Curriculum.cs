@@ -24,6 +24,7 @@ namespace Project
         //dbfiles to use: placed here for easy editing later on!
         protected string mathStudents;
         private string questions;
+        private int amountOfQuestionsNeeded;//hangt af van hoeveel vragen u wenst te ontvangen!
         private int difficulty;
 
         private Label l1;
@@ -70,7 +71,7 @@ namespace Project
 
             this.studentId = studentId;
 
-            timer = 30 / difficulty;
+            timer = 45 / difficulty;
             time.Background = Brushes.Gray;
 
             t1 = new DispatcherTimer();
@@ -90,6 +91,13 @@ namespace Project
         }
 
         //Setters:
+        public int AmountOfQuestions
+        {
+            get { return amountOfQuestionsNeeded; }
+            set { amountOfQuestionsNeeded = value; }
+        }
+
+
         public string StudentsFile
         {
             get { return mathStudents; }
@@ -103,9 +111,9 @@ namespace Project
         }
 
         //Methods:
-        public void PushDbFiles()
+        public void UpdateCurriculum()
         {
-           
+
             string[] studentTestCompleted = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));//opvragen db student
 
             if (studentTestCompleted[5].Equals("false"))
@@ -158,17 +166,17 @@ namespace Project
             return array;
         }
 
-        private string ResultOfAnswer(bool isCorrect, int i = 0)
-        {
-            if (isCorrect)
-            {
-                return " = Correct answer!";
-            }
-            else
-            {
-                return "Wrong should be: " + answers[i];
-            }
-        }
+        //private string ResultOfAnswer(bool isCorrect, int i = 0)  //gewijzigd op 08/04/15 19:30-20:00
+        //{
+        //    if (isCorrect)
+        //    {
+        //        return " = Correct answer!";
+        //    }
+        //    else
+        //    {
+        //        return "Wrong should be: " + answers[i];
+        //    }
+        //}
 
         public int Grade()
         {
@@ -177,23 +185,26 @@ namespace Project
             if (isCompleted == false)
             {
                 int points = 0;
+                string correctAnswer = " = Correct answer!";
+                string invalidInput = "ongeldige ingave bij vraag 1" + Environment.NewLine + "U krijgt voor deze vraag een 0";
+                string wrongAnswer = "Wrong, answer should be: ";
 
                 try
                 {
                     if (Convert.ToDouble(tb1.Text.Replace('.', ',')) == answers[0]) //replace om . en , toe te staan.
                     {
                         points++;
-                        tb1.Text += ResultOfAnswer(true);
+                        tb1.Text += correctAnswer;
                     }
                     else
                     {
-                        tb1.Text = ResultOfAnswer(false, 0);
+                        tb1.Text = wrongAnswer + answers[0];
                     }
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("ongeldige ingave bij vraag 1" + Environment.NewLine + "U krijgt voor deze vraag een 0");
-                    tb1.Text = ResultOfAnswer(false, 0);
+                    MessageBox.Show(invalidInput);
+                    tb1.Text = wrongAnswer + answers[0];
                 }
 
                 try
@@ -201,17 +212,17 @@ namespace Project
                     if (Convert.ToDouble(tb2.Text.Replace('.', ',')) == answers[1])
                     {
                         points++;
-                        tb2.Text += ResultOfAnswer(true);
+                        tb2.Text += correctAnswer;
                     }
                     else
                     {
-                        tb2.Text = ResultOfAnswer(false, 1);
+                        tb2.Text = wrongAnswer + answers[1];
                     }
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("Ongeldige ingave bij vraag 2" + Environment.NewLine + "U krijgt voor deze vraag een 0");
-                    tb2.Text = ResultOfAnswer(false, 1);
+                    tb2.Text = wrongAnswer + answers[1];
                 }
 
                 try
@@ -219,17 +230,17 @@ namespace Project
                     if (Convert.ToDouble(tb3.Text.Replace('.', ',')) == answers[2])
                     {
                         points++;
-                        tb3.Text += ResultOfAnswer(true);
+                        tb3.Text += correctAnswer;
                     }
                     else
                     {
-                        tb3.Text = ResultOfAnswer(false, 2);
+                        tb3.Text = wrongAnswer + answers[2];
                     }
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("Ongeldige ingave bij vraag 3" + Environment.NewLine + "U krijgt voor deze vraag een 0");
-                    tb3.Text = ResultOfAnswer(false, 2);
+                    tb3.Text = wrongAnswer + answers[2];
                 }
 
                 try
@@ -237,17 +248,17 @@ namespace Project
                     if (Convert.ToDouble(tb4.Text.Replace('.', ',')) == answers[3])
                     {
                         points++;
-                        tb4.Text += ResultOfAnswer(true);
+                        tb4.Text += correctAnswer;
                     }
                     else
                     {
-                        tb4.Text = ResultOfAnswer(false, 3);
+                        tb4.Text = wrongAnswer + answers[3];
                     }
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("Ongeldige ingave bij vraag 4" + Environment.NewLine + "U krijgt voor deze vraag een 0");
-                    tb4.Text = ResultOfAnswer(false, 3);
+                    tb4.Text = wrongAnswer + answers[3];
                 }
 
                 try
@@ -255,27 +266,34 @@ namespace Project
                     if (Convert.ToDouble(tb5.Text.Replace('.', ',')) == answers[4])
                     {
                         points++;
-                        tb5.Text += ResultOfAnswer(true);
+                        tb5.Text += correctAnswer;
                     }
                     else
                     {
-                        tb5.Text = ResultOfAnswer(false, 4);
+                        tb5.Text = wrongAnswer + answers[4];
                     }
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("Ongeldige ingave bij vraag 5" + Environment.NewLine + "U krijgt voor deze vraag een 0");
-                    tb5.Text = ResultOfAnswer(false, 4);
+                    tb5.Text = wrongAnswer + answers[4];
                 }
 
-                points = (int)(points * 1.5 + difficulty * 0.84);
+                if (timer > 0)//bonus points if test complete before end of time!
+                {
+                    points = (int)(points * 1.5 + difficulty * 0.84);
+                }
+                else
+                {
+                    points = (int)(points * 1.5);
+                }
 
                 string[] records = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));
                 records[5] = Convert.ToString(points);
                 DB.ChangeFromRead(mathStudents, studentId, records);
 
                 isCompleted = true;
-                return points;//score op 5 + moeilijkheidsgraad * 1.67 (0-5ptn waard)
+                return points;//score op 5 + moeilijkheidsgraad * 1.67 (0-3ptn waard)
             }
             else
             {
@@ -293,7 +311,7 @@ namespace Project
 
             if (visibleLines >= 5)
             {
-                int[] randomNumbers = SelectRandomQuestions(5, 1, totalLines);
+                int[] randomNumbers = SelectRandomQuestions(amountOfQuestionsNeeded, 1, totalLines);
                 string[] isEnabled;
 
                 for (int i = 0; i < randomNumbers.Length; i++)

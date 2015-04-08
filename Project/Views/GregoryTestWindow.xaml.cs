@@ -24,7 +24,7 @@ namespace Project
         public GregoryTestWindow()
         {
             InitializeComponent();
-            m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 2);//labels-tboxes-stud_id-difficulty
+            m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 3);//labels-tboxes-stud_id-difficulty
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

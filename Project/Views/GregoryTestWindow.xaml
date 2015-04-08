@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Project.GregoryTestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GregoryTest" Height="300" Width="300" Loaded="Window_Loaded_GregoryTest"> <!--loaded event runde niet, solved: added Loaded="..." 07/04 13:10 - 13:15 stackoverflow-->
+        Title="GregoryTest" Height="300" Width="350" Loaded="Window_Loaded_GregoryTest"> <!--loaded event runde niet, solved: added Loaded="..." 07/04 13:10 - 13:15 stackoverflow-->
     <Grid>
         <Label Content="De tafels" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="Azure"/>
 
@@ -12,11 +12,11 @@
         <Label Name="l5" Content="l5" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
         <Label Name="timeLabel" Content="timeLabel" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="100"/>
 
-        <TextBox Name="tb1" HorizontalAlignment="Left" Height="23" Margin="141,56,0,0" TextWrapping="Wrap" Text="tb1" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="tb2" HorizontalAlignment="Left" Height="23" Margin="141,86,0,0" TextWrapping="Wrap" Text="tb2" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="tb3" HorizontalAlignment="Left" Height="23" Margin="141,116,0,0" TextWrapping="Wrap" Text="tb3" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="tb4" HorizontalAlignment="Left" Height="23" Margin="141,146,0,0" TextWrapping="Wrap" Text="tb4" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="tb5" HorizontalAlignment="Left" Height="23" Margin="141,173,0,0" TextWrapping="Wrap" Text="tb5" VerticalAlignment="Top" Width="150"/>
+        <TextBox Name="tb1" HorizontalAlignment="Left" Height="23" Margin="141,56,0,0" TextWrapping="Wrap" Text="tb1" VerticalAlignment="Top" Width="191"/>
+        <TextBox Name="tb2" HorizontalAlignment="Left" Height="23" Margin="141,86,0,0" TextWrapping="Wrap" Text="tb2" VerticalAlignment="Top" Width="191"/>
+        <TextBox Name="tb3" HorizontalAlignment="Left" Height="23" Margin="141,116,0,0" TextWrapping="Wrap" Text="tb3" VerticalAlignment="Top" Width="191"/>
+        <TextBox Name="tb4" HorizontalAlignment="Left" Height="23" Margin="141,146,0,0" TextWrapping="Wrap" Text="tb4" VerticalAlignment="Top" Width="191"/>
+        <TextBox Name="tb5" HorizontalAlignment="Left" Height="23" Margin="141,173,0,0" TextWrapping="Wrap" Text="tb5" VerticalAlignment="Top" Width="191"/>
 
         <Button Content="Grade" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 

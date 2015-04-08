@@ -16,7 +16,8 @@ namespace Project
 
         //Constructors:
         public Mathematics()
-        {   
+        {
+            base.AmountOfQuestions = 5;
         }
 
         public Mathematics(Label time, Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, int studentId, int difficulty = 1)
@@ -24,7 +25,8 @@ namespace Project
         {
             base.QuestionsFile = "Courses_Math_Questions";//COURSES_MATH_QUESTIONS
             base.StudentsFile = "Courses_Math";
-            base.PushDbFiles();
+            base.AmountOfQuestions = 5;
+            base.UpdateCurriculum();
         }
 
         //info from: stackexchange.com
