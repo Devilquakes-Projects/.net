@@ -20,8 +20,8 @@ namespace Project
             base.AmountOfQuestions = 5;
         }
 
-        public Mathematics(int studentId, int difficulty, Label time, Label l1 = null, TextBox tb1 = null, Label l2 = null, TextBox tb2 = null, Label l3 = null, TextBox tb3 = null, Label l4 = null, TextBox tb4 = null, Label l5 = null, TextBox tb5 = null, Label l6 = null, TextBox tb6 = null)
-            : base(studentId, difficulty, time, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5, l6, tb6)
+        public Mathematics(int studentId, int difficulty, Label time, Button gradeButton, Label l1 = null, TextBox tb1 = null, Label l2 = null, TextBox tb2 = null, Label l3 = null, TextBox tb3 = null, Label l4 = null, TextBox tb4 = null, Label l5 = null, TextBox tb5 = null, Label l6 = null, TextBox tb6 = null)
+            : base(studentId, difficulty, time, gradeButton, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5, l6, tb6)
         {
             base.QuestionsFile = "Courses_Math_Questions";//COURSES_MATH_QUESTIONS
             base.StudentsFile = "Courses_Math";

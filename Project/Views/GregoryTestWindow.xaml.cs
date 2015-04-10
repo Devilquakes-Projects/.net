@@ -24,37 +24,55 @@ namespace Project
         public GregoryTestWindow()
         {
             InitializeComponent();
-           // m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 3);//labels-tboxes-stud_id-difficulty
+
             int studentId = 1;
             int difficulty = 2;
-            m1 = new Mathematics(studentId, difficulty, timeLabel, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5);
+
+            m1 = new Mathematics(studentId, difficulty, timeLabel, gradeButton, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5);
             m1.LoadQuestions();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-            //test dbfiles die ik op dit moment gebruik:
+            /*
+                test dbfiles die ik op dit moment gebruik:
 
-            //01DBProject\COURSES_MATH.txt:
-            //ID|VISIBLE|CLASS|SURNAME|FIRSTNAME|Math_Tasks_Score|Language_Tasks_Score|Geography_Tasks_Score
-            //1|true|tine|achternaam|voornaam|false|false|false
+                01DBProject\COURSES_MATH.txt:
+                ID|VISIBLE|CLASS|SURNAME|FIRSTNAME|Math_Tasks_Score|Language_Tasks_Score|Geography_Tasks_Score
+                1|true|tine|achternaam|voornaam|false|false|false
 
-            //01DBProject\COURSES_MATH_QUESTIONS.txt:
-            //ID|VISIBLE|QUESTION|SOLUTION
-            //1|true|1x1|1
-            //2|true|2x2|4
-            //3|true|3x3|9
-            //4|true|4x4|16
-            //5|true|5x5|25
-            //6|true|6x6|36
-            //7|true|7x7|49
-            //8|true|8x8|64
-            //9|true|9x9|81
-            //10|true|10x10|100
+                01DBProject\COURSES_MATH_QUESTIONS.txt:
+                ID|VISIBLE|QUESTION|SOLUTION
+                1|true|1x1|1
+                2|true|2x2|4
+                3|true|3x3|9
+                4|true|4x4|16
+                5|true|5x5|25
+                6|true|6x6|36
+                7|true|7x7|49
+                8|true|8x8|64
+                9|true|9x9|81
+                10|true|10x10|100
+            */
+            //Mathematics Code:
 
-            int grade = m1.Grade();
-            string result = String.Format("You earned {0}/10 points.", grade);
-            MessageBox.Show(result);
+            if (gradeButton.Content.Equals("Grade"))
+            {
+                int grade = m1.Grade();
+                string result = String.Format("You earned {0}/10 points.", grade);
+                MessageBox.Show(result);
+                gradeButton.Content = "Exit";
+            }
+            else if (gradeButton.Content.Equals("Exit"))
+            {
+                Environment.Exit(0);
+            }
+            
+        }
+
+        private void Button_Click_Exit(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);//when clicking this button i will kill the program.
         }
 
     }

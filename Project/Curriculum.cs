@@ -15,10 +15,15 @@ namespace Project
     {
         //Instance Variables:
         private Random r1 = new Random();
-        private DispatcherTimer t1;
 
-        private string[] answers;//FIXIT
-        private bool isCompleted;
+        //timer:
+        private DispatcherTimer t1;
+        private Label time;
+        private int timer;
+
+        //questions:
+        private string[] answers;
+        //private bool isCompleted;//overbodig door Environment.Close();
         private int studentId;
 
         //dbfiles to use:
@@ -27,15 +32,15 @@ namespace Project
         private int amountOfQuestionsNeeded;
         private int difficulty;
 
+        //labels:
         private Label l1;
         private Label l2;
         private Label l3;
         private Label l4;
         private Label l5;
         private Label l6;
-        private Label time;
-        private int timer;
 
+        //textboxes:
         private TextBox tb1;
         private TextBox tb2;
         private TextBox tb3;
@@ -43,18 +48,14 @@ namespace Project
         private TextBox tb5;
         private TextBox tb6;
 
-
-        //klasse leerstof!
-
-        //moeilijkheidsgraad: difficulty
-
-        //editing: aanpassen leerstof
+        //Buttons:
+        private Button gradeButton;
 
         //overzicht opvragen
 
         public Curriculum() { }
 
-        public Curriculum(int studentId, int difficulty, Label time, Label l1, TextBox tb1, Label l2, TextBox tb2, Label l3, TextBox tb3, Label l4, TextBox tb4, Label l5, TextBox tb5, Label l6, TextBox tb6) /*Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5*/
+        public Curriculum(int studentId, int difficulty, Label time, Button gradeButton, Label l1, TextBox tb1, Label l2, TextBox tb2, Label l3, TextBox tb3, Label l4, TextBox tb4, Label l5, TextBox tb5, Label l6, TextBox tb6) /*Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5*/
         {
             this.l1 = l1;
             this.l2 = l2;
@@ -70,6 +71,8 @@ namespace Project
             this.tb4 = tb4;
             this.tb5 = tb5;
             this.tb6 = tb6;
+
+            this.gradeButton = gradeButton;
 
             this.difficulty = difficulty;
 
@@ -89,7 +92,11 @@ namespace Project
             time.Content = String.Format("Time: {0} seconds", timer);
             if (timer <= 0)
             {
-                Grade();//when timer runs out grade this test!
+                gradeButton.Content = "Exit";
+
+                int grade = Grade();//when timer runs out grade this test!
+                string result = String.Format("You earned {0}/10 points.", grade);
+                MessageBox.Show(result);
             }
             timer--;
         }
@@ -101,6 +108,7 @@ namespace Project
             set
             {
                 amountOfQuestionsNeeded = value;
+                //QUESTIONMAARK!!!
                 answers = new string[amountOfQuestionsNeeded];
             }
         }
@@ -125,14 +133,14 @@ namespace Project
 
             if (studentTestCompleted[5].Equals("false"))
             {
-                this.isCompleted = false;
+                t1.Start();
             }
             else
             {
-                this.isCompleted = true;//this moet niet maar overzichtelijker
-                MessageBox.Show("NOTE: you already completed this test, you won't gain points for doing this test again", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                //this.isCompleted = true;//this moet niet maar overzichtelijker    //overbodig door System.Environment.Exit(0);
+                MessageBox.Show("NOTE: you already completed this test," + Environment.NewLine + "Closing application.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                System.Environment.Exit(0);//exitcode 0 means closed properly. --> close window here because you already did the test!
             }
-            t1.Start();
         }
 
         private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue) //make array with amount of variables and return it
@@ -185,86 +193,104 @@ namespace Project
         //    }
         //}
 
+        private void LockTextBlock(TextBox tb, bool isCorrect)
+        {
+            tb.IsReadOnly = true;
+
+            if (isCorrect)
+            {
+                tb.Background = Brushes.LightGreen;
+            }
+            else
+            {
+                tb.Background = Brushes.LightPink;
+            }
+        }
+
         public int Grade()
         {
             t1.Stop();
 
-            if (isCompleted == false)
+            //hide "Grade" Button:
+            time.Width = 100.0;
+            time.Content = "Test Completed!";
+
+            //if (isCompleted == false) //overbodig door System.Environment.Exit(0);
+            //{
+            int points = 0;
+            string correctAnswer = " = Correct answer!";
+            string invalidInput = "ongeldige ingave bij vraag 1" + Environment.NewLine + "U krijgt voor deze vraag een 0";
+            string wrongAnswer = " = Wrong, answer should be: ";
+
+
+            if (tb1 != null)
             {
-                int points = 0;
-                string correctAnswer = " = Correct answer!";
-                string invalidInput = "ongeldige ingave bij vraag 1" + Environment.NewLine + "U krijgt voor deze vraag een 0";
-                string wrongAnswer = "Wrong, answer should be: ";
-
-
-                if (tb1 != null)
+                if (tb1.Text.Equals(answers[0]))
                 {
-                    if (tb1.Text.Equals(answers[0])) //replace om . en , toe te staan.   //(Convert.ToDouble(tb1.Text.Replace('.', ',')) == answers[0]) 
+                    points++;
+                    tb1.Text += correctAnswer;
+                    LockTextBlock(tb1, true);
+                }
+                else
+                {
+                    tb1.Text += wrongAnswer + answers[0];
+                    LockTextBlock(tb1, false);
+                }
+
+                if (tb2 != null)
+                {
+                    if (tb2.Text.Equals(answers[1]))
                     {
                         points++;
-                        tb1.Text += correctAnswer;
+                        tb2.Text += correctAnswer;
+                        LockTextBlock(tb2, true);
                     }
                     else
                     {
-                        tb1.Text = wrongAnswer + answers[0];
+                        tb2.Text += wrongAnswer + answers[1];
+                        LockTextBlock(tb2, false);
                     }
 
-                    if (tb2 != null)
+                    if (tb3 != null)
                     {
-                        if (tb2.Text.Equals(answers[1]))
+                        if (tb3.Text.Equals(answers[2]))
                         {
                             points++;
-                            tb2.Text += correctAnswer;
+                            tb3.Text += correctAnswer;
+                            LockTextBlock(tb3, true);
                         }
                         else
                         {
-                            tb2.Text = wrongAnswer + answers[1];
+                            tb3.Text += wrongAnswer + answers[2];
+                            LockTextBlock(tb3, false);
                         }
 
-                        if (tb3 != null)
+                        if (tb4 != null)
                         {
-                            if (tb3.Text.Equals(answers[2]))
+                            if (tb4.Text.Equals(answers[3]))
                             {
                                 points++;
-                                tb3.Text += correctAnswer;
+                                tb4.Text += correctAnswer;
+                                LockTextBlock(tb4, true);
                             }
                             else
                             {
-                                tb3.Text = wrongAnswer + answers[2];
+                                tb4.Text += wrongAnswer + answers[3];
+                                LockTextBlock(tb4, false);
                             }
 
-                            if (tb4 != null)
+                            if (tb5 != null)
                             {
-                                if (tb4.Text.Equals(answers[3]))
+                                if (tb5.Text.Equals(answers[4]))
                                 {
                                     points++;
-                                    tb4.Text += correctAnswer;
+                                    tb5.Text += correctAnswer;
+                                    LockTextBlock(tb5, true);
                                 }
                                 else
                                 {
-                                    tb4.Text = wrongAnswer + answers[3];
-                                }
-
-                                if (tb5 != null)
-                                {
-                                    if (tb5.Text.Equals(answers[4]))
-                                    {
-                                        points++;
-                                        tb5.Text += correctAnswer;
-                                    }
-                                    else
-                                    {
-                                        tb5.Text = wrongAnswer + answers[4];
-                                    }
-
-                                    if (timer > 0)//bonus points if test complete before end of time!
-                                    {
-                                        points = (int)(points * 1.5 + difficulty * 0.84);
-                                    }
-                                    else
-                                    {
-                                        points = (int)(points * 1.5);
-                                    }
+                                    tb5.Text += wrongAnswer + answers[4];
+                                    LockTextBlock(tb5, false);
                                 }
 
                                 if (tb6 != null)
@@ -273,29 +299,43 @@ namespace Project
                                     {
                                         points++;
                                         tb5.Text += correctAnswer;
+                                        LockTextBlock(tb6, true);
                                     }
                                     else
                                     {
                                         tb6.Text = wrongAnswer + answers[5];
+                                        LockTextBlock(tb6, false);
                                     }
                                 }
                             }
                         }
                     }
                 }
-                string[] records = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));
-                records[5] = Convert.ToString(points);
-                DB.ChangeFromRead(mathStudents, studentId, records);
+            }
 
-                isCompleted = true;
-                return points;//score op 5 + moeilijkheidsgraad * 1.67 (0-3ptn waard)
+            if (timer > 0)//bonus points if test complete before end of time!
+            {
+                points = (int)(Math.Round((points * 1.5 + difficulty * 0.84), MidpointRounding.AwayFromZero));
             }
             else
             {
-                string[] points = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));
-                MessageBox.Show("you are not allowed to re-do this test", "Notification", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return Convert.ToInt32(points[5]);
+                points = (int)(Math.Round((points * 1.5), MidpointRounding.AwayFromZero));
             }
+
+            string[] records = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));
+            records[5] = Convert.ToString(points);
+            DB.ChangeFromRead(mathStudents, studentId, records);
+
+            //isCompleted = true;
+            return points;//score op 5 + moeilijkheidsgraad * 1.67 (0-3ptn waard)
+
+            //}     //overbodig door System.Environment.Exit(0);
+            //else
+            //{
+            //    string[] points = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));
+            //    MessageBox.Show("you are not allowed to re-do this test", "Notification", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return Convert.ToInt32(points[5]);
+            //}
         }
 
         public void LoadQuestions()
@@ -369,6 +409,6 @@ namespace Project
                 MessageBox.Show("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this", "Error: Not enough Questions.");
             }
         }
-        //add another method here?
+        //add another method here...
     }
 }
