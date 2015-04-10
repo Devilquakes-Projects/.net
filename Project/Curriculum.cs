@@ -14,8 +14,6 @@ namespace Project
     public abstract class Curriculum
     {
         //Instance Variables:
-        private Random r1 = new Random();
-
         //timer:
         private DispatcherTimer t1;
         private Label time;
@@ -175,6 +173,7 @@ namespace Project
         private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue) //make array with amount of variables and return it
         {
             string[] test;
+            Random r1 = new Random();
             int[] array = new int[amountOfNumbers];
 
             if (amountOfNumbers < maxValue - minValue) //check if there are enough unique numbers to choose from otherwise msgbox-popup
@@ -250,7 +249,6 @@ namespace Project
             string correctAnswer = " = Correct answer!";
             string invalidInput = "ongeldige ingave bij vraag 1" + Environment.NewLine + "U krijgt voor deze vraag een 0";
             string wrongAnswer = " = Wrong, answer should be: ";
-
 
             if (tb1 != null)
             {
