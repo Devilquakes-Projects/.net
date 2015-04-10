@@ -67,13 +67,6 @@ namespace Project
             {
                 Environment.Exit(0);
             }
-            
         }
-
-        private void Button_Click_Exit(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);//when clicking this button i will kill the program.
-        }
-
     }
 }
