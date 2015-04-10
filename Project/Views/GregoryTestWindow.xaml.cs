@@ -24,7 +24,11 @@ namespace Project
         public GregoryTestWindow()
         {
             InitializeComponent();
-            m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 3);//labels-tboxes-stud_id-difficulty
+           // m1 = new Mathematics(timeLabel, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5, 1, 3);//labels-tboxes-stud_id-difficulty
+            int studentId = 1;
+            int difficulty = 2;
+            m1 = new Mathematics(studentId, difficulty, timeLabel, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5);
+            m1.LoadQuestions();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,9 +57,5 @@ namespace Project
             MessageBox.Show(result);
         }
 
-        private void Window_Loaded_GregoryTest(object sender, RoutedEventArgs e)//07/04_13:00-13:10 updated window loaded event for this class
-        {
-            m1.LoadQuestions();
-        }
     }
 }
