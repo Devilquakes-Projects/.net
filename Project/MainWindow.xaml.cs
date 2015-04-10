@@ -55,9 +55,22 @@ namespace Project
             this.Close();
         }
 
-        private void gregoryButton_Click(object sender, RoutedEventArgs e)
+        private void gregoryButton_Click_Math(object sender, RoutedEventArgs e)
         {
             GregoryTestWindow newView = new GregoryTestWindow();
+            newView.Show();
+            this.Close();
+        }
+        private void gregoryButton_Click_Language(object sender, RoutedEventArgs e)//added by greg on 10/04
+        {
+            GregoryTestWindow_Language newView = new GregoryTestWindow_Language();
+            newView.Show();
+            this.Close();
+        }
+
+        private void gregoryButton_Click_Geography(object sender, RoutedEventArgs e)//added by greg on 10/04
+        {
+            GregoryTestWindow_Geography newView = new GregoryTestWindow_Geography();
             newView.Show();
             this.Close();
         }

@@ -9,7 +9,11 @@
                 <MenuItem Header="_Joris" />
                 <MenuItem Header="_Joren" />
                 <MenuItem Header="_Christiaan" />
-                <MenuItem Header="_Gregory" Click="gregoryButton_Click"/>
+                <MenuItem Header="_Gregory">
+                    <MenuItem Header="Math" Click="gregoryButton_Click_Math"/>
+                    <MenuItem Header="Languages" Click="gregoryButton_Click_Language" />
+                    <MenuItem Header="Geography" Click="gregoryButton_Click_Geography" />
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>

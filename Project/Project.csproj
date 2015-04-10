@@ -55,13 +55,20 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\Cource.cs" />
     <Compile Include="Controllers\Question.cs" />
+    <Compile Include="Languages.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
     <Compile Include="Curriculum.cs" />
     <Compile Include="Views\cources\MathematicsWindow.xaml.cs">
       <DependentUpon>MathematicsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GregoryTestWindow.xaml.cs">
-      <DependentUpon>GregoryTestWindow.xaml</DependentUpon>
+    <Compile Include="Views\GregoryTestWindow_Geography.xaml.cs">
+      <DependentUpon>GregoryTestWindow_Geography.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GregoryTestWindow_Language.xaml.cs">
+      <DependentUpon>GregoryTestWindow_Language.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GregoryTestWindow_Math.xaml.cs">
+      <DependentUpon>GregoryTestWindow_Math.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\auth\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -81,7 +88,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GregoryTestWindow.xaml">
+    <Page Include="Views\GregoryTestWindow_Geography.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GregoryTestWindow_Language.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GregoryTestWindow_Math.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
