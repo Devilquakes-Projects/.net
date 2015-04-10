@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Project.Controllers;
+using System.Globalization;
 
 namespace Project
 {
@@ -27,6 +28,78 @@ namespace Project
             base.StudentsFile = "Courses_Math";
             base.AmountOfQuestions = 5;
             base.UpdateCurriculum();
+        }
+
+        private void MsgPopupBox(int questionNumber)
+        {
+            MessageBox.Show(String.Format("Invalid input in box {0}, you receive 0 points for this question!", questionNumber));
+        }
+
+        public override int Grade()//accepts decimal numbers, note: stored with a '.' NOTATION)
+        {
+            double result;
+            NumberStyles style = NumberStyles.AllowDecimalPoint;
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
+
+            if (base.Tb1 != null)
+            {
+                if (Double.TryParse(base.Tb1.Replace(',', '.'), style, culture, out result))
+                {
+                    base.Tb1 = Convert.ToString(result);
+                }
+                else
+                {
+                    MsgPopupBox(1);
+                }
+                if (base.Tb2 != null)
+                {
+                    if (Double.TryParse(base.Tb2.Replace(',', '.'), style, culture, out result))
+                    {
+                        base.Tb2 = Convert.ToString(result);
+                    }
+                    else
+                    {
+                        MsgPopupBox(2);
+                    }
+
+                    if (base.Tb3 != null)
+                    {
+                        if (Double.TryParse(base.Tb3.Replace(',', '.'), style, culture, out result))
+                        {
+                            base.Tb3 = Convert.ToString(result);
+                        }
+                        else
+                        {
+                            MsgPopupBox(3);
+                        }
+
+                        if (base.Tb4 != null)
+                        {
+                            if (Double.TryParse(base.Tb4.Replace(',', '.'), style, culture, out result))
+                            {
+                                base.Tb4 = Convert.ToString(result);
+                            }
+                            else
+                            {
+                                MsgPopupBox(4);
+                            }
+                            if (base.Tb5 != null)
+                            {
+                                if (Double.TryParse(base.Tb5.Replace(',', '.'), style, culture, out result))
+                                {
+                                    base.Tb5 = Convert.ToString(result);
+                                }
+                                else
+                                {
+                                    MsgPopupBox(5);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return base.Grade();
         }
 
         //info from: stackexchange.com
@@ -66,5 +139,6 @@ namespace Project
             return "tafels terugsturen";
         }
         */
+
     }
 }

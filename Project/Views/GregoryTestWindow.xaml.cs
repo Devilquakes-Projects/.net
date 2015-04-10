@@ -26,7 +26,7 @@ namespace Project
             InitializeComponent();
 
             int studentId = 1;
-            int difficulty = 2;
+            int difficulty = 3;
 
             m1 = new Mathematics(studentId, difficulty, timeLabel, gradeButton, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5);
             m1.LoadQuestions();
@@ -58,12 +58,13 @@ namespace Project
 
             if (gradeButton.Content.Equals("Grade"))
             {
+                //int grade = m1.Grade();
                 int grade = m1.Grade();
                 string result = String.Format("You earned {0}/10 points.", grade);
                 MessageBox.Show(result);
                 gradeButton.Content = "Exit";
             }
-            else if (gradeButton.Content.Equals("Exit"))
+            else
             {
                 Environment.Exit(0);
             }

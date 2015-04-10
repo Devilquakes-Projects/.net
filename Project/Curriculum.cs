@@ -51,8 +51,7 @@ namespace Project
         //Buttons:
         private Button gradeButton;
 
-        //overzicht opvragen
-
+        //Constructors:
         public Curriculum() { }
 
         public Curriculum(int studentId, int difficulty, Label time, Button gradeButton, Label l1, TextBox tb1, Label l2, TextBox tb2, Label l3, TextBox tb3, Label l4, TextBox tb4, Label l5, TextBox tb5, Label l6, TextBox tb6) /*Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5*/
@@ -101,18 +100,16 @@ namespace Project
             timer--;
         }
 
-        //Setters:
+        //Getters/Setters:
         public int AmountOfQuestions
         {
-            get { return amountOfQuestionsNeeded; }
+            //get { return amountOfQuestionsNeeded; }//don't think i need this annywhere
             set
             {
                 amountOfQuestionsNeeded = value;
-                //QUESTIONMAARK!!!
                 answers = new string[amountOfQuestionsNeeded];
             }
         }
-
 
         public string StudentsFile
         {
@@ -124,6 +121,38 @@ namespace Project
         {
             get { return questions; }
             set { questions = value; }
+        }
+
+        //getter/setters-textboxes:
+        public string Tb1
+        {
+            get { return tb1.Text; }
+            set { tb1.Text = value; }
+        }
+        public string Tb2
+        {
+            get { return tb2.Text; }
+            set { tb2.Text = value; }
+        }
+        public string Tb3
+        {
+            get { return tb3.Text; }
+            set { tb3.Text = value; }
+        }
+        public string Tb4
+        {
+            get { return tb4.Text; }
+            set { tb4.Text = value; }
+        }
+        public string Tb5
+        {
+            get { return tb5.Text; }
+            set { tb5.Text = value; }
+        }
+        public string Tb6
+        {
+            get { return tb6.Text; }
+            set { tb6.Text = value; }
         }
 
         //Methods:
@@ -207,7 +236,7 @@ namespace Project
             }
         }
 
-        public int Grade()
+        public virtual int Grade()
         {
             t1.Stop();
 
