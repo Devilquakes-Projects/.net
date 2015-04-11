@@ -91,7 +91,7 @@ namespace Project
 
         private void MathematicsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("test");
         }
 
         private void testButton_Click(object sender, RoutedEventArgs e)
