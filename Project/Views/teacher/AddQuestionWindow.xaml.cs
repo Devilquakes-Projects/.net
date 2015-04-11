@@ -34,7 +34,7 @@ namespace Project.Views
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> data = new List<string>();
-            string [] cources = Cource.AllCources();
+            string [] cources = Course.AllCourses();
 
             for (int i = 0; i < cources.Length; i++)
             {

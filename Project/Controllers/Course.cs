@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.Controllers
 {
-    public static class Cource
+    public static class Course
     {
         private static string[,] GetAll()
         {
@@ -27,7 +27,7 @@ namespace Project.Controllers
         /// <returns>String with the db path.</returns>
         public static string DBQuestionsPath(string cource)
         {
-            string[,] courcesAll = Cource.GetAll();
+            string[,] courcesAll = Course.GetAll();
 
             for (int i = 0; i < courcesAll.Length / 3; i++)
             {
@@ -43,9 +43,9 @@ namespace Project.Controllers
         /// 
         /// </summary>
         /// <returns>Array of all the cource names.</returns>
-        public static string[] AllCources()
+        public static string[] AllCourses()
         {
-            string[,] courcesAll = Cource.GetAll();
+            string[,] courcesAll = Course.GetAll();
             string[] cources = new string[courcesAll.Length / 3];
 
             for (int i = 0; i < courcesAll.Length / 3; i++)

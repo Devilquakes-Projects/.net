@@ -15,7 +15,7 @@ namespace Project.Controllers
         {
             try
             {
-                string dbPath = Cource.DBQuestionsPath(cource);
+                string dbPath = Course.DBQuestionsPath(cource);
                 string[] records = { question, solution };
                 DB.AddRecord(dbPath, records);
                 return true;
@@ -30,7 +30,7 @@ namespace Project.Controllers
         {
             try
             {
-                string dbPath = Cource.DBQuestionsPath(cource);
+                string dbPath = Course.DBQuestionsPath(cource);
                 string[] records = { question, solution };
                 DB.ChangeRecord(dbPath, id, records);
                 return true;

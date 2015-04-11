@@ -53,7 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\Cource.cs" />
+    <Compile Include="Controllers\Course.cs" />
     <Compile Include="Controllers\Question.cs" />
     <Compile Include="Languages.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
