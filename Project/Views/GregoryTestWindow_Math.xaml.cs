@@ -37,7 +37,7 @@ namespace Project
             /*
                 test dbfiles die ik op dit moment gebruik:
 
-                01DBProject\COURSES_MATH.txt:
+                01DBProject\COURSES.txt:
                 ID|VISIBLE|CLASS|SURNAME|FIRSTNAME|Math_Tasks_Score|Language_Tasks_Score|Geography_Tasks_Score
                 1|true|tine|achternaam|voornaam|false|false|false
 

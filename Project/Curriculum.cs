@@ -20,7 +20,7 @@ namespace Project
         private int timer;
 
         //questions:
-        private string[] answers;
+        private string[,] answers;
         //private bool isCompleted;//overbodig door Environment.Close();
         private int studentId;
 
@@ -28,6 +28,7 @@ namespace Project
         protected string mathStudents;
         private string questions;
         private int amountOfQuestionsNeeded;
+        private int maxAmountOfAnswersPQ;
         private int difficulty;
 
         //labels:
@@ -99,16 +100,17 @@ namespace Project
         }
 
         //Getters/Setters:
-        public int AmountOfQuestions
+        public int SetAmountOfQuestions
         {
-            //get { return amountOfQuestionsNeeded; }//don't think i need this annywhere
-            set
-            {
-                amountOfQuestionsNeeded = value;
-                answers = new string[amountOfQuestionsNeeded];
-            }
+            set { amountOfQuestionsNeeded = value; }
         }
 
+        public int SetAmountOfAnswersPerQuestion
+        { 
+            set { maxAmountOfAnswersPQ = value/* + 1*/; }
+        }
+
+        //Files to use:
         public string StudentsFile
         {
             get { return mathStudents; }
@@ -154,11 +156,16 @@ namespace Project
         }
 
         //Methods:
-        public void UpdateCurriculum()
+        public void InitializeArray()
+        {
+            answers = new string[amountOfQuestionsNeeded, maxAmountOfAnswersPQ];//ik tel vanaf 0!
+        }
+
+        public void UpdateCurriculum(int index)
         {
             string[] studentTestCompleted = DB.FindFirst(mathStudents, "ID", Convert.ToString(studentId));//opvragen db student
 
-            if (studentTestCompleted[5].Equals("false"))
+            if (studentTestCompleted[index].Equals("false"))
             {
                 t1.Start();
             }
@@ -178,9 +185,11 @@ namespace Project
 
             if (amountOfNumbers < maxValue - minValue) //check if there are enough unique numbers to choose from otherwise msgbox-popup
             {
+                maxValue++;
+
                 for (int i = 0; i < amountOfNumbers; i++)
                 {
-                    array[i] = r1.Next(minValue, maxValue + 1);
+                    array[i] = r1.Next(minValue, maxValue);
 
                     test = DB.FindFirst(questions, "ID", Convert.ToString(array[i]));
                     if (test != null)
@@ -252,7 +261,7 @@ namespace Project
 
             if (tb1 != null)
             {
-                if (tb1.Text.Equals(answers[0]))
+                if (tb1.Text.Equals(answers[0, 0]))
                 {
                     points++;
                     tb1.Text += correctAnswer;
@@ -260,13 +269,13 @@ namespace Project
                 }
                 else
                 {
-                    tb1.Text += wrongAnswer + answers[0];
+                    tb1.Text += wrongAnswer + answers[0, 0];
                     LockTextBlock(tb1, false);
                 }
 
                 if (tb2 != null)
                 {
-                    if (tb2.Text.Equals(answers[1]))
+                    if (tb2.Text.Equals(answers[1, 0]))//NOTE: werkt voor math oefening, omdat deze 1-1 antwoorden verwacht, crashes bij multiple boxes! searching for a fix
                     {
                         points++;
                         tb2.Text += correctAnswer;
@@ -274,13 +283,13 @@ namespace Project
                     }
                     else
                     {
-                        tb2.Text += wrongAnswer + answers[1];
+                        tb2.Text += wrongAnswer + answers[1, 0];
                         LockTextBlock(tb2, false);
                     }
 
                     if (tb3 != null)
                     {
-                        if (tb3.Text.Equals(answers[2]))
+                        if (tb3.Text.Equals(answers[2, 0]))
                         {
                             points++;
                             tb3.Text += correctAnswer;
@@ -288,13 +297,13 @@ namespace Project
                         }
                         else
                         {
-                            tb3.Text += wrongAnswer + answers[2];
+                            tb3.Text += wrongAnswer + answers[2, 0];
                             LockTextBlock(tb3, false);
                         }
 
                         if (tb4 != null)
                         {
-                            if (tb4.Text.Equals(answers[3]))
+                            if (tb4.Text.Equals(answers[3, 0]))
                             {
                                 points++;
                                 tb4.Text += correctAnswer;
@@ -302,13 +311,13 @@ namespace Project
                             }
                             else
                             {
-                                tb4.Text += wrongAnswer + answers[3];
+                                tb4.Text += wrongAnswer + answers[3, 0];
                                 LockTextBlock(tb4, false);
                             }
 
                             if (tb5 != null)
                             {
-                                if (tb5.Text.Equals(answers[4]))
+                                if (tb5.Text.Equals(answers[4, 0]))
                                 {
                                     points++;
                                     tb5.Text += correctAnswer;
@@ -316,13 +325,13 @@ namespace Project
                                 }
                                 else
                                 {
-                                    tb5.Text += wrongAnswer + answers[4];
+                                    tb5.Text += wrongAnswer + answers[4, 0];
                                     LockTextBlock(tb5, false);
                                 }
 
                                 if (tb6 != null)
                                 {
-                                    if (tb6.Text.Equals(answers[5]))
+                                    if (tb6.Text.Equals(answers[5, 0]))
                                     {
                                         points++;
                                         tb5.Text += correctAnswer;
@@ -330,7 +339,7 @@ namespace Project
                                     }
                                     else
                                     {
-                                        tb6.Text = wrongAnswer + answers[5];
+                                        tb6.Text = wrongAnswer + answers[5, 0];
                                         LockTextBlock(tb6, false);
                                     }
                                 }
@@ -369,22 +378,34 @@ namespace Project
         {
             int totalLines;
             int visibleLines;
-            DB.LineCount(questions, out visibleLines, out totalLines);//THE NEW WAY
+            DB.LineCount(questions, out visibleLines, out totalLines);
 
             if (visibleLines >= amountOfQuestionsNeeded)
             {
                 int[] randomNumbers = SelectRandomQuestions(amountOfQuestionsNeeded, 1, totalLines);
                 string[] isEnabled;
 
+                //for (int i = 0; i < randomNumbers.Length; i++)
+                //{
+                //    answers[i, 0] = Convert.ToString(randomNumbers[i]);
+                //    isEnabled = DB.FindFirst(questions, "ID", Convert.ToString(answers[i, 0]));
+
+                //    //if (isEnabled == null)//overbodige test: 10/04
+                //    //{
+                //    //    i--;
+                //    //}
+                //}
+
+                int teller;
+
                 for (int i = 0; i < randomNumbers.Length; i++)
                 {
-                    answers[i] = Convert.ToString(randomNumbers[i]);
-                    isEnabled = DB.FindFirst(questions, "ID", Convert.ToString(answers[i]));
+                    isEnabled = DB.FindFirst(questions, "ID", Convert.ToString(Convert.ToString(randomNumbers[i])));
 
-                    //if (isEnabled == null)//overbodige test: 10/04
-                    //{
-                    //    i--;
-                    //}
+                    for (int j = 3; j < isEnabled.Length; j++)
+                    {
+                        answers[i, j - 3] = isEnabled[j];
+                    }
                 }
 
                 string[] labels;
@@ -393,37 +414,37 @@ namespace Project
                 {
                     labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[0]));
                     l1.Content = labels[2];//show question
-                    answers[0] = Convert.ToString(labels[3]); //save answer index
+                    //answers[0, maxAmountOfAnswersPQ] = Convert.ToString(labels[3]); //save answer index
 
                     if (l2 != null)
                     {
                         labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[1]));
                         l2.Content = labels[2];
-                        answers[1] = Convert.ToString(labels[3]);
+                        //answers[1, maxAmountOfAnswersPQ] = Convert.ToString(labels[3]);
 
                         if (l3 != null)
                         {
                             labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[2]));
                             l3.Content = labels[2];
-                            answers[2] = Convert.ToString(labels[3]);
+                            //answers[2, maxAmountOfAnswersPQ] = Convert.ToString(labels[3]);
 
                             if (l4 != null)
                             {
                                 labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[3]));
                                 l4.Content = labels[2];
-                                answers[3] = Convert.ToString(labels[3]);
+                                //answers[3, maxAmountOfAnswersPQ] = Convert.ToString(labels[3]);
 
                                 if (l5 != null)
                                 {
                                     labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[4]));
                                     l5.Content = labels[2];
-                                    answers[4] = Convert.ToString(labels[3]);
+                                    //answers[4, maxAmountOfAnswersPQ] = Convert.ToString(labels[3]);
 
                                     if (l6 != null)
                                     {
                                         labels = DB.FindFirst(questions, "Id", Convert.ToString(randomNumbers[5]));
                                         l6.Content = labels[2];
-                                        answers[5] = Convert.ToString(labels[3]);
+                                        //answers[5, maxAmountOfAnswersPQ] = Convert.ToString(labels[3]);
                                     }
                                 }
                             }
