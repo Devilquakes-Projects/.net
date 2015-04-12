@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Project.Controllers;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +11,49 @@ namespace Project
 {
     class Languages : Curriculum
     {
-        public Languages(int studentId, int difficulty, Label time, Button gradeButton, Label l1 = null, TextBox tb1 = null, Label l2 = null, TextBox tb2 = null, Label l3 = null, TextBox tb3 = null, Label l4 = null, TextBox tb4 = null, Label l5 = null, TextBox tb5 = null, Label l6 = null, TextBox tb6 = null)
-            : base(studentId, difficulty, time, gradeButton, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5, l6, tb6)
+        //private string headerFileName;
+        //private Label title;
+
+        public Languages(int studentId, int difficulty, Button gradeButton, Label time, Label title, Label question1, Label question2, Label header1, Label header2, Label header3, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6)
+            : base(studentId, difficulty, gradeButton, time, title , question1, question2, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6)
         {
             base.QuestionsFile = "Courses_Lang";//COURSES_MATH_QUESTIONS
             base.StudentsFile = "Courses";
+            LoadHeaderLabels();
+
+            base.SetTimer += 15;//15 seconds bonus-time for everyone (the defaulted time method is just too short for this course.
+
             base.SetAmountOfQuestions = 2;
             base.SetAmountOfAnswersPerQuestion = 3;
             base.InitializeArray();
             base.UpdateCurriculum(6);//6: index of Languages
         }
 
-        
+        private void LoadHeaderLabels()
+        {
+            string[] questions = DB.FindFirst(base.QuestionsFile, "ID", "1", onlyVisible: false);//onlyVisible: false, omdat ik deze zelf op false gezet heb voor eenvoudiger programma te kunnen schrijven!
+
+            if (questions != null)
+            {
+                base.Title = questions[2];
+                base.Header1 = questions[3];
+                base.Header2 = questions[4];
+                base.Header3 = questions[5];
+
+                Console.WriteLine("l1: " + l1.Name + " l2: " + l2.Name + " l3: " + l3.Name + " l4: " + l4.Name + " l5: " + l5.Name + " l6: " + l6.Name);
+            }
+        }
+
+        public override int Grade()//makes sure that answers are stored in uppercase, is this necessary?
+        {
+            base.Tb1 = base.Tb1.ToUpper();
+            base.Tb2 = base.Tb2.ToUpper();
+            base.Tb3 = base.Tb3.ToUpper();
+            base.Tb4 = base.Tb4.ToUpper();
+            base.Tb5 = base.Tb5.ToUpper();
+            base.Tb6 = base.Tb6.ToUpper();
+
+            return base.Grade();
+        }
     }
 }

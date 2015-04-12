@@ -497,25 +497,26 @@ namespace Project.Controllers
         {
             try
             {
+                string[] test;
+
                 visibleLines = 0;
                 totalLines = -1;
 
-                string testVisible;
                 string readFile = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
                 StreamReader read = File.OpenText(readFile);
 
-                string reader = read.ReadLine();
+                string reader = read.ReadLine();//12/04: nieuwe check, ging goed tot aan 9 regels en dan werkte vorige versie nietmeer! --> source: http://www.dotnetperls.com/split
+                
                 while (reader != null)
                 {
-                    testVisible = reader.Substring(2, 4);
-                    if (testVisible.Equals("true"))
+                    test = reader.Split('|');
+                    if (test[1].Equals("true"))
                     {
                         visibleLines++;
                     }
                     totalLines++;
                     reader = read.ReadLine();
                 }
-
             }
             catch (FileNotFoundException)
             {

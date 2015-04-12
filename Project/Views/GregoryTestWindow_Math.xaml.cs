@@ -32,7 +32,7 @@ namespace Project
             m1.LoadQuestions();
         }
 
-        private void Button_Click_Start(object sender, RoutedEventArgs e)
+        private void Button_Click_Grade(object sender, RoutedEventArgs e)
         {
             /*
                 test dbfiles die ik op dit moment gebruik:
@@ -61,8 +61,8 @@ namespace Project
                 //int grade = m1.Grade();
                 int grade = m1.Grade();
                 string result = String.Format("You earned {0}/10 points.", grade);
-                MessageBox.Show(result);
                 gradeButton.Content = "Exit";
+                MessageBox.Show(result);
             }
             else
             {

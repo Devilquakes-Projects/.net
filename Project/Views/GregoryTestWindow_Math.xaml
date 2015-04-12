@@ -19,7 +19,7 @@
         <TextBox Name="tb4" HorizontalAlignment="Left" Height="23" Margin="141,146,0,0" TextWrapping="Wrap" Text="tb4" VerticalAlignment="Top" Width="220"/>
         <TextBox Name="tb5" HorizontalAlignment="Left" Height="23" Margin="141,173,0,0" TextWrapping="Wrap" Text="tb5" VerticalAlignment="Top" Width="220"/>
 
-        <Button Name="gradeButton" Content="Grade" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Start"/>
+        <Button Name="gradeButton" Content="Grade" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Grade"/>
 
     </Grid>
 </Window>
