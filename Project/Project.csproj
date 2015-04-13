@@ -55,9 +55,10 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\Course.cs" />
     <Compile Include="Controllers\Question.cs" />
-    <Compile Include="Languages.cs" />
+    <Compile Include="Courses\Geography.cs" />
+    <Compile Include="Courses\Languages.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
-    <Compile Include="Curriculum.cs" />
+    <Compile Include="Courses\Curriculum.cs" />
     <Compile Include="Views\cources\MathematicsWindow.xaml.cs">
       <DependentUpon>MathematicsWindow.xaml</DependentUpon>
     </Compile>
@@ -73,7 +74,7 @@
     <Compile Include="Views\auth\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mathematics.cs" />
+    <Compile Include="Courses\Mathematics.cs" />
     <Compile Include="Views\auth\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
@@ -149,6 +150,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -14,7 +14,6 @@ namespace Project
 {
     class Mathematics : Curriculum //onderliggend van abstracte klasse Curriculum
     {
-
         //Constructors:
         public Mathematics()
         {/*you shouldn't use me!*/}
@@ -25,8 +24,7 @@ namespace Project
             base.QuestionsFile = "Courses_Math";//COURSES_MATH_QUESTIONS
             base.StudentsFile = "Courses";
             base.SetAmountOfQuestions = 5;
-            base.SetAmountOfAnswersPerQuestion = 1;
-            base.InitializeArray();
+            base.InitializeArray(1);
             base.UpdateCurriculum(5);//index to check
         }
 
@@ -42,62 +40,49 @@ namespace Project
             NumberStyles style = NumberStyles.AllowDecimalPoint;
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
 
-            if (base.Tb1 != null)
+            if (Double.TryParse(base.Tb1.Replace(',', '.'), style, culture, out result))
             {
-                if (Double.TryParse(base.Tb1.Replace(',', '.'), style, culture, out result))
-                {
-                    base.Tb1 = Convert.ToString(result);//25.0 word 25!
-                }
-                else
-                {
-                    MsgPopupBox(1);
-                }
-                if (base.Tb2 != null)
-                {
-                    if (Double.TryParse(base.Tb2.Replace(',', '.'), style, culture, out result))
-                    {
-                        base.Tb2 = Convert.ToString(result);
-                    }
-                    else
-                    {
-                        MsgPopupBox(2);
-                    }
+                base.Tb1 = Convert.ToString(result);//25.0 word 25!
+            }
+            else
+            {
+                MsgPopupBox(1);
+            }
 
-                    if (base.Tb3 != null)
-                    {
-                        if (Double.TryParse(base.Tb3.Replace(',', '.'), style, culture, out result))
-                        {
-                            base.Tb3 = Convert.ToString(result);
-                        }
-                        else
-                        {
-                            MsgPopupBox(3);
-                        }
+            if (Double.TryParse(base.Tb2.Replace(',', '.'), style, culture, out result))
+            {
+                base.Tb2 = Convert.ToString(result);
+            }
+            else
+            {
+                MsgPopupBox(2);
+            }
 
-                        if (base.Tb4 != null)
-                        {
-                            if (Double.TryParse(base.Tb4.Replace(',', '.'), style, culture, out result))
-                            {
-                                base.Tb4 = Convert.ToString(result);
-                            }
-                            else
-                            {
-                                MsgPopupBox(4);
-                            }
-                            if (base.Tb5 != null)
-                            {
-                                if (Double.TryParse(base.Tb5.Replace(',', '.'), style, culture, out result))
-                                {
-                                    base.Tb5 = Convert.ToString(result);
-                                }
-                                else
-                                {
-                                    MsgPopupBox(5);
-                                }
-                            }
-                        }
-                    }
-                }
+            if (Double.TryParse(base.Tb3.Replace(',', '.'), style, culture, out result))
+            {
+                base.Tb3 = Convert.ToString(result);
+            }
+            else
+            {
+                MsgPopupBox(3);
+            }
+
+            if (Double.TryParse(base.Tb4.Replace(',', '.'), style, culture, out result))
+            {
+                base.Tb4 = Convert.ToString(result);
+            }
+            else
+            {
+                MsgPopupBox(4);
+            }
+
+            if (Double.TryParse(base.Tb5.Replace(',', '.'), style, culture, out result))
+            {
+                base.Tb5 = Convert.ToString(result);
+            }
+            else
+            {
+                MsgPopupBox(5);
             }
 
             return base.Grade();
@@ -140,6 +125,5 @@ namespace Project
             return "tafels terugsturen";
         }
         */
-
     }
 }

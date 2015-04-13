@@ -1,26 +1,25 @@
 ﻿<Window x:Class="Project.Views.GregoryTestWindow_Language"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GregoryTestWindow_Language" Height="300" Width="827">
+        Title="GregoryTestWindow_Language" Height="300" Width="940">
     <Grid>
         <Label Name="title" Content="languages" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Label Name="header1" Content="Header1" HorizontalAlignment="Left" Margin="132,68,0,0" VerticalAlignment="Top" Width="220"/>
-        <Label Name="header2" Content="Header2" HorizontalAlignment="Left" Margin="360,68,0,0" VerticalAlignment="Top" Width="220"/>
-        <Label Name="header3" Content="Header3" HorizontalAlignment="Left" Margin="580,68,0,0" VerticalAlignment="Top" Width="220"/>
-        
+        <Label Name="header1" Content="Header1" HorizontalAlignment="Left" Margin="132,68,0,0" VerticalAlignment="Top" Width="250"/>
+        <Label Name="header2" Content="Header2" HorizontalAlignment="Left" Margin="395,68,0,0" VerticalAlignment="Top" Width="250"/>
+        <Label Name="header3" Content="Header3" HorizontalAlignment="Left" Margin="667,68,0,0" VerticalAlignment="Top" Width="250"/>
+
         <Label Name="question1Label" Content="question1Label" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top"/>
 
-        <TextBox Name="tb1" HorizontalAlignment="Left" Height="23" Margin="132,107,0,0" TextWrapping="Wrap" Text="Tb1" VerticalAlignment="Top" Width="220"/>
-        <TextBox Name="tb2" HorizontalAlignment="Left" Height="23" Margin="360,107,0,0" TextWrapping="Wrap" Text="Tb2" VerticalAlignment="Top" Width="220"/>
-        <TextBox Name="tb3" HorizontalAlignment="Left" Height="23" Margin="585,107,0,0" TextWrapping="Wrap" Text="Tb3" VerticalAlignment="Top" Width="220"/>
+        <TextBox Name="tb1" HorizontalAlignment="Left" Height="23" Margin="132,107,0,0" TextWrapping="Wrap" Text="Tb1" VerticalAlignment="Top" Width="250"/>
+        <TextBox Name="tb2" HorizontalAlignment="Left" Height="23" Margin="395,107,0,0" TextWrapping="Wrap" Text="Tb2" VerticalAlignment="Top" Width="250"/>
+        <TextBox Name="tb3" HorizontalAlignment="Left" Height="23" Margin="667,107,0,0" TextWrapping="Wrap" Text="Tb3" VerticalAlignment="Top" Width="250"/>
 
         <Label Name="question2Label" Content="question2Label" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb4" HorizontalAlignment="Left" Height="23" Margin="132,180,0,0" TextWrapping="Wrap" Text="Tb4" VerticalAlignment="Top" Width="220"/>
-        <TextBox Name="tb5" HorizontalAlignment="Left" Height="23" Margin="360,183,0,0" TextWrapping="Wrap" Text="Tb5" VerticalAlignment="Top" Width="220"/>
-        <TextBox Name="tb6" HorizontalAlignment="Left" Height="23" Margin="585,184,0,0" TextWrapping="Wrap" Text="Tb6" VerticalAlignment="Top" Width="220"/>
+        <TextBox Name="tb4" HorizontalAlignment="Left" Height="23" Margin="132,180,0,0" TextWrapping="Wrap" Text="Tb4" VerticalAlignment="Top" Width="250"/>
+        <TextBox Name="tb5" HorizontalAlignment="Left" Height="23" Margin="395,180,0,0" TextWrapping="Wrap" Text="Tb5" VerticalAlignment="Top" Width="250"/>
+        <TextBox Name="tb6" HorizontalAlignment="Left" Height="23" Margin="667,180,0,0" TextWrapping="Wrap" Text="Tb6" VerticalAlignment="Top" Width="250"/>
 
-        <Button Name="gradeButton" Content="Grade" HorizontalAlignment="Left" Margin="734,240,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Grade"/>
+        <Button Name="gradeButton" Content="Grade" HorizontalAlignment="Left" Margin="842,239,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Grade"/>
         <Label Name="timeLabel" Content="TimeLabel" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top"/>
-        
     </Grid>
 </Window>

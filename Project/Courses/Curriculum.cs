@@ -21,14 +21,13 @@ namespace Project
 
         //questions:
         private string[,] answers;
-        //private bool isCompleted;//overbodig door Environment.Close();
         private int studentId;
 
         //dbfiles to use:
         protected string mathStudents;
         private string questions;
         private int amountOfQuestionsNeeded;
-        private int maxAmountOfAnswersPQ;
+        //private int maxAmountOfAnswersPQ;
         private int difficulty;
 
         //labels:
@@ -53,21 +52,21 @@ namespace Project
         //Constructors:
         public Curriculum() { }
 
-        public Curriculum(int studentId, int difficulty, Button gradeButton, Label time,Label title, Label question1, Label question2, Label header1, Label header2, Label header3 ,TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6)
+        public Curriculum(int studentId, int difficulty, Button gradeButton, Label time, Label title, Label question1, Label question2, Label header1, Label header2, Label header3, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6)
         {
             this.studentId = studentId;
             this.difficulty = difficulty;
 
             this.gradeButton = gradeButton;
 
-            this.time = time;//6,4,5,3 --> 3,4,5,6    title: 6-3, header 1 = ok, header 2 = ok, header 3 = 3-6
-            this.l1 = question1;
-            this.l2 = question2;
-            this.l3 = title;//NOTE: vragen worden ge-set vanaf 1! hier 2 labels voor vragen dus 1+2 worden overschreven!
-            this.l4 = header1;
-            this.l5 = header2;
-            this.l6 = header3;
-            
+            this.time = time;
+            this.l1 = question1;//questionlabel (left of top row of answer-textboxes)
+            this.l2 = question2;//questionlabel (right of lower row of answer-textboxes)
+            this.l3 = title;    //NOTE: questions get set starting from label1 --> label 1+2 get overridden at the end of constructor from languages_constructor!
+            this.l4 = header1;  //top left column-description   (loaded from "Courses_Lang.txt")
+            this.l5 = header2;  //top middle column-description (loaded from "Courses_Lang.txt")
+            this.l6 = header3;  //top right column-descrition   (loaded from "Courses_Lang.txt")
+
             this.tb1 = tb1;
             this.tb2 = tb2;
             this.tb3 = tb3;
@@ -131,18 +130,13 @@ namespace Project
             t1.Stop();
         }
 
-        //Getters/Setters:
+        //Getters/Setters: Questions:
         public int SetAmountOfQuestions
         {
             set { amountOfQuestionsNeeded = value; }
         }
 
-        public int SetAmountOfAnswersPerQuestion
-        {
-            set { maxAmountOfAnswersPQ = value/* + 1*/; }
-        }
-
-        //Files to use:
+        //Getters/Setters: Files to use:
         public string StudentsFile
         {
             get { return mathStudents; }
@@ -155,7 +149,7 @@ namespace Project
             set { questions = value; }
         }
 
-        //Getters/Setters-labels:
+        //Getters/Setters: labels:
         protected string Title
         {
             set { l3.Content = value; }
@@ -175,7 +169,7 @@ namespace Project
             set { l6.Content = value; }
         }
 
-        //getter/setters-textboxes:
+        //getter/setters: textboxes:
         public string Tb1
         {
             get { return tb1.Text; }
@@ -207,7 +201,7 @@ namespace Project
             set { tb6.Text = value; }
         }
 
-        //setter to influence the amount of given time for the exercises:
+        //Getter/Setter: to influence the amount of given time for the exercises:
         public int SetTimer
         {
             get { return timer; }
@@ -215,9 +209,9 @@ namespace Project
         }
 
         //Methods:
-        protected void InitializeArray()
+        protected void InitializeArray(int maxAmountOfAnswersPerQuestion)
         {
-            answers = new string[amountOfQuestionsNeeded, maxAmountOfAnswersPQ];
+            answers = new string[amountOfQuestionsNeeded, maxAmountOfAnswersPerQuestion];
         }
 
         public void UpdateCurriculum(int index)//also tests if course has been completed!
@@ -304,18 +298,18 @@ namespace Project
             if (this is Mathematics)
             {
                 Console.WriteLine("This is a mathematics class!");
-                points = OneQuestionPerAnwser(correctAnswer, wrongAnswer);  //deze bij one on one questions (oftewel bij Mathematics)
+                points = OneQuestionPerAnwser(correctAnswer, wrongAnswer);      //1x1 questions (Mathematics)
                 WriteRecords(5, points);
             }
             else if (this is Languages)
             {
                 Console.WriteLine("This is a Languages class!");
-                points = OneQuestionThreeAnswers(correctAnswer, wrongAnswer);
+                points = OneQuestionThreeAnswers(correctAnswer, wrongAnswer);   //1x3 questions(Languages)
                 WriteRecords(6, points);
             }
             else
             {
-                Console.WriteLine("another class? note geography should come here!");
+                Console.WriteLine("another class? note geography should come here!");   //geography will come here
             }
 
             return points;
@@ -328,209 +322,68 @@ namespace Project
             DB.ChangeFromRead(mathStudents, studentId, records);
         }
 
-        private int OneQuestionThreeAnswers(string correctAnswer, string wrongAnswer)
-        {
-            //answers[,]: .rank = aantal rijen, .length: alles dat erin zit!, .length / .rank = aantal kolommen
-            int points = 0;
-
-            if (tb1 != null)
-            {
-                if (tb1.Text.Equals(answers[0, 0]))
-                {
-                    points++;
-                    tb1.Text += correctAnswer;
-                    LockTextBlock(tb1, true);//color + lock textbox
-                }
-                else
-                {
-                    tb1.Text += wrongAnswer + answers[0, 0];
-                    LockTextBlock(tb1, false);
-                }
-
-                if (tb2 != null)
-                {
-                    if (tb2.Text.Equals(answers[0, 1]))
-                    {
-                        points++;
-                        tb2.Text += correctAnswer;
-                        LockTextBlock(tb2, true);
-                    }
-                    else
-                    {
-                        tb2.Text += wrongAnswer + answers[0, 1];
-                        LockTextBlock(tb2, false);
-                    }
-                }
-
-                if (tb3 != null)
-                {
-                    if (tb3.Text.Equals(answers[0, 2]))
-                    {
-                        points++;
-                        tb3.Text += correctAnswer;
-                        LockTextBlock(tb3, true);
-                    }
-                    else
-                    {
-                        tb3.Text += wrongAnswer + answers[0, 2];
-                        LockTextBlock(tb3, false);
-                    }
-                }
-
-
-
-
-                if (tb4 != null)
-                {
-                    if (tb4.Text.Equals(answers[1, 0]))
-                    {
-                        points++;
-                        tb4.Text += correctAnswer;
-                        LockTextBlock(tb4, true);//color + lock textbox
-                    }
-                    else
-                    {
-                        tb4.Text += wrongAnswer + answers[1, 0];
-                        LockTextBlock(tb4, false);
-                    }
-
-                    if (tb5 != null)
-                    {
-                        if (tb5.Text.Equals(answers[1, 1]))
-                        {
-                            points++;
-                            tb5.Text += correctAnswer;
-                            LockTextBlock(tb5, true);
-                        }
-                        else
-                        {
-                            tb5.Text += wrongAnswer + answers[1, 1];
-                            LockTextBlock(tb5, false);
-                        }
-                    }
-
-                    if (tb6 != null)
-                    {
-                        if (tb6.Text.Equals(answers[1, 2]))
-                        {
-                            points++;
-                            tb6.Text += correctAnswer;
-                            LockTextBlock(tb6, true);
-                        }
-                        else
-                        {
-                            tb6.Text += wrongAnswer + answers[1, 2];
-                            LockTextBlock(tb6, false);
-                        }
-                    }
-                }
-            }
-
-            //pts forumule Languages:
-            if (timer > 0)//bonus points if test complete before end of time!
-            {
-                points = (int)(Math.Round((points * 1.25 + difficulty * 0.84), MidpointRounding.AwayFromZero));
-            }
-            else
-            {
-                points = (int)(Math.Round((points * 1.25), MidpointRounding.AwayFromZero));
-            }
-
-            return points;
-        }
-
         private int OneQuestionPerAnwser(string correctAnswer, string wrongAnswer)
         {
             int points = 0;
 
-            if (tb1 != null)
+            if (tb1.Text.Equals(answers[0, 0]))
             {
-                if (tb1.Text.Equals(answers[0, 0]))
-                {
-                    points++;
-                    tb1.Text += correctAnswer;
-                    LockTextBlock(tb1, true);
-                }
-                else
-                {
-                    tb1.Text += wrongAnswer + answers[0, 0];
-                    LockTextBlock(tb1, false);
-                }
+                points++;
+                tb1.Text += correctAnswer;
+                LockTextBlock(tb1, true);
+            }
+            else
+            {
+                tb1.Text += wrongAnswer + answers[0, 0];
+                LockTextBlock(tb1, false);
+            }
 
-                if (tb2 != null)
-                {
-                    if (tb2.Text.Equals(answers[1, 0]))
-                    {
-                        points++;
-                        tb2.Text += correctAnswer;
-                        LockTextBlock(tb2, true);
-                    }
-                    else
-                    {
-                        tb2.Text += wrongAnswer + answers[1, 0];
-                        LockTextBlock(tb2, false);
-                    }
+            if (tb2.Text.Equals(answers[1, 0]))
+            {
+                points++;
+                tb2.Text += correctAnswer;
+                LockTextBlock(tb2, true);
+            }
+            else
+            {
+                tb2.Text += wrongAnswer + answers[1, 0];
+                LockTextBlock(tb2, false);
+            }
 
-                    if (tb3 != null)
-                    {
-                        if (tb3.Text.Equals(answers[2, 0]))
-                        {
-                            points++;
-                            tb3.Text += correctAnswer;
-                            LockTextBlock(tb3, true);
-                        }
-                        else
-                        {
-                            tb3.Text += wrongAnswer + answers[2, 0];
-                            LockTextBlock(tb3, false);
-                        }
+            if (tb3.Text.Equals(answers[2, 0]))
+            {
+                points++;
+                tb3.Text += correctAnswer;
+                LockTextBlock(tb3, true);
+            }
+            else
+            {
+                tb3.Text += wrongAnswer + answers[2, 0];
+                LockTextBlock(tb3, false);
+            }
 
-                        if (tb4 != null)
-                        {
-                            if (tb4.Text.Equals(answers[3, 0]))
-                            {
-                                points++;
-                                tb4.Text += correctAnswer;
-                                LockTextBlock(tb4, true);
-                            }
-                            else
-                            {
-                                tb4.Text += wrongAnswer + answers[3, 0];
-                                LockTextBlock(tb4, false);
-                            }
+            if (tb4.Text.Equals(answers[3, 0]))
+            {
+                points++;
+                tb4.Text += correctAnswer;
+                LockTextBlock(tb4, true);
+            }
+            else
+            {
+                tb4.Text += wrongAnswer + answers[3, 0];
+                LockTextBlock(tb4, false);
+            }
 
-                            if (tb5 != null)
-                            {
-                                if (tb5.Text.Equals(answers[4, 0]))
-                                {
-                                    points++;
-                                    tb5.Text += correctAnswer;
-                                    LockTextBlock(tb5, true);
-                                }
-                                else
-                                {
-                                    tb5.Text += wrongAnswer + answers[4, 0];
-                                    LockTextBlock(tb5, false);
-                                }
-
-                                if (tb6 != null)
-                                {
-                                    if (tb6.Text.Equals(answers[5, 0]))
-                                    {
-                                        points++;
-                                        tb5.Text += correctAnswer;
-                                        LockTextBlock(tb6, true);
-                                    }
-                                    else
-                                    {
-                                        tb6.Text = wrongAnswer + answers[5, 0];
-                                        LockTextBlock(tb6, false);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            if (tb5.Text.Equals(answers[4, 0]))
+            {
+                points++;
+                tb5.Text += correctAnswer;
+                LockTextBlock(tb5, true);
+            }
+            else
+            {
+                tb5.Text += wrongAnswer + answers[4, 0];
+                LockTextBlock(tb5, false);
             }
 
             //pts formule math:
@@ -546,6 +399,98 @@ namespace Project
             return points;
         }
 
+        private int OneQuestionThreeAnswers(string correctAnswer, string wrongAnswer)
+        {
+            //answers[,]: .rank = amount of dimensions, .length: alles dat erin zit!, .length / .GetLength(0) = amount of columns from dimension 0 ["(0)"]
+            int points = 0;
+            //....................................................................................................................................................
+            if (tb1.Text.Equals(answers[0, 0]))
+            {
+                points++;
+                tb1.Text += correctAnswer;
+                LockTextBlock(tb1, true);//color + lock textbox
+            }
+            else
+            {
+                tb1.Text += wrongAnswer + answers[0, 0];
+                LockTextBlock(tb1, false);
+            }
+
+            if (tb2.Text.Equals(answers[0, 1]))
+            {
+                points++;
+                tb2.Text += correctAnswer;
+                LockTextBlock(tb2, true);
+            }
+            else
+            {
+                tb2.Text += wrongAnswer + answers[0, 1];
+                LockTextBlock(tb2, false);
+            }
+
+
+            if (tb3.Text.Equals(answers[0, 2]))
+            {
+                points++;
+                tb3.Text += correctAnswer;
+                LockTextBlock(tb3, true);
+            }
+            else
+            {
+                tb3.Text += wrongAnswer + answers[0, 2];
+                LockTextBlock(tb3, false);
+            }
+
+            if (tb4.Text.Equals(answers[1, 0]))
+            {
+                points++;
+                tb4.Text += correctAnswer;
+                LockTextBlock(tb4, true);//color + lock textbox
+            }
+            else
+            {
+                tb4.Text += wrongAnswer + answers[1, 0];
+                LockTextBlock(tb4, false);
+            }
+
+
+            if (tb5.Text.Equals(answers[1, 1]))
+            {
+                points++;
+                tb5.Text += correctAnswer;
+                LockTextBlock(tb5, true);
+            }
+            else
+            {
+                tb5.Text += wrongAnswer + answers[1, 1];
+                LockTextBlock(tb5, false);
+            }
+
+            if (tb6.Text.Equals(answers[1, 2]))
+            {
+                points++;
+                tb6.Text += correctAnswer;
+                LockTextBlock(tb6, true);
+            }
+            else
+            {
+                tb6.Text += wrongAnswer + answers[1, 2];
+                LockTextBlock(tb6, false);
+            }
+
+            //pts forumule Languages:
+            if (timer > 0)//bonus points if test complete before end of time!
+            {
+                points = (int)(Math.Round((points * 1.25 + difficulty * 0.84), MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                points = (int)(Math.Round((points * 1.25), MidpointRounding.AwayFromZero));
+            }
+
+            return points;
+        }
+
         public void LoadQuestions()
         {
             int totalLines;
@@ -554,11 +499,9 @@ namespace Project
 
             if (visibleLines >= amountOfQuestionsNeeded)
             {
-                int[] randomNumbers;
-
-                randomNumbers = SelectRandomQuestions(amountOfQuestionsNeeded, 1, totalLines);//headers MOETEN IN EEN VISIBLE: FALSE REGEL STAAN!!!!!!!!!!!!!
-               
                 string[] isEnabled;
+                string[] labels;
+                int[] randomNumbers = SelectRandomQuestions(amountOfQuestionsNeeded, 1, totalLines);//headers MOETEN IN EEN VISIBLE: FALSE REGEL STAAN!!!!!!!!!!!!!
 
                 for (int i = 0; i < randomNumbers.Length; i++)
                 {
@@ -569,8 +512,6 @@ namespace Project
                         answers[i, j - 3] = isEnabled[j];
                     }
                 }
-
-                string[] labels;
 
                 if (1 <= answers.GetLength(0))
                 {
