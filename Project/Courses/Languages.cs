@@ -14,7 +14,7 @@ namespace Project
         public Languages(int studentId, int difficulty, Button gradeButton, Label time, Label title, Label question1, Label question2, Label header1, Label header2, Label header3, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6)
             : base(studentId, difficulty, gradeButton, time, title, question1, question2, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6)
         {
-            base.QuestionsFile = "Courses_Lang";//COURSES_MATH_QUESTIONS
+            base.QuestionsFile = "Courses_Lang";
             base.StudentsFile = "Courses";
             LoadHeaderLabels();
 
@@ -31,12 +31,12 @@ namespace Project
 
             if (questions != null)
             {
-                base.Title = questions[2];
-                base.Header1 = questions[3];
-                base.Header2 = questions[4];
-                base.Header3 = questions[5];
+                base.L3 = questions[2];
+                base.L4 = questions[3];
+                base.L5 = questions[4];
+                base.L6 = questions[5];
 
-                Console.WriteLine("l1: " + l1.Name + " l2: " + l2.Name + " l3: " + l3.Name + " l4: " + l4.Name + " l5: " + l5.Name + " l6: " + l6.Name);
+                //Console.WriteLine("l1: " + base.L1 + " l2: " + base.L2 + " l3: " + base.L3 + " l4: " + base.L4 + " l5: " + base.L5 + " l6: " + base.L6);
             }
         }
 

@@ -24,19 +24,19 @@ namespace Project
         private int studentId;
 
         //dbfiles to use:
-        protected string mathStudents;
+        private string mathStudents;
         private string questions;
         private int amountOfQuestionsNeeded;
         //private int maxAmountOfAnswersPQ;
         private int difficulty;
 
         //labels:
-        public Label l1;
-        public Label l2;
-        public Label l3;
-        public Label l4;
-        public Label l5;
-        public Label l6;
+        private Label l1;
+        private Label l2;
+        private Label l3;
+        private Label l4;
+        private Label l5;
+        private Label l6;
 
         //textboxes:
         private TextBox tb1;
@@ -150,22 +150,38 @@ namespace Project
         }
 
         //Getters/Setters: labels:
-        protected string Title
+
+        protected string L1
         {
+            get { return Convert.ToString(l1.Content); }
+            set { l1.Content = value; }
+        }
+        protected string L2
+        {
+            get { return Convert.ToString(l2.Content); }
+            set { l2.Content = value; }
+        }
+
+        protected string L3
+        {
+            get { return Convert.ToString(l3.Content); }
             set { l3.Content = value; }
         }
 
-        protected string Header1
+        protected string L4
         {
+            get { return Convert.ToString(l4.Content); }
             set { l4.Content = value; }
         }
 
-        protected string Header2
+        protected string L5
         {
+            get { return Convert.ToString(l5.Content); }
             set { l5.Content = value; }
         }
-        protected string Header3
+        protected string L6
         {
+            get { return Convert.ToString(l6.Content); }
             set { l6.Content = value; }
         }
 
