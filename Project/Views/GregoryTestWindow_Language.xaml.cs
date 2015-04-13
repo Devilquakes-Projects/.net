@@ -25,11 +25,10 @@ namespace Project.Views
             InitializeComponent();
 
             //onderstaande int's moeten van buitenaf doorgegeven worden (via constructor), ik set deze tijdelijk op deze manier:
-            int studentId = 2;
+            int studentId = 3;
             int difficulty = 3;
 
             lang = new Languages(studentId, difficulty, gradeButton, timeLabel, title, question1Label, question2Label, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6);
-            lang.LoadQuestions();
         }
 
         private void Button_Click_Grade(object sender, RoutedEventArgs e)
@@ -38,7 +37,6 @@ namespace Project.Views
             {
                 int grade = lang.Grade();
                 string result = String.Format("You earned {0}/10 points.", grade);
-                gradeButton.Content = "Exit";
                 MessageBox.Show(result);
             }
             else

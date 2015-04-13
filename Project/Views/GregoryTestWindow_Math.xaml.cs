@@ -26,11 +26,10 @@ namespace Project
             InitializeComponent();
 
             //onderstaande int's moeten van buitenaf doorgegeven worden (via constructor), ik set deze tijdelijk op deze manier:
-            int studentId = 1;
+            int studentId = 2;
             int difficulty = 3;
 
-            m1 = new Mathematics(studentId, difficulty, timeLabel, gradeButton, l1, tb1, l2, tb2, l3, tb3, l4, tb4, l5, tb5);
-            m1.LoadQuestions();
+            m1 = new Mathematics(studentId, difficulty, timeLabel, gradeButton, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5);
         }
 
         private void Button_Click_Grade(object sender, RoutedEventArgs e)
@@ -39,7 +38,6 @@ namespace Project
             {
                 int grade = m1.Grade();
                 string result = String.Format("You earned {0}/10 points.", grade);
-                gradeButton.Content = "Exit";
                 MessageBox.Show(result);
             }
             else
