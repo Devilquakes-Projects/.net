@@ -184,9 +184,9 @@ namespace Project
             {
                 double result;
                 NumberStyles style = NumberStyles.AllowDecimalPoint;
-                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("nl-BE");//edited on: 20/04/15 by Greg (from en-GB to nl-BE)
 
-                if (Double.TryParse(tb1.Text.Replace(',', '.'), style, culture, out result))
+                if (Double.TryParse(tb1.Text.Replace('.', ','), style, culture, out result))
                 {
                     tb1.Text = Convert.ToString(result);//25.0 word 25!
                 }
@@ -195,7 +195,7 @@ namespace Project
                     MsgPopupBox(1);
                 }
 
-                if (Double.TryParse(tb2.Text.Replace(',', '.'), style, culture, out result))
+                if (Double.TryParse(tb2.Text.Replace('.', ','), style, culture, out result))
                 {
                     tb2.Text = Convert.ToString(result);
                 }
@@ -204,7 +204,7 @@ namespace Project
                     MsgPopupBox(2);
                 }
 
-                if (Double.TryParse(tb3.Text.Replace(',', '.'), style, culture, out result))
+                if (Double.TryParse(tb3.Text.Replace('.', ','), style, culture, out result))
                 {
                     tb3.Text = Convert.ToString(result);
                 }
@@ -213,7 +213,7 @@ namespace Project
                     MsgPopupBox(3);
                 }
 
-                if (Double.TryParse(tb4.Text.Replace(',', '.'), style, culture, out result))
+                if (Double.TryParse(tb4.Text.Replace('.', ','), style, culture, out result))
                 {
                     tb4.Text = Convert.ToString(result);
                 }
@@ -222,7 +222,7 @@ namespace Project
                     MsgPopupBox(4);
                 }
 
-                if (Double.TryParse(tb5.Text.Replace(',', '.'), style, culture, out result))
+                if (Double.TryParse(tb5.Text.Replace('.', ','), style, culture, out result))
                 {
                     tb5.Text = Convert.ToString(result);
                 }
