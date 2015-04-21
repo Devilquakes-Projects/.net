@@ -50,17 +50,17 @@ namespace Project.Controllers
             else
             {
                 StreamWriter outputStream = File.CreateText(newFile);
-                    outputStream.Write("ID");
+                outputStream.Write("ID");
                 outputStream.Write(String.Format("{0}VISIBLE", separator));
-                    foreach (string field in fields)
-                    {
+                foreach (string field in fields)
+                {
                     outputStream.Write(String.Format("{0}{1}", separator, field.ToUpper()));
-                    }
-                    outputStream.WriteLine();
-                    outputStream.Close();
-
                 }
+                outputStream.WriteLine();
+                outputStream.Close();
+
             }
+        }
 
         /// <summary>
         /// Deletes a database
@@ -75,9 +75,9 @@ namespace Project.Controllers
 
             try
             {
-            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-            File.Delete(file);
-        }
+                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+                File.Delete(file);
+            }
             catch (DirectoryNotFoundException)
             {
                 Console.WriteLine("DB not found.");
@@ -99,7 +99,7 @@ namespace Project.Controllers
             StreamReader inputStream = null;
             try
             {
-            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
                 inputStream = File.OpenText(file);
                 string line = inputStream.ReadLine();
                 return line.Split(separator);
@@ -114,8 +114,8 @@ namespace Project.Controllers
                 if (inputStream != null)
                 {
                     inputStream.Close();
+                }
             }
-        }
         }
 
         /// <summary>
@@ -230,8 +230,8 @@ namespace Project.Controllers
             }
             else
             {
-            return null;
-        }
+                return null;
+            }
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace Project.Controllers
             StreamReader inputStream = null;
             try
             {
-            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
                 inputStream = File.OpenText(file);
                 string[] foundRecord = new string[FileStructureLength(dbName)];
                 List<string[]> foundRecords = new List<string[]>();
@@ -283,7 +283,7 @@ namespace Project.Controllers
             {
                 Console.WriteLine("DB not found");
                 return null;
-        }
+            }
             finally
             {
                 if (inputStream != null)
@@ -308,10 +308,10 @@ namespace Project.Controllers
 
             try
             {
-            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-            string filestructure = File.ReadLines(file).First();
+                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+                string filestructure = File.ReadLines(file).First();
                 return filestructure.Split(separator).Length;
-        }
+            }
             catch (FileNotFoundException)
             {
                 Console.WriteLine("DB not found");
@@ -379,39 +379,39 @@ namespace Project.Controllers
                 inputStream = File.OpenText(file);
                 outputStream = File.CreateText(tempFile);
 
-            string line = inputStream.ReadLine();
-            while (line != null)
-            {
+                string line = inputStream.ReadLine();
+                while (line != null)
+                {
                     if (line.Split(separator)[0].Equals(Convert.ToString(id)))
-                {
-                    // change content
-                    foreach (string record in records)
                     {
-                        if (first)
+                        // change content
+                        foreach (string record in records)
                         {
-                            outputStream.Write(String.Format("{0}", record));
-                            first = false;
-                        }
-                        else
-                        {
+                            if (first)
+                            {
+                                outputStream.Write(String.Format("{0}", record));
+                                first = false;
+                            }
+                            else
+                            {
                                 outputStream.Write(String.Format("{0}{1}", separator, record));
+                            }
                         }
+                        outputStream.WriteLine();
                     }
-                    outputStream.WriteLine();
+                    else
+                    {
+                        // copy content
+                        outputStream.WriteLine(line);
+                    }
+                    line = inputStream.ReadLine();
                 }
-                else
-                {
-                    // copy content
-                    outputStream.WriteLine(line);
-                }
-                line = inputStream.ReadLine();
+                // delete temp file and rename back to original
+                outputStream.Close();
+                inputStream.Close();
+                File.Delete(file);
+                File.Move(tempFile, file);
             }
-            // delete temp file and rename back to original
-            outputStream.Close();
-            inputStream.Close();
-            File.Delete(file);
-            File.Move(tempFile, file);
-        }
             catch (FileNotFoundException)
             {
                 Console.WriteLine("DB not found.");
@@ -550,8 +550,8 @@ namespace Project.Controllers
                 if (inputStream != null)
                 {
                     inputStream.Close();
+                }
             }
-        }
         }
 
         // Auther: Gregory
@@ -567,29 +567,28 @@ namespace Project.Controllers
         /// <param name="dbName">Name of DB File.</param>
         public static void LineCount(string dbName, out int visibleLines, out int totalLines)
         {
-            StreamReader read = null;
+            StreamReader inputStream = null;
 
             try
             {
                 string[] test;
-            StreamReader read = null;//must be assigned for finally!
                 visibleLines = 0;
                 totalLines = -1;
 
                 string readFile = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                read = File.OpenText(readFile);
+                inputStream = File.OpenText(readFile);
 
-                string reader = read.ReadLine();//12/04: nieuwe check, ging goed tot aan 9 regels en dan werkte vorige versie nietmeer! --> source: http://www.dotnetperls.com/split
-                
-                while (reader != null)
+                string line = inputStream.ReadLine();//12/04: nieuwe check, ging goed tot aan 9 regels en dan werkte vorige versie nietmeer! --> source: http://www.dotnetperls.com/split
+
+                while (line != null)
                 {
-                    test = reader.Split(separator);
+                    test = line.Split(separator);
                     if (test[1].Equals("true"))
                     {
                         visibleLines++;
                     }
                     totalLines++;
-                    reader = read.ReadLine();
+                    line = inputStream.ReadLine();
                 }
             }
             catch (FileNotFoundException)
@@ -604,9 +603,9 @@ namespace Project.Controllers
             }
             finally
             {
-                if (read != null)
+                if (inputStream != null)
                 {
-                    read.Close();
+                    inputStream.Close();
                 }
             }
         }
