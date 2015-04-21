@@ -54,6 +54,7 @@ namespace Project
 
             this.gradeButton = gradeButton;
             gradeButton.Content = "Grade";
+            base.SetTextboxStartSize(185, 1.1, 30, tb1, tb2, tb3, tb4, tb5);//setup textboxes
 
             this.l1 = l1;
             this.l2 = l2;

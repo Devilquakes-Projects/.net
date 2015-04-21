@@ -112,7 +112,7 @@ namespace Project
             }
         }
 
-        public override void Grade()
+        public override void Grade()//21/04: aangepast dat geen ints gereturnd worden + fixed grading system for this one.
         {
             dpTimer.Stop();
 

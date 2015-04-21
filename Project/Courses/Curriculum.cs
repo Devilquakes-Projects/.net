@@ -184,8 +184,53 @@ namespace Project
 
         protected void UpdateTimeLabel(Label time)
         {
-            time.Width = 100.0;
+            //time.Width = 100.0;
             time.Background = Brushes.LightGray;
+        }
+
+        protected void SetTextboxStartSize(double tbWidth = 200, double tbMaxWidth = 1.25, int amountOfCharactersAllowed = 20, TextBox tb1 = null, TextBox tb2 = null, TextBox tb3 = null, TextBox tb4 = null, TextBox tb5 = null, TextBox tb6 = null)
+        {
+                if (tb1 != null)
+                {
+                    tb1.MinWidth = tbWidth;
+                    tb1.MaxWidth = tbWidth * tbMaxWidth;
+                    tb1.MaxLength = amountOfCharactersAllowed;
+
+                    if (tb2 != null)
+                    {
+                        tb2.MinWidth = tbWidth;
+                        tb2.MaxWidth = tbWidth * tbMaxWidth;
+                        tb2.MaxLength = amountOfCharactersAllowed;
+
+                        if (tb3 != null)
+                        {
+                            tb3.MinWidth = tbWidth;
+                            tb3.MaxWidth = tbWidth * tbMaxWidth;
+                            tb3.MaxLength = amountOfCharactersAllowed;
+
+                            if (tb4 != null)
+                            {
+                                tb4.MinWidth = tbWidth;
+                                tb4.MaxWidth = tbWidth * tbMaxWidth;
+                                tb4.MaxLength = amountOfCharactersAllowed;
+
+                                if (tb5 != null)
+                                {
+                                    tb5.MinWidth = tbWidth;
+                                    tb5.MaxWidth = tbWidth * tbMaxWidth;
+                                    tb5.MaxLength = amountOfCharactersAllowed;
+
+                                    if (tb6 != null)
+                                    {
+                                        tb6.MinWidth = tbWidth;
+                                        tb6.MaxWidth = tbWidth * tbMaxWidth;
+                                        tb6.MaxLength = amountOfCharactersAllowed;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
         }
 
         protected void WriteRecords(int index, int points)
