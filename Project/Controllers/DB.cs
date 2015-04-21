@@ -47,17 +47,22 @@ namespace Project.Controllers
             }
             else
             {
-
-                StreamWriter outputStream = File.CreateText(newFile);
-                outputStream.Write("ID");
-                outputStream.Write("|VISIBLE");
-                foreach (string field in fields)
+                StreamWriter outputStream = null;
+                try
                 {
-                    outputStream.Write(String.Format("|{0}", field.ToUpper()));
+                    outputStream = File.CreateText(newFile);
+                    outputStream.Write("ID");
+                    outputStream.Write("|VISIBLE");
+                    foreach (string field in fields)
+                    {
+                        outputStream.Write(String.Format("|{0}", field.ToUpper()));
+                    }
+                    outputStream.WriteLine();
                 }
-                outputStream.WriteLine();
-                outputStream.Close();
-
+                finally
+                {
+                    outputStream.Close();
+                }
             }
         }
 
@@ -273,6 +278,11 @@ namespace Project.Controllers
         /// <returns>The number of fields.</returns>
         private static int FileStructureLength(string dbName)
         {
+            if (dbName == null)
+            {
+                throw new ArgumentNullException("database name");
+            }
+
             string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
             string filestructure = File.ReadLines(file).First();
             return filestructure.Split('|').Length;
