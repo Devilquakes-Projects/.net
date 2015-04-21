@@ -148,14 +148,14 @@ namespace Project.Controllers
 
         public static bool Promote(int id)
         {
-            try
+            string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
+            if (records != null)
             {
-                string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
                 records[6] = "1";
                 DB.ChangeRecord("users", id, records);
                 return true;
             }
-            catch
+            else
             {
                 return false;
             }
@@ -163,14 +163,14 @@ namespace Project.Controllers
 
         public static bool Demote(int id)
         {
-            try
+            string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
+            if (records != null)
             {
-                string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
                 records[6] = "0";
                 DB.ChangeRecord("users", id, records);
                 return true;
             }
-            catch
+            else
             {
                 return false;
             }
