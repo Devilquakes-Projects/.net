@@ -47,22 +47,17 @@ namespace Project.Controllers
             }
             else
             {
-                StreamWriter outputStream = null;
-                try
+
+                StreamWriter outputStream = File.CreateText(newFile);
+                outputStream.Write("ID");
+                outputStream.Write("|VISIBLE");
+                foreach (string field in fields)
                 {
-                    outputStream = File.CreateText(newFile);
-                    outputStream.Write("ID");
-                    outputStream.Write("|VISIBLE");
-                    foreach (string field in fields)
-                    {
-                        outputStream.Write(String.Format("|{0}", field.ToUpper()));
-                    }
-                    outputStream.WriteLine();
+                    outputStream.Write(String.Format("|{0}", field.ToUpper()));
                 }
-                finally
-                {
-                    outputStream.Close();
-                }
+                outputStream.WriteLine();
+                outputStream.Close();
+
             }
         }
 
@@ -278,11 +273,6 @@ namespace Project.Controllers
         /// <returns>The number of fields.</returns>
         private static int FileStructureLength(string dbName)
         {
-            if (dbName == null)
-            {
-                throw new ArgumentNullException("database name");
-            }
-
             string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
             string filestructure = File.ReadLines(file).First();
             return filestructure.Split('|').Length;
@@ -505,15 +495,15 @@ namespace Project.Controllers
         /// <param name="dbName">Name of DB File.</param>
         public static void LineCount(string dbName, out int visibleLines, out int totalLines)
         {
+            string readFile = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            string[] test;
+            StreamReader read = null;//must be assigned for finally!
+            visibleLines = 0;
+            totalLines = -1;
+
             try
             {
-                string[] test;
-
-                visibleLines = 0;
-                totalLines = -1;
-
-                string readFile = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                StreamReader read = File.OpenText(readFile);
+                read = File.OpenText(readFile);
 
                 string reader = read.ReadLine();//12/04: nieuwe check, ging goed tot aan 9 regels en dan werkte vorige versie nietmeer! --> source: http://www.dotnetperls.com/split
                 
@@ -532,6 +522,18 @@ namespace Project.Controllers
             {
                 visibleLines = 0;
                 totalLines = 0;
+            }
+            catch (IOException)//optional?
+            {
+                visibleLines = 0;
+                totalLines = 0;
+            }
+            finally//added on 21/04 on 10:4-10:50
+            {
+                if (read != null)//test if streamreader exists
+                {
+                    read.Close();
+                }
             }
         }
 
