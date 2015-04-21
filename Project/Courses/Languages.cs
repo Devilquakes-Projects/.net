@@ -86,16 +86,15 @@ namespace Project
             header3.Content = headers[5];
         }
 
-        void dpTimer_Tick(object sender, EventArgs e)
+        private void dpTimer_Tick(object sender, EventArgs e)
         {
             if (base.ShouldTimerStopRunningt(time))
             {
-                int grade = Grade();
-                MessageBox.Show(String.Format("You earned {0}/10 points.", grade));
+                Grade();
             }
         }
 
-        public override int Grade()//makes sure that answers are stored in uppercase, is this necessary!?
+        public override void Grade()//makes sure that answers are stored in uppercase, is this necessary!?
         {
             dpTimer.Stop();
 
@@ -195,7 +194,7 @@ namespace Project
             base.GradeButtonToExit(gradeButton, time);
             base.WriteRecords(6, points);//index 6 is for column of language points!
 
-            return points;
+            base.ShowResults(points);
         }
 
         private void ConvertInputToCapitals()

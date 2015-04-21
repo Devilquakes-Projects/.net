@@ -51,7 +51,7 @@ namespace Project
             qBoxTitle1.Header = questionList[0];
             qBoxTitle2.Header = questionList[1];
 
-            RandomQuestions(rb1, rb2, rb3, rb4);
+            RandomizeQuestionLocations(rb1, rb2, rb3, rb4);
             
             dpTimer = base.SetupTimer();
             dpTimer.Tick += dpTimer_Tick;
@@ -62,12 +62,11 @@ namespace Project
         {
             if (base.ShouldTimerStopRunningt(timeLabel))
             {
-                int grade = Grade();
-                MessageBox.Show(String.Format("You earned {0}/10 points.", grade));
+                Grade();
             }
         }
 
-        private void RandomQuestions(RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4)
+        private void RandomizeQuestionLocations(RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4)
         {
             string[,] answers = base.Answers;
             Random generator = new Random();
@@ -101,7 +100,19 @@ namespace Project
             }
         }
 
-        public override int Grade()
+        private int GradeAnswers(int points, bool isAnswerCorrect)
+        {
+            if (isAnswerCorrect)
+            {
+                return ++points;
+            }
+            else
+            {
+                return points;
+            }
+        }
+
+        public override void Grade()
         {
             dpTimer.Stop();
 
@@ -118,58 +129,35 @@ namespace Project
             string[,] answers = base.Answers;
 
             //set colored boxes:
-            bool firstbox;
             Brush colorCorrect = new SolidColorBrush(Colors.Green);
             Brush colorWrong = new SolidColorBrush(Colors.Red);
 
             if (rb1.Content.Equals(answers[0, 0]))
             {
-                firstbox = true;
                 rb1.Foreground = colorCorrect;
                 rb2.Foreground = colorWrong;
+
+                points = GradeAnswers(points, rb1.IsChecked == true);
             }
             else
             {
-                firstbox = false;
                 rb1.Foreground = colorWrong;
                 rb2.Foreground = colorCorrect;
-            }
 
-            if (firstbox)
-            {
-                if (rb1.IsChecked == true)
-                {
-                    points++;
-                }
-                else if (rb2.IsChecked == true)
-                {
-                    points++;
-                }
+                points = GradeAnswers(points, rb2.IsChecked == true);
             }
 
             if (rb3.Content.Equals(answers[1, 0]))
             {
-                firstbox = true;
                 rb3.Foreground = colorCorrect;
                 rb4.Foreground = colorWrong;
+                points = GradeAnswers(points, rb3.IsChecked == true);
             }
             else
             {
-                firstbox = false;
                 rb3.Foreground = colorWrong;
                 rb4.Foreground = colorCorrect;
-            }
-
-            if (firstbox)
-            {
-                if (rb3.IsChecked == true)
-                {
-                    points++;
-                }
-                else if (rb4.IsChecked == true)
-                {
-                    points++;
-                }
+                points = GradeAnswers(points, rb4.IsChecked == true);
             }
 
             if (base.Timer > 0)
@@ -183,8 +171,8 @@ namespace Project
 
             base.GradeButtonToExit(gradeButton, timeLabel);
             base.WriteRecords(7, points);//index 7 is for column of Geography points!
-            
-            return points;
+
+            base.ShowResults(points);
         }
     }
 }

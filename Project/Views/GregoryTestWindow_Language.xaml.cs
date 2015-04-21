@@ -35,9 +35,7 @@ namespace Project.Views
         {
             if (gradeButton.Content.Equals("Grade"))
             {
-                int grade = lang.Grade();
-                string result = String.Format("You earned {0}/10 points.", grade);
-                MessageBox.Show(result);
+                lang.Grade();
             }
             else
             {

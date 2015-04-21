@@ -174,13 +174,18 @@ namespace Project
             wrongAnswer = " = Wrong, answer should be: ";
         }
 
-        public abstract int Grade();
+        public abstract void Grade();
+
+        protected void ShowResults(int pts)
+        {
+            string result = String.Format("You earned {0}/{1} points.", pts, 10);//int 10 mag ook string "10" zijn
+            MessageBox.Show(result);
+        }
 
         protected void UpdateTimeLabel(Label time)
         {
             time.Width = 100.0;
             time.Background = Brushes.LightGray;
-            time.Content = "Test Completed!";
         }
 
         protected void WriteRecords(int index, int points)

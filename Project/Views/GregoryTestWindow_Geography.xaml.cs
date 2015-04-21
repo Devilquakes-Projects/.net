@@ -37,9 +37,8 @@ namespace Project.Views
         {
             if (gradeButton.Content.Equals("Grade"))
             {
-                int grade = geography.Grade();
-                string result = String.Format("You earned {0}/10 points.", grade);
-                MessageBox.Show(result);
+                geography.Grade();
+                
             }
             else
             {

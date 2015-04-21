@@ -80,16 +80,15 @@ namespace Project
             timer.Start();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             if (base.ShouldTimerStopRunningt(timeLabel))
             {
-                int grade = Grade();
-                MessageBox.Show(String.Format("You earned {0}/10 points.", grade));
+                Grade();
             }
         }
 
-        public override int Grade()//accepts decimal numbers, note: stored with a '.' NOTATION)
+        public override void Grade()//accepts decimal numbers, note: stored with a '.' NOTATION)
         {
             timer.Stop();
             ConvertToDecimal();
@@ -175,7 +174,7 @@ namespace Project
             base.GradeButtonToExit(gradeButton, timeLabel);
             base.WriteRecords(5, points);//index 5 is for column of math points!
 
-            return points;
+            base.ShowResults(points);
         }
 
         private void ConvertToDecimal()
