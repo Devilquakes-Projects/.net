@@ -54,13 +54,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\Course.cs" />
+    <Compile Include="Controllers\Input.cs" />
     <Compile Include="Controllers\Question.cs" />
     <Compile Include="Courses\Geography.cs" />
     <Compile Include="Courses\Languages.cs" />
+    <Compile Include="SnakeGame\Snake.cs" />
+    <Compile Include="SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
     <Compile Include="Courses\Curriculum.cs" />
-    <Compile Include="Views\cources\MathematicsWindow.xaml.cs">
+    <Compile Include="Views\Cources\MathematicsWindow.xaml.cs">
       <DependentUpon>MathematicsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Games\SnakeWindow.xaml.cs">
+      <DependentUpon>SnakeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GregoryTestWindow_Geography.xaml.cs">
       <DependentUpon>GregoryTestWindow_Geography.xaml</DependentUpon>
@@ -71,21 +77,25 @@
     <Compile Include="Views\GregoryTestWindow_Math.xaml.cs">
       <DependentUpon>GregoryTestWindow_Math.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\auth\LoginWindow.xaml.cs">
+    <Compile Include="Views\Auth\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Courses\Mathematics.cs" />
-    <Compile Include="Views\auth\RegisterWindow.xaml.cs">
+    <Compile Include="Views\Auth\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\User.cs" />
-    <Compile Include="Views\teacher\AddQuestionWindow.xaml.cs">
+    <Compile Include="Views\Teacher\AddQuestionWindow.xaml.cs">
       <DependentUpon>AddQuestionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\teacher\EditQuestionWindow.xaml.cs">
+    <Compile Include="Views\Teacher\EditQuestionWindow.xaml.cs">
       <DependentUpon>EditQuestionWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\cources\MathematicsWindow.xaml">
+    <Page Include="Views\Cources\MathematicsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Games\SnakeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\auth\LoginWindow.xaml">
+    <Page Include="Views\Auth\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,15 +128,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\auth\RegisterWindow.xaml">
+    <Page Include="Views\Auth\RegisterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\teacher\AddQuestionWindow.xaml">
+    <Page Include="Views\Teacher\AddQuestionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\teacher\EditQuestionWindow.xaml">
+    <Page Include="Views\Teacher\EditQuestionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

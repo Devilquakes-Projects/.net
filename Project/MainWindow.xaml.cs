@@ -98,5 +98,12 @@ namespace Project
         {
             
         }
+
+        private void snakeButton_Click(object sender, RoutedEventArgs e)
+        {
+            SnakeWindow newView = new SnakeWindow();
+            newView.Show();
+            this.Close();
+        }
     }
 }

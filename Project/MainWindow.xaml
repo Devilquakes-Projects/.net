@@ -6,7 +6,9 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Testing">
-                <MenuItem Header="_Joris" />
+                <MenuItem Header="_Joris">
+                    <MenuItem Header="_Snake" Click="snakeButton_Click"/>
+                </MenuItem>
                 <MenuItem Header="_Joren" />
                 <MenuItem Header="_Christiaan" />
                 <MenuItem Header="_Gregory">
