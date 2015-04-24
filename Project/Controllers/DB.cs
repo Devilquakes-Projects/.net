@@ -58,7 +58,6 @@ namespace Project.Controllers
                 }
                 outputStream.WriteLine();
                 outputStream.Close();
-
             }
         }
 
@@ -82,7 +81,6 @@ namespace Project.Controllers
             {
                 Console.WriteLine("DB not found.");
             }
-
         }
 
         /// <summary>
