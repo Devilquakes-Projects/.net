@@ -21,7 +21,7 @@ namespace Project.Controllers
 {
     public static class DB
     {
-        private static string destination = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "01DBProject");
+        private static string destination = Path.Combine("01DBProject");
         private static char separator = '|';
 
         /// <summary>
