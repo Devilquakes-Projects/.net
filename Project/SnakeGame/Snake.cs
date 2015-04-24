@@ -22,8 +22,6 @@ namespace Project.SnakeGame
         private DispatcherTimer moveTimer;
         private DispatcherTimer timeTimer;
         private int timeLeft;
-        private int snakeX;
-        private int snakeY;
         private int size = 10;
         private int points = 0;
         private Random random;
@@ -32,6 +30,7 @@ namespace Project.SnakeGame
         private int foodY;
         private List<SnakePart> snake;
         private int direction; // Down = 0, Left = 1, Right = 2, Up = 3
+        private bool eaten = true;
 
         /// <summary>
         /// Constructor of the Snake class
@@ -46,10 +45,8 @@ namespace Project.SnakeGame
             direction = 0;
             snake = new List<SnakePart>();
             SnakePart head = new SnakePart();
-            snakeX = ((int)(drawOnCanvas.Width / 2) / 10) * 10; // zorgt voor een veelvoud van 10
-            snakeY = ((int)(drawOnCanvas.Height / 2) / 10) * 10; // zorgt voor een veelvoud van 10
-            head.X = snakeX;
-            head.Y = snakeY;
+            head.X = ((int)(drawOnCanvas.Width / 2) / 10) * 10; // zorgt voor een veelvoud van 10
+            head.Y = ((int)(drawOnCanvas.Height / 2) / 10) * 10; // zorgt voor een veelvoud van 10
             snake.Add(head);
             snakeTimer = new DispatcherTimer();
             snakeTimer.Interval = TimeSpan.FromSeconds(0.3);
@@ -88,8 +85,6 @@ namespace Project.SnakeGame
         public void startGame()
         {
             drawSnake();
-            foodX = (random.Next(0, (int)(drawOnCanvas.Width - size)) / 10) * 10;
-            foodY = (random.Next(0, (int)(drawOnCanvas.Height - size)) / 10) * 10;
             snakeTimer.Start();
             moveTimer.Start();
             timeTimer.Start();
@@ -140,15 +135,33 @@ namespace Project.SnakeGame
             food.Fill = Brushes.Red;
             food.Width = size;
             food.Height = size;
+            bool findSpot = true;
 
-            while (((foodX >= snakeX && (foodX <= snakeX + size))
-                && (foodY >= snakeY && (foodY <= snakeY + size)))
-                || foodX == 0 || foodX + size == drawOnCanvas.Width
-                || foodY == 0 || foodY + size == drawOnCanvas.Height)
+            if (eaten)
             {
-                foodX = (random.Next(0, (int)(drawOnCanvas.Width - size)) / 10) * 10;
-                foodY = (random.Next(0, (int)(drawOnCanvas.Height - size)) / 10) * 10;
+                while (findSpot)
+                {
+                    foodX = (random.Next(0, (int)(drawOnCanvas.Width - size)) / 10) * 10;
+                    foodY = (random.Next(0, (int)(drawOnCanvas.Height - size)) / 10) * 10;
+
+                    for (int i = 0; i < snake.Count; i++)
+                    {
+                        if (((foodX >= snake[i].X && (foodX <= snake[i].X + size))
+                            && (foodY >= snake[i].Y && (foodY <= snake[i].Y + size)))
+                            || foodX == 0 || foodX + size == drawOnCanvas.Width
+                            || foodY == 0 || foodY + size == drawOnCanvas.Height)
+                        {
+                            findSpot = true;
+                        }
+                        else
+                        {
+                            findSpot = false;
+                        }
+                    }
+                }
+                eaten = false;
             }
+
             food.Margin = new Thickness(foodX, foodY, 0, 0);
             drawOnCanvas.Children.Add(food);
         }
@@ -233,8 +246,8 @@ namespace Project.SnakeGame
         public void hit()
         {
             // check hitting borders
-            if (snake[0].X == 0 || snake[0].Y == 0
-                    || (snake[0].X + size) == drawOnCanvas.Width || (snake[0].Y + size) == drawOnCanvas.Height)
+            if (snake[0].X < 0 || snake[0].Y < 0
+                    || (snake[0].X + size) > drawOnCanvas.Width || (snake[0].Y + size) > drawOnCanvas.Height)
             {
                 Dead();
             }
@@ -272,6 +285,7 @@ namespace Project.SnakeGame
         /// </summary>
         public void Eat()
         {
+            eaten = true;
             points++;
             pointsLabel.Content = points;
             SnakePart bodyPart = new SnakePart();
@@ -279,9 +293,6 @@ namespace Project.SnakeGame
             bodyPart.Y = snake[snake.Count - 1].Y;
             snake.Add(bodyPart);
             drawSnake();
-            foodX = (random.Next(0, (int)(drawOnCanvas.Width - size)) / 10) * 10;
-            foodY = (random.Next(0, (int)(drawOnCanvas.Height - size)) / 10) * 10;
-            drawFood();
         }
 
         /// <summary>
