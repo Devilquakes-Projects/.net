@@ -11,56 +11,23 @@ namespace Project.Controllers
 {
     public static class User
     {
-        private static bool _loggedIn;
+        //private static bool _loggedIn;
 
-        public static bool LoggedIn
-        {
-            get { return _loggedIn; }
-        }
-
-        private static int _id;
-
-        public static int Id
-        {
-            get { return _id; }
-        }
-
-        private static string _username;
-
-        public static string UserName
-        {
-            get { return _username; }
-        }
-
-        private static string _name;
-
-        public static string Name
-        {
-            get { return _name; }
-        }
-
-        private static string _lastName;
-
-        public static string LastName
-        {
-            get { return _lastName; }
-        }
-
-        private static int _permission;
-
-        public static int Permission
-        {
-            get { return _permission; }
-        }
+        public static bool LoggedIn { get; set; }
+        public static int Id { get; set; }
+        public static string Username { get; set; }
+        public static string Name { get; set; }
+        public static string LastName { get; set; }
+        public static int Permission { get; set; }
 
         public static void Logout()
         {
-            _id = 0;
-            _username = null;
-            _name = null;
-            _lastName = null;
-            _permission = 0;
-            _loggedIn = false;
+            Id = 0;
+            Username = null;
+            Name = null;
+            LastName = null;
+            Permission = 0;
+            LoggedIn = false;
         }
 
         public static bool Login(string userName, string pass)
@@ -83,12 +50,12 @@ namespace Project.Controllers
                 if (BCrypt.CheckPassword(pass, dbUser[3]))
                 {
                     // Do login
-                    _id = Convert.ToInt32(dbUser[0]);
-                    _username = dbUser[2];
-                    _name = dbUser[4];
-                    _lastName = dbUser[5];
-                    _permission = Convert.ToInt32(dbUser[6]);
-                    _loggedIn = true;
+                    Id = Convert.ToInt32(dbUser[0]);
+                    Username = dbUser[2];
+                    Name = dbUser[4];
+                    LastName = dbUser[5];
+                    Permission = Convert.ToInt32(dbUser[6]);
+                    LoggedIn = true;
                     return true;
                 }
             }
@@ -132,12 +99,12 @@ namespace Project.Controllers
 
                 DB.AddRecord("users", records);
                 string[] dbUser = DB.FindFirst("users", "username", userName);
-                _id = Convert.ToInt32(dbUser[0]);
-                _username = dbUser[2];
-                _name = dbUser[4];
-                _lastName = dbUser[5];
-                _permission = Convert.ToInt32(dbUser[6]);
-                _loggedIn = true;
+                Id = Convert.ToInt32(dbUser[0]);
+                Username = dbUser[2];
+                Name = dbUser[4];
+                LastName = dbUser[5];
+                Permission = Convert.ToInt32(dbUser[6]);
+                LoggedIn = true;
                 return true;
             }
             else
