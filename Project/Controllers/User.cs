@@ -11,8 +11,6 @@ namespace Project.Controllers
 {
     public static class User
     {
-        //private static bool _loggedIn;
-
         public static bool LoggedIn { get; set; }
         public static int Id { get; set; }
         public static string Username { get; set; }
