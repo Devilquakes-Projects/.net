@@ -14,8 +14,10 @@ namespace Project.Controllers
         private static string[,] GetAll()
         {
             // add cources to this array
+            // name, question path, users point path
             string[,] cources = { 
-                                    { "Mathmatics", "Courses_Math_Questions", "Courses_Math" }
+                                    { "Mathmatics", "COURSES_MATH", "" },
+                                    { "Languages", "COURSES_LANG", "" }
                                 };
             return cources;
         }
