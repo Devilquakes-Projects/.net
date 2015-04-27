@@ -11,12 +11,12 @@ namespace Project.Controllers
 {
     public static class User
     {
-        public static bool LoggedIn { get; set; }
-        public static int Id { get; set; }
-        public static string Username { get; set; }
-        public static string Name { get; set; }
-        public static string LastName { get; set; }
-        public static int Permission { get; set; }
+        public static bool LoggedIn { get; private set; }
+        public static int Id { get; private set; }
+        public static string Username { get; private set; }
+        public static string Name { get; private set; }
+        public static string LastName { get; private set; }
+        public static int Permission { get; private set; }
 
         public static void Logout()
         {
