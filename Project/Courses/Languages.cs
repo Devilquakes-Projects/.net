@@ -25,12 +25,7 @@ namespace Project
         private Label header2;
         private Label header3;
 
-        private TextBox tb1;
-        private TextBox tb2;
-        private TextBox tb3;
-        private TextBox tb4;
-        private TextBox tb5;
-        private TextBox tb6;
+        private TextBox[] tb = new TextBox[6];
 
         public Languages(int studentId, int difficulty, Button gradeButton, Label time, Label title, Label question1, Label question2, Label header1, Label header2, Label header3, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6, int bonusTime = 20)
             : base(studentId, difficulty)
@@ -57,12 +52,12 @@ namespace Project
             this.header3 = header3;
 
             base.SetTextboxStartSize(200, 1.25, 74, tb1, tb2, tb3, tb4, tb5, tb6);//setup textboxes
-            this.tb1 = tb1;
-            this.tb2 = tb2;
-            this.tb3 = tb3;
-            this.tb4 = tb4;
-            this.tb5 = tb5;
-            this.tb6 = tb6;
+            this.tb[0] = tb1;
+            this.tb[1] = tb2;
+            this.tb[2] = tb3;
+            this.tb[3] = tb4;
+            this.tb[4] = tb5;
+            this.tb[5] = tb6;
 
             LoadHeaderLabels();
 
@@ -108,78 +103,27 @@ namespace Project
             string wrongAnswer;
             base.StartGradeValues(out correctAnswer, out wrongAnswer);
 
-            if (tb1.Text.Equals(Answers[0, 0]))
+            int x = 0;
+            int y = 0;
+            for (int i = 0; i < tb.Length; i++)
             {
-                points++;
-                tb1.Text += correctAnswer;
-                LockTextBlock(tb1, true);//color + lock textbox
-            }
-            else
-            {
-                tb1.Text += wrongAnswer + Answers[0, 0];
-                LockTextBlock(tb1, false);
-            }
-
-            if (tb2.Text.Equals(Answers[0, 1]))
-            {
-                points++;
-                tb2.Text += correctAnswer;
-                LockTextBlock(tb2, true);
-            }
-            else
-            {
-                tb2.Text += wrongAnswer + Answers[0, 1];
-                LockTextBlock(tb2, false);
-            }
-
-
-            if (tb3.Text.Equals(Answers[0, 2]))
-            {
-                points++;
-                tb3.Text += correctAnswer;
-                LockTextBlock(tb3, true);
-            }
-            else
-            {
-                tb3.Text += wrongAnswer + Answers[0, 2];
-                LockTextBlock(tb3, false);
-            }
-
-            if (tb4.Text.Equals(Answers[1, 0]))
-            {
-                points++;
-                tb4.Text += correctAnswer;
-                LockTextBlock(tb4, true);//color + lock textbox
-            }
-            else
-            {
-                tb4.Text += wrongAnswer + Answers[1, 0];
-                LockTextBlock(tb4, false);
-            }
-
-
-            if (tb5.Text.Equals(Answers[1, 1]))
-            {
-                points++;
-                tb5.Text += correctAnswer;
-                LockTextBlock(tb5, true);
-            }
-            else
-            {
-                tb5.Text += wrongAnswer + Answers[1, 1];
-                LockTextBlock(tb5, false);
-            }
-
-            if (tb6.Text.Equals(Answers[1, 2]))
-            {
-                points++;
-                tb6.Text += correctAnswer;
-                LockTextBlock(tb6, true);
-            }
-            else
-            {
-                tb6.Text += wrongAnswer + Answers[1, 2];
-                LockTextBlock(tb6, false);
+                if (x >= 3)
+                {
+                    x = 0;
+                    y = 1;
+                }
+                if (tb[i].Text.Equals(Answers[y, x]))
+                {
+                    points++;
+                    tb[i].Text += correctAnswer;
+                    LockTextBlock(tb[i], true);//color + lock textbox
+                }
+                else
+                {
+                    tb[i].Text += wrongAnswer + Answers[y, x];
+                    LockTextBlock(tb[i], false);
+                }
+                x++;
             }
 
             //pts forumule Languages:
@@ -201,12 +145,10 @@ namespace Project
         private void ConvertInputToCapitals()
         {
             //ingave op hoofdletters zetten:
-            tb1.Text = tb1.Text.ToUpper();
-            tb2.Text = tb2.Text.ToUpper();
-            tb3.Text = tb3.Text.ToUpper();
-            tb4.Text = tb4.Text.ToUpper();
-            tb5.Text = tb5.Text.ToUpper();
-            tb6.Text = tb6.Text.ToUpper();
+            for (int i = 0; i < tb.Length; i++)
+            {
+                tb[i].Text = tb[i].Text.ToUpper();
+            }
         }
     }
 }

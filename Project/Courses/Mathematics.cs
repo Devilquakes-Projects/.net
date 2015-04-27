@@ -17,18 +17,9 @@ namespace Project
         //instance variables:
         //labels:
         private Label timeLabel;
-        private Label l1;
-        private Label l2;
-        private Label l3;
-        private Label l4;
-        private Label l5;
 
         //textboxes:
-        private TextBox tb1;
-        private TextBox tb2;
-        private TextBox tb3;
-        private TextBox tb4;
-        private TextBox tb5;
+        private TextBox[] tb = new TextBox[5];
 
         //GradeButton:
         private Button gradeButton;
@@ -54,19 +45,14 @@ namespace Project
 
             this.gradeButton = gradeButton;
             gradeButton.Content = "Grade";
+
             base.SetTextboxStartSize(185, 1.1, 30, tb1, tb2, tb3, tb4, tb5);//setup textboxes
 
-            this.l1 = l1;
-            this.l2 = l2;
-            this.l3 = l3;
-            this.l4 = l4;
-            this.l5 = l5;
-
-            this.tb1 = tb1;
-            this.tb2 = tb2;
-            this.tb3 = tb3;
-            this.tb4 = tb4;
-            this.tb5 = tb5;
+            this.tb[0] = tb1;
+            this.tb[1] = tb2;
+            this.tb[2] = tb3;
+            this.tb[3] = tb4;
+            this.tb[4] = tb5;
 
             string[] questions = base.LoadQuestions();
 
@@ -102,64 +88,19 @@ namespace Project
 
             base.StartGradeValues(out correctAnswer, out wrongAnswer);
 
-            if (tb1.Text.Equals(answers[0, 0]))
+            for (int i = 0; i < tb.Length; i++)
             {
-                points++;
-                tb1.Text += correctAnswer;
-                base.LockTextBlock(tb1, true);
-            }
-            else
-            {
-                tb1.Text += wrongAnswer + answers[0, 0];
-                base.LockTextBlock(tb1, false);
-            }
-
-            if (tb2.Text.Equals(answers[1, 0]))
-            {
-                points++;
-                tb2.Text += correctAnswer;
-                base.LockTextBlock(tb2, true);
-            }
-            else
-            {
-                tb2.Text += wrongAnswer + answers[1, 0];
-                base.LockTextBlock(tb2, false);
-            }
-
-            if (tb3.Text.Equals(answers[2, 0]))
-            {
-                points++;
-                tb3.Text += correctAnswer;
-                base.LockTextBlock(tb3, true);
-            }
-            else
-            {
-                tb3.Text += wrongAnswer + answers[2, 0];
-                base.LockTextBlock(tb3, false);
-            }
-
-            if (tb4.Text.Equals(answers[3, 0]))
-            {
-                points++;
-                tb4.Text += correctAnswer;
-                base.LockTextBlock(tb4, true);
-            }
-            else
-            {
-                tb4.Text += wrongAnswer + answers[3, 0];
-                base.LockTextBlock(tb4, false);
-            }
-
-            if (tb5.Text.Equals(answers[4, 0]))
-            {
-                points++;
-                tb5.Text += correctAnswer;
-                base.LockTextBlock(tb5, true);
-            }
-            else
-            {
-                tb5.Text += wrongAnswer + answers[4, 0];
-                base.LockTextBlock(tb5, false);
+                if (tb[i].Text.Equals(answers[i, 0]))
+                {
+                    points++;
+                    tb[i].Text += correctAnswer;
+                    base.LockTextBlock(tb[i], true);
+                }
+                else
+                {
+                    tb[i].Text += wrongAnswer + answers[i, 0];
+                    base.LockTextBlock(tb[i], false);
+                }
             }
 
             //pts formule math:
@@ -186,52 +127,19 @@ namespace Project
                 NumberStyles style = NumberStyles.AllowDecimalPoint;
                 CultureInfo culture = CultureInfo.CreateSpecificCulture("nl-BE");//edited on: 20/04/15 by Greg (from en-GB to nl-BE)
 
-                if (Double.TryParse(tb1.Text.Replace('.', ','), style, culture, out result))
+                for (int i = 0; i < tb.Length; i++)
                 {
-                    tb1.Text = Convert.ToString(result);//25.0 word 25!
-                }
-                else
-                {
-                    MsgPopupBox(1);
-                }
-
-                if (Double.TryParse(tb2.Text.Replace('.', ','), style, culture, out result))
-                {
-                    tb2.Text = Convert.ToString(result);
-                }
-                else
-                {
-                    MsgPopupBox(2);
-                }
-
-                if (Double.TryParse(tb3.Text.Replace('.', ','), style, culture, out result))
-                {
-                    tb3.Text = Convert.ToString(result);
-                }
-                else
-                {
-                    MsgPopupBox(3);
-                }
-
-                if (Double.TryParse(tb4.Text.Replace('.', ','), style, culture, out result))
-                {
-                    tb4.Text = Convert.ToString(result);
-                }
-                else
-                {
-                    MsgPopupBox(4);
-                }
-
-                if (Double.TryParse(tb5.Text.Replace('.', ','), style, culture, out result))
-                {
-                    tb5.Text = Convert.ToString(result);
-                }
-                else
-                {
-                    MsgPopupBox(5);
+                    if (Double.TryParse(tb[i].Text.Replace('.', ','), style, culture, out result))
+                    {
+                        tb[i].Text = Convert.ToString(result);//25.0 word 25!
+                    }
+                    else
+                    {
+                        MsgPopupBox(i+1);
+                    }
                 }
             }
-            catch(CultureNotFoundException)
+            catch (CultureNotFoundException)
             {
                 Console.WriteLine("keyboard culture not found, comma's and dot's will result in wrong answer!");
             }
