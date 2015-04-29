@@ -629,9 +629,10 @@ namespace Project.Controllers
                 //ChangeRecord(dbName, colmName, newArray);   //not performant: fixed at 07/04: 12:10-12:15 by Gregory
                 RewriteRecord(dbName, colmName, newArray);
             }
-            catch
+            catch (IndexOutOfRangeException obj)
             {
-                Console.WriteLine("unhandled exception in ChangeCell...");
+                Console.WriteLine(obj);
+                throw new IndexOutOfRangeException();
             }
         }
     }

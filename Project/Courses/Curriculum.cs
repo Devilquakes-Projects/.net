@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
+// Auther: Gregory Malomgré
+// Date: 04/04/2015 10:00
 namespace Project
 {
     public abstract class Curriculum
@@ -35,9 +37,9 @@ namespace Project
             this.studentId = studentId;
             this.difficulty = difficulty;
 
-            this.timer = 45/difficulty;
+            this.timer = 45 / difficulty;
         }
-        
+
         //Getter: answers
         protected string[,] Answers
         {
@@ -63,7 +65,7 @@ namespace Project
             set { questions = value; }
         }
 
-        
+
         //Getter: difficulty to use in Grade subclasses:
         protected int GetDifficulty
         {
@@ -78,7 +80,7 @@ namespace Project
         }
 
         //Methods:
-        protected bool ShouldTimerStopRunningt(Label timeLabel)
+        protected bool ShouldTimerStopRunning(Label timeLabel)
         {
             timer--;
             timeLabel.Content = String.Format(" {0} Seconds", timer);
@@ -88,11 +90,6 @@ namespace Project
         protected void InitializeArray(int maxAmountOfAnswersPerQuestion)
         {
             answers = new string[amountOfQuestionsNeeded, maxAmountOfAnswersPerQuestion];
-        }
-
-        protected void MsgPopupBox(int questionNumber)
-        {
-            MessageBox.Show(String.Format("Invalid input in box {0}, you receive 0 points for this question!", questionNumber));
         }
 
         protected DispatcherTimer SetupTimer()
@@ -154,20 +151,6 @@ namespace Project
             return array;
         }
 
-        protected void LockTextBlock(TextBox tb, bool isCorrect)
-        {
-            tb.IsReadOnly = true;
-
-            if (isCorrect)
-            {
-                tb.Background = Brushes.LightGreen;
-            }
-            else
-            {
-                tb.Background = Brushes.LightPink;
-            }
-        }
-
         protected void StartGradeValues(out string correctAnswer, out string wrongAnswer)
         {
             correctAnswer = " = Correct answer!";
@@ -186,20 +169,6 @@ namespace Project
         {
             //time.Width = 100.0;
             time.Background = Brushes.LightGray;
-        }
-
-        protected void SetTextboxStartSize(double tbWidth = 200, double tbMaxWidth = 1.25, int amountOfCharactersAllowed = 20, TextBox tb1 = null, TextBox tb2 = null, TextBox tb3 = null, TextBox tb4 = null, TextBox tb5 = null, TextBox tb6 = null)
-        {
-            TextBox[] tb = { tb1, tb2, tb3, tb4, tb5, tb6 };
-            for (int i = 0; i < tb.Length; i++)
-            {
-                if (tb[i] != null)
-                {
-                    tb[i].MinWidth = tbWidth;
-                    tb[i].MaxWidth = tbWidth * tbMaxWidth;
-                    tb[i].MaxLength = amountOfCharactersAllowed;
-                }
-            }
         }
 
         protected void WriteRecords(int index, int points)

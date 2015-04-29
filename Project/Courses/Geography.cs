@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
+// Auther: Gregory Malomgré
+// Date: 12/04/2015 16:00
 namespace Project
 {
     public class Geography : Curriculum
@@ -24,7 +26,8 @@ namespace Project
         private RadioButton rb3;
         private RadioButton rb4;
 
-        public Geography(int studentId, int difficulty, Button gradeButton, Label time, GroupBox qBoxTitle1, RadioButton rb1, RadioButton rb2, GroupBox qBoxTitle2, RadioButton rb3, RadioButton rb4) : base(studentId, difficulty)
+        public Geography(int studentId, int difficulty, Button gradeButton, Label time, GroupBox qBoxTitle1, RadioButton rb1, RadioButton rb2, GroupBox qBoxTitle2, RadioButton rb3, RadioButton rb4)
+            : base(studentId, difficulty)
         {
             base.QuestionsFile = "Courses_Geography";
             base.StudentsFile = "Courses";
@@ -52,7 +55,7 @@ namespace Project
             qBoxTitle2.Header = questionList[1];
 
             RandomizeQuestionLocations(rb1, rb2, rb3, rb4);
-            
+
             dpTimer = base.SetupTimer();
             dpTimer.Tick += dpTimer_Tick;
             dpTimer.Start();
@@ -60,7 +63,7 @@ namespace Project
 
         void dpTimer_Tick(object sender, EventArgs e)
         {
-            if (base.ShouldTimerStopRunningt(timeLabel))
+            if (base.ShouldTimerStopRunning(timeLabel))
             {
                 Grade();
             }

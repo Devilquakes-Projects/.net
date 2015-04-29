@@ -10,9 +10,11 @@ using System.Windows.Threading;
 using Project.Controllers;
 using System.Globalization;
 
+// Auther: Gregory Malomgré
+// Date: 07/04/2015 16:00
 namespace Project
 {
-    class Mathematics : Curriculum //onderliggend van abstracte klasse Curriculum
+    class Mathematics : Courses_TextBoxClass //onderliggend van abstracte klasse Curriculum
     {
         //instance variables:
         //labels:
@@ -28,13 +30,10 @@ namespace Project
         private DispatcherTimer timer;
 
         //Constructors:
-        public Mathematics()
-        {/*you shouldn't use me!*/}
-
         public Mathematics(int studentId, int difficulty, Label timeLabel, Button gradeButton, Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5)
             : base(studentId, difficulty)
         {
-            base.QuestionsFile = "Courses_Math";//COURSES_MATH_QUESTIONS
+            base.QuestionsFile = "Courses_Math";
             base.StudentsFile = "Courses";
             base.SetAmountOfQuestions = 5;
             base.InitializeArray(1);
@@ -69,7 +68,7 @@ namespace Project
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (base.ShouldTimerStopRunningt(timeLabel))
+            if (base.ShouldTimerStopRunning(timeLabel))
             {
                 Grade();
             }
@@ -119,6 +118,11 @@ namespace Project
             base.ShowResults(points);
         }
 
+        private void MsgPopupBox(int questionNumber)
+        {
+            MessageBox.Show(String.Format("Invalid input in box {0}, you receive 0 points for this question!", questionNumber));
+        }
+
         private void ConvertToDecimal()
         {
             try
@@ -135,7 +139,7 @@ namespace Project
                     }
                     else
                     {
-                        MsgPopupBox(i+1);
+                        MsgPopupBox(i + 1);
                     }
                 }
             }

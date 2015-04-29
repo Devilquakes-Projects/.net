@@ -56,6 +56,7 @@
     <Compile Include="Controllers\Course.cs" />
     <Compile Include="Controllers\Input.cs" />
     <Compile Include="Controllers\Question.cs" />
+    <Compile Include="Courses\Courses_TextBoxClass.cs" />
     <Compile Include="Courses\Geography.cs" />
     <Compile Include="Courses\Languages.cs" />
     <Compile Include="SnakeGame\Snake.cs" />

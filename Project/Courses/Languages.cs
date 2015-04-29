@@ -9,9 +9,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
+// Auther: Gregory Malomgré
+// Date: 10/04/2015 16:00
 namespace Project
 {
-    class Languages : Curriculum
+    class Languages : Courses_TextBoxClass
     {
         private DispatcherTimer dpTimer;
 
@@ -84,7 +86,7 @@ namespace Project
 
         private void dpTimer_Tick(object sender, EventArgs e)
         {
-            if (base.ShouldTimerStopRunningt(time))
+            if (base.ShouldTimerStopRunning(time))
             {
                 Grade();
             }
