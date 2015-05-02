@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Project.Controllers;
+using Project.Exceptions;
 
 namespace Project.Views
 {
@@ -36,15 +37,25 @@ namespace Project.Views
             string userName = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
 
-            if (User.Login(userName, pass))
+            try
             {
+                User.Login(userName, pass);
+
                 MainWindow mainwindow = new MainWindow();
                 mainwindow.Show();
                 this.Close();
             }
-            else
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("Gebruikersnaam en/of wachtwoord fout.");
+                // een veld = 0
+            }
+            catch (UserNotFoundException)
+            {
+                // user niet gevonden
+            }
+            catch(InvalidPasswordException)
+            {
+                // password klopt niet
             }
         }
 
@@ -54,6 +65,5 @@ namespace Project.Views
             register.Show();
             this.Close();
         }
-
     }
 }

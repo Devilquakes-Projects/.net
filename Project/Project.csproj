@@ -59,6 +59,9 @@
     <Compile Include="Courses\Courses_TextBoxClass.cs" />
     <Compile Include="Courses\Geography.cs" />
     <Compile Include="Courses\Languages.cs" />
+    <Compile Include="Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="SnakeGame\Snake.cs" />
     <Compile Include="SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />

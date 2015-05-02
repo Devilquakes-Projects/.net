@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Project.Controllers;
+using Project.Exceptions;
 
 namespace Project.Views
 {
@@ -37,23 +38,24 @@ namespace Project.Views
             string pass = passwordTextBox.Password;
             string name = nameTextBox.Text;
             string lastName = lastNameTextBox.Text;
+            string teacher = teacherCodeTextBox.Text;
+            string classText = classTextBox.Text;
 
-            if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(pass) || String.IsNullOrEmpty(name) || String.IsNullOrEmpty(lastName))
+            try
             {
-                MessageBox.Show("Vul alle velden in");
+                User.Register(userName, pass, name, lastName, teacher, classText);
+
+                MainWindow hoofdvenster = new MainWindow();
+                hoofdvenster.Show();
+                this.Close();
             }
-            else
+            catch (ArgumentNullException ex)
             {
-                if (User.Register(userName, pass, name, lastName))
-                {
-                    MainWindow hoofdvenster = new MainWindow();
-                    hoofdvenster.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("username bestaat al.");
-                }
+                // Doe iets in gui als veld null is
+            }
+            catch (UserAlreadyExistsException ex)
+            {
+                // doe iets in gui als user al bestaat
             }
         }
 

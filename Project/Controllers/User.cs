@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Project.Exceptions;
 
 namespace Project.Controllers
 {
@@ -28,15 +29,15 @@ namespace Project.Controllers
             LoggedIn = false;
         }
 
-        public static bool Login(string userName, string pass)
+        public static void Login(string userName, string pass)
         {
-            if (userName == null)
+            if (String.IsNullOrEmpty(userName))
             {
-                throw new ArgumentNullException("username");
+                throw new ArgumentNullException("userName");
             }
-            if (pass == null)
+            if (String.IsNullOrEmpty(pass))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException("pass");
             }
 
             User.Logout();
@@ -54,29 +55,43 @@ namespace Project.Controllers
                     LastName = dbUser[5];
                     Permission = Convert.ToInt32(dbUser[6]);
                     LoggedIn = true;
-                    return true;
+                }
+                else
+                {
+                    throw new InvalidPasswordException();
                 }
             }
-            return false;
+            else
+            {
+                throw new UserNotFoundException();
+            }
         }
 
-        public static bool Register(string userName, string pass, string name, string lastName, bool teacher = false)
+        public static void Register(string userName, string pass, string name, string lastName, string teacher, string classText)
         {
-            if (userName == null)
+            if (String.IsNullOrEmpty(userName))
             {
-                throw new ArgumentNullException("username");
+                throw new ArgumentNullException("userName");
             }
-            if (pass == null)
+            if (String.IsNullOrEmpty(pass))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException("pass");
             }
-            if (name == null)
+            if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("name");
             }
-            if (lastName == null)
+            if (String.IsNullOrEmpty(lastName))
             {
-                throw new ArgumentNullException("last name");
+                throw new ArgumentNullException("lastName");
+            }
+            if (String.IsNullOrEmpty(teacher))
+            {
+                throw new ArgumentNullException("teacher");
+            }
+            if (String.IsNullOrEmpty(classText))
+            {
+                throw new ArgumentNullException("classText");
             }
 
             User.Logout();
@@ -90,10 +105,10 @@ namespace Project.Controllers
 
                 string[] records = { userName, pass, name, lastName, "0" };
 
-                if (teacher)
+                /*if (teacher)
                 {
                     records[4] = "1";
-                }
+                }*/
 
                 DB.AddRecord("users", records);
                 string[] dbUser = DB.FindFirst("users", "username", userName);
@@ -103,11 +118,10 @@ namespace Project.Controllers
                 LastName = dbUser[5];
                 Permission = Convert.ToInt32(dbUser[6]);
                 LoggedIn = true;
-                return true;
             }
             else
             {
-                return false;
+                throw new UserAlreadyExistsException();
             }
         }
 
