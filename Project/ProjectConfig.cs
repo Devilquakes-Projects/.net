@@ -18,6 +18,7 @@ namespace Project
         public static string QuestionsFileGeo { get; private set; }
         public static string QuestionsFileLang { get; private set; }
         public static string QuestionsFileMath { get; private set; }
+        public static string SnakeFile { get; private set; }
 
         private static List<string[]> DBs;
 
@@ -63,7 +64,8 @@ namespace Project
             QuestionsFileLang = coursesLangDB[0];
             QuestionsFileMath = coursesMathDB[0];
 
-
+            // Set snakeDB
+            SnakeFile = pointsSnakeDB[0];
         }
 
         private static void CheckDB()

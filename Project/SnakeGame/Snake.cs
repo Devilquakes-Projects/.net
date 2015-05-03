@@ -22,6 +22,7 @@ namespace Project.SnakeGame
         private DispatcherTimer moveTimer;
         private DispatcherTimer timeTimer;
         private int timeLeft;
+        private int timePlayed;
         private int size = 10;
         private int points = 0;
         private Random random;
@@ -43,6 +44,7 @@ namespace Project.SnakeGame
             pointsLabel = totalPointsLabel;
             random = new Random();
             direction = 0;
+            timePlayed = 0;
             snake = new List<SnakePart>();
             SnakePart head = new SnakePart();
             head.X = ((int)(drawOnCanvas.Width / 2) / 10) * 10; // zorgt voor een veelvoud van 10
@@ -67,6 +69,7 @@ namespace Project.SnakeGame
         public void timeTimer_Tick(object sender, EventArgs e)
         {
             timeLeft--;
+            timePlayed++;
             if (timeLeft == 0)
             {
                 moveTimer.Stop();
@@ -302,6 +305,11 @@ namespace Project.SnakeGame
         {
             moveTimer.Stop();
             snakeTimer.Stop();
+
+            // save score
+            string[] records = { Convert.ToString(User.Id), Convert.ToString(DateTime.Now), Convert.ToString(timePlayed), Convert.ToString(points) };
+            DB.AddRecord(ProjectConfig.SnakeFile, records);
+
             if (MessageBox.Show("You died!" + Environment.NewLine + "Score: " + points, "You died", MessageBoxButton.OK) == MessageBoxResult.OK)
             {
                 SnakeWindow window = new SnakeWindow();

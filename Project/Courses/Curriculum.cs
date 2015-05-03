@@ -106,8 +106,8 @@ namespace Project
             }
             else
             {
-                string[] fields = { Convert.ToString(User.Id), "false", "false", "false" };
-                DB.AddRecord(studentsFile, fields);
+                string[] records = { Convert.ToString(User.Id), "false", "false", "false" };
+                DB.AddRecord(studentsFile, records);
             }
         }
 
