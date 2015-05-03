@@ -32,13 +32,12 @@ namespace Project
         public Languages(int studentId, int difficulty, Button gradeButton, Label time, Label title, Label question1, Label question2, Label header1, Label header2, Label header3, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6, int bonusTime = 20)
             : base(studentId, difficulty)
         {
-            base.QuestionsFile = "Courses_Lang";
-            base.StudentsFile = "Courses";
+            base.QuestionsFile = ProjectConfig.QuestionsFileLang;
 
             base.SetAmountOfQuestions = 2;
             base.InitializeArray(3);
 
-            base.IsTestGraded(6);//6: index of Languages
+            base.IsTestGraded(4);//4: index of Languages
 
             this.gradeButton = gradeButton;
             gradeButton.Content = "Grade";
@@ -139,7 +138,7 @@ namespace Project
             }
 
             base.GradeButtonToExit(gradeButton, time);
-            base.WriteRecords(6, points);//index 6 is for column of language points!
+            base.WriteRecords(4, points);//index 4 is for column of language points!
 
             base.ShowResults(points);
         }

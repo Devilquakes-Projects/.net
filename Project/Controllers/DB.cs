@@ -4,11 +4,6 @@
 //      @ http://stackoverflow.com/questions/2837020/open-existing-file-append-a-single-line
 //      @ https://msdn.microsoft.com/en-us/library/vstudio/cc148994%28v=vs.100%29.aspx
 //      @ Course .net
-//
-// Alle messageboxes moeten nog aangepast worden met een error handler
-// Probeer niet iets te doen dat niet kan, heb niet overal een messagebox gezet dus het kan zijn
-// dat het programma dan crasht. als er iets echt mis is contacteer mij dan.
-// Daarna kan je System.windows deleten
 
 using System;
 using System.Collections.Generic;
@@ -29,7 +24,7 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="dbName">Name of the database.</param>
         /// <param name="fields">Array of fields you want to make.</param>
-        public static void MakeDB(string dbName, string[] fields)
+        public static void Make(string dbName, string[] fields)
         {
             if (dbName == null)
             {
@@ -65,7 +60,7 @@ namespace Project.Controllers
         /// Deletes a database
         /// </summary>
         /// <param name="dbName">Name of the database.</param>
-        public static void DeleteDb(string dbName)
+        public static void Delete(string dbName)
         {
             if (dbName == null)
             {
@@ -80,6 +75,28 @@ namespace Project.Controllers
             catch (DirectoryNotFoundException)
             {
                 Console.WriteLine("DB not found.");
+            }
+        }
+
+        /// <summary>
+        /// Check if db exists
+        /// </summary>
+        /// <param name="dbName">Name of the database.</param>
+        public static bool Exists(string dbName)
+        {
+            if (dbName == null)
+            {
+                throw new ArgumentNullException("DB Name.");
+            }
+
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            if (File.Exists(file))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

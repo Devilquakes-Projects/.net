@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Project.Views
             InitializeComponent();
 
             //onderstaande int's moeten van buitenaf doorgegeven worden (via constructor), ik set deze tijdelijk op deze manier:
-            int studentId = 4;
+            int studentId = User.Id;
             int difficulty = 3;
             
             geography = new Geography(studentId, difficulty, gradeButton, timeLabel, firstQuestionBoxTitle, rButton1_1, rButton1_2, secondQuestionBoxTitle, rButton2_1, rButton2_2);

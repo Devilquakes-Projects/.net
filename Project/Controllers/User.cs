@@ -17,7 +17,10 @@ namespace Project.Controllers
         public static string Username { get; private set; }
         public static string Name { get; private set; }
         public static string LastName { get; private set; }
+        public static string Class { get; private set; }
         public static int Permission { get; private set; }
+
+        private static string userDB = ProjectConfig.UserFile;
 
         public static void Logout()
         {
@@ -25,6 +28,7 @@ namespace Project.Controllers
             Username = null;
             Name = null;
             LastName = null;
+            Class = null;
             Permission = 0;
             LoggedIn = false;
         }
@@ -42,7 +46,7 @@ namespace Project.Controllers
 
             User.Logout();
 
-            string[] dbUser = DB.FindFirst("users", "username", userName);
+            string[] dbUser = DB.FindFirst(userDB, "username", userName);
             if (dbUser != null)
             {
                 // 3 is het veld van het wachtwoord.
@@ -53,7 +57,8 @@ namespace Project.Controllers
                     Username = dbUser[2];
                     Name = dbUser[4];
                     LastName = dbUser[5];
-                    Permission = Convert.ToInt32(dbUser[6]);
+                    Class = dbUser[6];
+                    Permission = Convert.ToInt32(dbUser[7]);
                     LoggedIn = true;
                 }
                 else
@@ -85,10 +90,6 @@ namespace Project.Controllers
             {
                 throw new ArgumentNullException("lastName");
             }
-            if (String.IsNullOrEmpty(teacher))
-            {
-                throw new ArgumentNullException("teacher");
-            }
             if (String.IsNullOrEmpty(classText))
             {
                 throw new ArgumentNullException("classText");
@@ -97,26 +98,28 @@ namespace Project.Controllers
             User.Logout();
 
             // check als user bestaat
-            string[] userExists = DB.FindFirst("users", "username", userName);
+            string[] userExists = DB.FindFirst(userDB, "username", userName);
             if (userExists == null)
             {
                 string salt = BCrypt.GenerateSalt();
                 pass = BCrypt.HashPassword(pass, salt);
 
-                string[] records = { userName, pass, name, lastName, "0" };
+                string[] records = { userName, pass, name, lastName, classText, "0" };
 
-                /*if (teacher)
+
+                if (teacher.Equals(ProjectConfig.TeacherCode))
                 {
-                    records[4] = "1";
-                }*/
+                    records[5] = "1";
+                }
 
                 DB.AddRecord("users", records);
-                string[] dbUser = DB.FindFirst("users", "username", userName);
+                string[] dbUser = DB.FindFirst(userDB, "username", userName);
                 Id = Convert.ToInt32(dbUser[0]);
                 Username = dbUser[2];
                 Name = dbUser[4];
                 LastName = dbUser[5];
-                Permission = Convert.ToInt32(dbUser[6]);
+                Class = dbUser[6];
+                Permission = Convert.ToInt32(dbUser[7]);
                 LoggedIn = true;
             }
             else
@@ -125,33 +128,31 @@ namespace Project.Controllers
             }
         }
 
-        public static bool Promote(int id)
+        public static void Promote(int id)
         {
-            string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
+            string[] records = DB.FindFirst(userDB, "id", Convert.ToString(id));
             if (records != null)
             {
-                records[6] = "1";
+                records[7] = "1";
                 DB.ChangeRecord("users", id, records);
-                return true;
             }
             else
             {
-                return false;
+                throw new UserNotFoundException();
             }
         }
 
-        public static bool Demote(int id)
+        public static void Demote(int id)
         {
-            string[] records = DB.FindFirst("users", "id", Convert.ToString(id));
+            string[] records = DB.FindFirst(userDB, "id", Convert.ToString(id));
             if (records != null)
             {
-                records[6] = "0";
+                records[7] = "0";
                 DB.ChangeRecord("users", id, records);
-                return true;
             }
             else
             {
-                return false;
+                throw new UserNotFoundException();
             }
         }
     }

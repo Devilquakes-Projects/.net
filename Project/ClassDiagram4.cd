@@ -66,7 +66,7 @@
   <Class Name="Project.Controllers.DB" Collapsed="true">
     <Position X="14.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAIAAAAAABAEAEAAcAAQAEAIgAAAAAABgBQAABAA=</HashCode>
+      <HashCode>QAAAAIAAAAAABAEAEAAYAAQAEAIgAAAAAABgBQBABAA=</HashCode>
       <FileName>Controllers\DB.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
   <Class Name="Project.Controllers.User" Collapsed="true">
     <Position X="7.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAARAAAAZAAAAhAAAAAAAwAAAAAAg=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAARIAAAZAAAAhAAAAAAAwAAAAAAg=</HashCode>
       <FileName>Controllers\User.cs</FileName>
     </TypeIdentifier>
   </Class>

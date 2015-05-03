@@ -62,6 +62,7 @@
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="ProjectConfig.cs" />
     <Compile Include="SnakeGame\Snake.cs" />
     <Compile Include="SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />

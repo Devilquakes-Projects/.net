@@ -24,7 +24,7 @@ namespace Project
         private int studentId;
 
         //dbfiles to use:
-        private string studentsFile;
+        private string studentsFile = ProjectConfig.StudentsFile;
         private string questions;
         private int amountOfQuestionsNeeded;
         private int difficulty;
@@ -50,13 +50,6 @@ namespace Project
         protected int SetAmountOfQuestions
         {
             set { amountOfQuestionsNeeded = value; }
-        }
-
-        //Getters/Setters: Files to use:
-        public string StudentsFile
-        {
-            get { return studentsFile; }
-            set { studentsFile = value; }
         }
 
         public string QuestionsFile
@@ -101,12 +94,20 @@ namespace Project
 
         protected void IsTestGraded(int index)//also tests if course has been completed!
         {
-            string[] studentTestCompleted = DB.FindFirst(studentsFile, "ID", Convert.ToString(studentId));//opvragen db student
-
-            if (!studentTestCompleted[index].Equals("false"))
+            string[] studentTestCompleted = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));//opvragen db student
+            
+            if (studentTestCompleted != null)
             {
-                MessageBox.Show("NOTE: you already completed this test," + Environment.NewLine + "Closing application.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                System.Environment.Exit(0);//exitcode 0 means closed properly
+                if (!studentTestCompleted[index].Equals("false"))
+                {
+                    MessageBox.Show("NOTE: you already completed this test," + Environment.NewLine + "Closing application.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    System.Environment.Exit(0);//exitcode 0 means closed properly
+                }
+            }
+            else
+            {
+                string[] fields = { Convert.ToString(User.Id), "false", "false", "false" };
+                DB.AddRecord(studentsFile, fields);
             }
         }
 
@@ -173,9 +174,9 @@ namespace Project
 
         protected void WriteRecords(int index, int points)
         {
-            string[] records = DB.FindFirst(studentsFile, "ID", Convert.ToString(studentId));
+            string[] records = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));
             records[index] = Convert.ToString(points);
-            DB.ChangeFromRead(studentsFile, studentId, records);
+            DB.ChangeFromRead(studentsFile, Convert.ToInt32(records[0]), records);
         }
 
         protected string[] LoadQuestions()

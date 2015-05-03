@@ -33,11 +33,10 @@ namespace Project
         public Mathematics(int studentId, int difficulty, Label timeLabel, Button gradeButton, Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5)
             : base(studentId, difficulty)
         {
-            base.QuestionsFile = "Courses_Math";
-            base.StudentsFile = "Courses";
+            base.QuestionsFile = ProjectConfig.QuestionsFileMath;
             base.SetAmountOfQuestions = 5;
             base.InitializeArray(1);
-            base.IsTestGraded(5);//5: index of Mathematics
+            base.IsTestGraded(3);//3: index of Mathematics
 
             this.timeLabel = timeLabel;
             base.UpdateTimeLabel(timeLabel);
@@ -113,7 +112,7 @@ namespace Project
             }
 
             base.GradeButtonToExit(gradeButton, timeLabel);
-            base.WriteRecords(5, points);//index 5 is for column of math points!
+            base.WriteRecords(3, points);//index 3 is for column of math points!
 
             base.ShowResults(points);
         }

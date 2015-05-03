@@ -29,12 +29,11 @@ namespace Project
         public Geography(int studentId, int difficulty, Button gradeButton, Label time, GroupBox qBoxTitle1, RadioButton rb1, RadioButton rb2, GroupBox qBoxTitle2, RadioButton rb3, RadioButton rb4)
             : base(studentId, difficulty)
         {
-            base.QuestionsFile = "Courses_Geography";
-            base.StudentsFile = "Courses";
+            base.QuestionsFile = ProjectConfig.QuestionsFileGeo;
 
             base.SetAmountOfQuestions = 2;  //2 questions
             base.InitializeArray(2);        //2 answers per question
-            base.IsTestGraded(7);           //7 is index of file Courses (pts for geography are in this index)
+            base.IsTestGraded(5);           //5 is index of file Courses (pts for geography are in this index)
 
             this.gradeButton = gradeButton;
             gradeButton.Content = "Grade";
@@ -173,7 +172,7 @@ namespace Project
             }
 
             base.GradeButtonToExit(gradeButton, timeLabel);
-            base.WriteRecords(7, points);//index 7 is for column of Geography points!
+            base.WriteRecords(5, points);//index 5 is for column of Geography points!
 
             base.ShowResults(points);
         }
