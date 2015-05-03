@@ -10,7 +10,7 @@ using System.Windows.Threading;
 
 // Auther: Gregory Malomgré
 // Date: 12/04/2015 16:00
-namespace Project
+namespace Project.Controllers.Courses
 {
     public class Geography : Curriculum
     {

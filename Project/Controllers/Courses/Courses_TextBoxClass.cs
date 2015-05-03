@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 // Auther: Gregory Malomgré
 // Date: 29/04/2015 16:00
-namespace Project
+namespace Project.Controllers.Courses
 {
     public abstract class Courses_TextBoxClass : Curriculum
     {

@@ -11,7 +11,7 @@ using System.Windows.Threading;
 
 // Auther: Gregory Malomgré
 // Date: 04/04/2015 10:00
-namespace Project
+namespace Project.Controllers.Courses
 {
     public abstract class Curriculum
     {

@@ -11,7 +11,7 @@ using System.Windows.Threading;
 
 // Auther: Gregory Malomgré
 // Date: 10/04/2015 16:00
-namespace Project
+namespace Project.Controllers.Courses
 {
     class Languages : Courses_TextBoxClass
     {

@@ -12,7 +12,7 @@ using System.Globalization;
 
 // Auther: Gregory Malomgré
 // Date: 07/04/2015 16:00
-namespace Project
+namespace Project.Controllers.Courses
 {
     class Mathematics : Courses_TextBoxClass //onderliggend van abstracte klasse Curriculum
     {

@@ -54,9 +54,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\Input.cs" />
-    <Compile Include="Courses\Courses_TextBoxClass.cs" />
-    <Compile Include="Courses\Geography.cs" />
-    <Compile Include="Courses\Languages.cs" />
+    <Compile Include="Controllers\Courses\Courses_TextBoxClass.cs" />
+    <Compile Include="Controllers\Courses\Geography.cs" />
+    <Compile Include="Controllers\Courses\Languages.cs" />
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="SnakeGame\Snake.cs" />
     <Compile Include="SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
-    <Compile Include="Courses\Curriculum.cs" />
+    <Compile Include="Controllers\Courses\Curriculum.cs" />
     <Compile Include="Views\Games\SnakeWindow.xaml.cs">
       <DependentUpon>SnakeWindow.xaml</DependentUpon>
     </Compile>
@@ -80,7 +80,7 @@
     <Compile Include="Views\Auth\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Courses\Mathematics.cs" />
+    <Compile Include="Controllers\Courses\Mathematics.cs" />
     <Compile Include="Views\Auth\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
