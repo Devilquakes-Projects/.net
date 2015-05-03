@@ -18,7 +18,8 @@ namespace Project
         public static string QuestionsFileGeo { get; private set; }
         public static string QuestionsFileLang { get; private set; }
         public static string QuestionsFileMath { get; private set; }
-        private static List<string[]> DBs { get; set; }
+
+        private static List<string[]> DBs;
 
         public static void StartUp()
         {
