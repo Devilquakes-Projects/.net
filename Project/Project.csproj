@@ -65,19 +65,16 @@
     <Compile Include="SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
     <Compile Include="Courses\Curriculum.cs" />
-    <Compile Include="Views\Cources\MathematicsWindow.xaml.cs">
-      <DependentUpon>MathematicsWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Games\SnakeWindow.xaml.cs">
       <DependentUpon>SnakeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GregoryTestWindow_Geography.xaml.cs">
+    <Compile Include="Views\Cources\GregoryTestWindow_Geography.xaml.cs">
       <DependentUpon>GregoryTestWindow_Geography.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GregoryTestWindow_Language.xaml.cs">
+    <Compile Include="Views\Cources\GregoryTestWindow_Language.xaml.cs">
       <DependentUpon>GregoryTestWindow_Language.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GregoryTestWindow_Math.xaml.cs">
+    <Compile Include="Views\Cources\GregoryTestWindow_Math.xaml.cs">
       <DependentUpon>GregoryTestWindow_Math.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Auth\LoginWindow.xaml.cs">
@@ -88,23 +85,19 @@
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\User.cs" />
-    <Page Include="Views\Cources\MathematicsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Games\SnakeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GregoryTestWindow_Geography.xaml">
+    <Page Include="Views\Cources\GregoryTestWindow_Geography.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GregoryTestWindow_Language.xaml">
+    <Page Include="Views\Cources\GregoryTestWindow_Language.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GregoryTestWindow_Math.xaml">
+    <Page Include="Views\Cources\GregoryTestWindow_Math.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
