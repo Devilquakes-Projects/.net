@@ -77,16 +77,12 @@ namespace Project
 
         private void addQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            AddQuestionWindow newView = new AddQuestionWindow();
-            newView.Show();
-            this.Close();
+
         }
 
         private void editQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            EditQuestionWindow newView = new EditQuestionWindow();
-            newView.Show();
-            this.Close();
+
         }
 
         private void MathematicsButton_Click(object sender, RoutedEventArgs e)
