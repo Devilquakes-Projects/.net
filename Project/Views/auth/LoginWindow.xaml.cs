@@ -29,7 +29,7 @@ namespace Project.Views
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // Auther: Joren Martens
             // Date: 31/03/2015 19:32
@@ -59,7 +59,7 @@ namespace Project.Views
             }
         }
 
-        private void registerButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow register = new RegisterWindow();
             register.Show();

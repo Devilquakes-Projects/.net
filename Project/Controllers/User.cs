@@ -74,6 +74,8 @@ namespace Project.Controllers
 
         public static void Register(string userName, string pass, string name, string lastName, string teacher, string classText)
         {
+            bool isTeacher = false;
+
             if (String.IsNullOrEmpty(userName))
             {
                 throw new ArgumentNullException("userName");
@@ -94,6 +96,17 @@ namespace Project.Controllers
             {
                 throw new ArgumentNullException("classText");
             }
+            if (!String.IsNullOrEmpty(teacher))
+            {
+                if (teacher.Equals(ProjectConfig.TeacherCode))
+                {
+                    isTeacher = true;
+                }
+                else
+                {
+                    throw new InvalidTeacherCodeException();
+                }
+            }
 
             User.Logout();
 
@@ -106,8 +119,7 @@ namespace Project.Controllers
 
                 string[] records = { userName, pass, name, lastName, classText, "0" };
 
-
-                if (teacher.Equals(ProjectConfig.TeacherCode))
+                if (isTeacher)
                 {
                     records[5] = "1";
                 }
@@ -125,6 +137,43 @@ namespace Project.Controllers
             else
             {
                 throw new UserAlreadyExistsException();
+            }
+        }
+
+        public static void Recover(string userName, string pass, string teacher)
+        {
+            if (String.IsNullOrEmpty(userName))
+            {
+                throw new ArgumentNullException("userName");
+            }
+            if (String.IsNullOrEmpty(pass))
+            {
+                throw new ArgumentNullException("userName");
+            }
+            if (String.IsNullOrEmpty(teacher))
+            {
+                throw new ArgumentNullException("userName");
+            }
+
+            if (!teacher.Equals(ProjectConfig.TeacherCode))
+            {
+                throw new InvalidTeacherCodeException();
+            }
+            else
+            {
+                string[] dbUser = DB.FindFirst(userDB, "username", userName);
+                if (dbUser != null)
+                {
+                    string salt = BCrypt.GenerateSalt();
+                    pass = BCrypt.HashPassword(pass, salt);
+
+                    dbUser[3] = Convert.ToString(pass);
+                    DB.ChangeFromRead(userDB, Convert.ToInt32(dbUser[0]), dbUser);
+                }
+                else
+                {
+                    throw new UserNotFoundException();
+                }
             }
         }
 

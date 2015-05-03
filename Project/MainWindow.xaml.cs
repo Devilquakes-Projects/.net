@@ -92,7 +92,9 @@ namespace Project
 
         private void testButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            PasswordRecoveryWindow newView = new PasswordRecoveryWindow();
+            newView.Show();
+            this.Close();
         }
 
         private void snakeButton_Click(object sender, RoutedEventArgs e)

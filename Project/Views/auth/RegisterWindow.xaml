@@ -18,7 +18,7 @@
         <Label x:Name="classLabel" Content="Klas:" HorizontalAlignment="Left" Height="27" Margin="15,198,0,0" VerticalAlignment="Top" Width="102"/>
         <TextBox x:Name="classTextBox" HorizontalAlignment="Left" Height="27" Margin="117,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
 
-        <Button Name="registerButton" Content="Bevestig registratie" HorizontalAlignment="Left" Height="30" Margin="117,230,0,0" VerticalAlignment="Top" Width="151" Click="registerButton_Click"/>
+        <Button Name="registerButton" Content="Bevestig registratie" HorizontalAlignment="Left" Height="30" Margin="117,230,0,0" VerticalAlignment="Top" Width="151" Click="RegisterButton_Click"/>
         
         
     </Grid>

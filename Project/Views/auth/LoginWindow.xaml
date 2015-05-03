@@ -4,12 +4,12 @@
         Title="Welkom" Height="300" Width="300">
     <Grid>
         <Label Name="welkomLabel" Content="Welkom" Margin="53,10,0,0" VerticalAlignment="Top" FontSize="48" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Button Name="loginButton" Content="Aanmelden" HorizontalAlignment="Left" Height="33" Margin="119,153,0,0" VerticalAlignment="Top" Width="156" Click="loginButton_Click"/>
+        <Button Name="loginButton" Content="Aanmelden" HorizontalAlignment="Left" Height="33" Margin="119,153,0,0" VerticalAlignment="Top" Width="156" Click="LoginButton_Click"/>
         <Label Name="usernameLabel" Content="Gebruiker:" HorizontalAlignment="Left" Height="27" Margin="10,89,0,0" VerticalAlignment="Top" Width="81"/>
         <Label Name="passwordLabel" Content="Wachtwoord:" HorizontalAlignment="Left" Height="27" Margin="10,121,0,0" VerticalAlignment="Top" Width="81"/>
         <TextBox Name="usernameTextBox" HorizontalAlignment="Left" Height="27" Margin="119,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="156"/>
         <PasswordBox Name="passwordTextBox" HorizontalAlignment="Left" Height="27" Margin="119,121,0,0" VerticalAlignment="Top" Width="156"/>
-        <Button Name="registerButton" Content="Registeer" HorizontalAlignment="Left" Height="33" Margin="199,234,0,0" VerticalAlignment="Top" Width="85" Click="registerButton_Click"/>
+        <Button Name="registerButton" Content="Registeer" HorizontalAlignment="Left" Height="33" Margin="199,234,0,0" VerticalAlignment="Top" Width="85" Click="RegisterButton_Click"/>
         <Label Content="Nog geen account? Registreer nu!" HorizontalAlignment="Left" Height="32" Margin="10,238,0,0" VerticalAlignment="Top" Width="197"/>
     </Grid>
 </Window>

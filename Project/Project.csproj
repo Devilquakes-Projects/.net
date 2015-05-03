@@ -58,6 +58,7 @@
     <Compile Include="Controllers\Courses\Geography.cs" />
     <Compile Include="Controllers\Courses\Languages.cs" />
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Exceptions\InvalidTeacherCodeException.cs" />
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="ProjectConfig.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
     <Compile Include="Controllers\Courses\Curriculum.cs" />
+    <Compile Include="Views\Auth\PasswordRecoveryWindow.xaml.cs">
+      <DependentUpon>PasswordRecoveryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Games\SnakeWindow.xaml.cs">
       <DependentUpon>SnakeWindow.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,10 @@
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\User.cs" />
+    <Page Include="Views\Auth\PasswordRecoveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Games\SnakeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
