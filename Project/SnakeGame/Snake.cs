@@ -32,6 +32,7 @@ namespace Project.SnakeGame
         private List<SnakePart> snake;
         private int direction; // Down = 0, Left = 1, Right = 2, Up = 3
         private bool eaten = true;
+        double difficulty = 1;
 
         /// <summary>
         /// Constructor of the Snake class
@@ -51,7 +52,7 @@ namespace Project.SnakeGame
             head.Y = ((int)(drawOnCanvas.Height / 2) / 10) * 10; // zorgt voor een veelvoud van 10
             snake.Add(head);
             snakeTimer = new DispatcherTimer();
-            snakeTimer.Interval = TimeSpan.FromSeconds(0.3);
+            snakeTimer.Interval = TimeSpan.FromSeconds(0.4 - (difficulty / 10));
             snakeTimer.Tick += snakeTimer_Tick;
             moveTimer = new DispatcherTimer();
             moveTimer.Interval = TimeSpan.FromMilliseconds(5);
@@ -290,6 +291,16 @@ namespace Project.SnakeGame
         {
             eaten = true;
             points++;
+
+            if (points == 10)
+            {
+                difficulty++;
+            }
+            if (points == 20)
+            {
+                difficulty++;
+            }
+
             pointsLabel.Content = points;
             SnakePart bodyPart = new SnakePart();
             bodyPart.X = snake[snake.Count - 1].X;
