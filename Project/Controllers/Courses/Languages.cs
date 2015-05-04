@@ -128,12 +128,9 @@ namespace Project.Controllers.Courses
             }
 
             //pts forumule Languages:
-            if (Timer > 0)//bonus points if test complete before end of time!
+            if (Timer > 0 && points > 0)//bonus points if test complete before end of time!
             {
-                if (points > 0)
-                {
                     points = (int)(Math.Round((points * 1.25 + GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
-                }
             }
             else
             {

@@ -162,12 +162,9 @@ namespace Project.Controllers.Courses
                 points = GradeAnswers(points, rb4.IsChecked == true);
             }
 
-            if (base.Timer > 0)
+            if (base.Timer > 0 && points > 0)
             {
-                if (points > 0)
-                {
                     points = (int)(Math.Round(((points * 3.5) + base.GetDifficulty), 0, MidpointRounding.AwayFromZero));
-                }
             }
             else
             {
