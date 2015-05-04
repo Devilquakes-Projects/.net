@@ -164,7 +164,10 @@ namespace Project.Controllers.Courses
 
             if (base.Timer > 0)
             {
-                points = (int)(Math.Round(((points * 3.5) + base.GetDifficulty), 0, MidpointRounding.AwayFromZero));
+                if (points > 0)
+                {
+                    points = (int)(Math.Round(((points * 3.5) + base.GetDifficulty), 0, MidpointRounding.AwayFromZero));
+                }
             }
             else
             {

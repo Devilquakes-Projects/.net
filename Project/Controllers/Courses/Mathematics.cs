@@ -104,7 +104,10 @@ namespace Project.Controllers.Courses
             //pts formule math:
             if (Timer > 0)//bonus points if test complete before end of time!
             {
-                points = (int)(Math.Round((points * 1.5 + base.GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
+                if (points > 0)
+                {
+                    points = (int)(Math.Round((points * 1.5 + base.GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
+                }
             }
             else
             {
