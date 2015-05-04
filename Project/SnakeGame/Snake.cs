@@ -1,4 +1,7 @@
-﻿using Project.Controllers;
+﻿// Auther: Joris Meylaers
+// Date: 01/04/2015
+
+using Project.Controllers;
 using Project.Views;
 using System;
 using System.Collections.Generic;
@@ -320,6 +323,18 @@ namespace Project.SnakeGame
             // save score
             string[] records = { Convert.ToString(User.Id), Convert.ToString(DateTime.Now), Convert.ToString(timePlayed), Convert.ToString(points) };
             DB.AddRecord(ProjectConfig.SnakeFile, records);
+
+            // save cource in progress to default db. and reset cource in progress
+            string[] studentCourcePointsTemp = DB.FindFirst(ProjectConfig.StudentsFile, "userID", Convert.ToString(User.Id));
+            string[] studentCourcePoints = new string[4];
+            studentCourcePoints[0] = Convert.ToString(DateTime.Now);
+            for (int i = 1; i <= 3; i++)
+			{
+                studentCourcePoints[i] = studentCourcePointsTemp[i + 2];
+                studentCourcePointsTemp[i + 2] = "false";
+			}
+            DB.AddRecord(ProjectConfig.StudentPointsFile, studentCourcePoints);
+            DB.ChangeRecord(ProjectConfig.StudentsFile, Convert.ToInt32(studentCourcePointsTemp[0]), studentCourcePointsTemp);
 
             if (MessageBox.Show("You died!" + Environment.NewLine + "Score: " + points, "You died", MessageBoxButton.OK) == MessageBoxResult.OK)
             {

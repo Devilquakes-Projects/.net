@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Auther: Joris Meylaers
+// Date: 01/04/2015
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

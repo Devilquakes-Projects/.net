@@ -4,33 +4,53 @@
 using Project.Controllers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Project
 {
     static class ProjectConfig
     {
+        public static string DBDestinationPath { get; private set; }
         public static string TeacherCode { get; private set; }
         public static string UserFile { get; private set; }
         public static string StudentsFile { get; private set; }
+        public static string StudentPointsFile { get; private set; }
         public static string QuestionsFileGeo { get; private set; }
         public static string QuestionsFileLang { get; private set; }
         public static string QuestionsFileMath { get; private set; }
         public static string SnakeFile { get; private set; }
+        public static string BallFile { get; private set; }
 
         private static List<string[]> DBs;
 
         public static void StartUp()
         {
+            DBDestinationPath = Path.Combine("01DBProject");
+
+            // Check for write permissions
+            try
+            {
+                // Attempt to get a list of security permissions from the folder. 
+                // This will raise an exception if the path is read only or do not have access to view the permissions. 
+                System.Security.AccessControl.DirectorySecurity ds = Directory.GetAccessControl(DBDestinationPath);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("UnauthorizedAccessException, no write access in folder path.");
+            }
+
             // Teacher code
             TeacherCode = "123";
 
             // dbName + fields
             string[] userDB = { "users", "username", "password", "name", "lastname", "class", "permissions" };
 
-            string[] coursesDB = { "courses", "userID", "math_scores", "language_scores", "geography_scores" };
+            string[] coursesInProgressDB = { "courses_in_progress", "userID", "math_scores", "language_scores", "geography_scores" };
+            string[] coursesPointsDB = { "courses_points", "userID", "date", "math_scores", "language_scores", "geography_scores" };
 
             string[] coursesGeographyDB = { "courses_geography", "question", "correct_solution", "wrong_solution" };
             string[] coursesLangDB = { "courses_lang", "question", "solution1", "solution2", "solution3" };
@@ -42,7 +62,9 @@ namespace Project
             DBs = new List<string[]>();
             DBs.Add(userDB);
 
-            DBs.Add(coursesDB);
+            DBs.Add(coursesInProgressDB);
+            DBs.Add(coursesPointsDB);
+
             DBs.Add(coursesMathDB);
             DBs.Add(coursesLangDB);
             DBs.Add(coursesGeographyDB);
@@ -57,7 +79,10 @@ namespace Project
             UserFile = userDB[0];
 
             // Set Curriculum StudentsFile
-            StudentsFile = coursesDB[0];
+            StudentsFile = coursesInProgressDB[0];
+
+            // Set Curriculum StudentsPointsFile
+            StudentPointsFile = coursesPointsDB[0];
 
             // Set Curriculum QuestionsFile
             QuestionsFileGeo = coursesGeographyDB[0];
@@ -66,6 +91,9 @@ namespace Project
 
             // Set snakeDB
             SnakeFile = pointsSnakeDB[0];
+
+            // Set snakeDB
+            BallFile = pointsBallDB[0];
         }
 
         private static void CheckDB()

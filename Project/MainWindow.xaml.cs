@@ -92,7 +92,7 @@ namespace Project
 
         private void testButton_Click(object sender, RoutedEventArgs e)
         {
-            PasswordRecoveryWindow newView = new PasswordRecoveryWindow();
+            AddQuestionWindow newView = new AddQuestionWindow();
             newView.Show();
             this.Close();
         }
