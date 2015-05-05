@@ -92,7 +92,7 @@ namespace Project
 
         private void testButton_Click(object sender, RoutedEventArgs e)
         {
-            AddQuestionWindow newView = new AddQuestionWindow();
+            EditQuestionWindow newView = new EditQuestionWindow();
             newView.Show();
             this.Close();
         }
