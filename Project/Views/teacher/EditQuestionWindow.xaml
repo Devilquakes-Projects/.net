@@ -3,5 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="EditQuestionWindow" Height="300" Width="300">
     <Grid>
+        <ComboBox Name="CoursesComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Loaded="CoursesComboBox_Loaded" SelectionChanged="CoursesComboBox_SelectionChanged" />
+        <Button Name="editButton" Content="Edit" HorizontalAlignment="Left" Height="22" Margin="155,10,0,0" VerticalAlignment="Top" Width="129" Visibility="Hidden"/>
+        <ListBox Name="QuestionsListBox" HorizontalAlignment="Left" Height="223" Margin="10,37,0,0" VerticalAlignment="Top" Width="274" MouseDoubleClick="QuestionsListBox_MouseDoubleClick"/>
     </Grid>
 </Window>

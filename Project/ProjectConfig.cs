@@ -42,6 +42,10 @@ namespace Project
             {
                 MessageBox.Show("UnauthorizedAccessException, no write access in folder path.");
             }
+            catch (DirectoryNotFoundException)
+            {
+                System.IO.Directory.CreateDirectory(DBDestinationPath);
+            }
 
             // Teacher code
             TeacherCode = "123";
