@@ -143,7 +143,7 @@ namespace Project.Controllers.Courses
             base.ShowResults(points);
         }
 
-        private void ConvertInputToCapitals()
+        private void ConvertInputToCapitals()//Author: Greg, Date:14-04-15 14:00 - 15:00
         {
             //ingave op hoofdletters zetten:
             for (int i = 0; i < tb.Length; i++)

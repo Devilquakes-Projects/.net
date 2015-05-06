@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 
 // Auther: Gregory Malomgré
-// Date: 04/04/2015 10:00
+// Date: 04/04/2015 10:00   --> NOTE: deze vernieuwde versie: Date: 08-04-15 tot 11-04-15
 namespace Project.Controllers.Courses
 {
     public abstract class Curriculum
@@ -111,7 +111,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue) //make array with amount of variables and return it
+        private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue) //author: Greg, Date: 04/04/15 10:00 - 11:00 | make array with amount of variables and return it
         {
             string[] test;
             Random r1 = new Random();
@@ -156,28 +156,28 @@ namespace Project.Controllers.Courses
         {
             correctAnswer = " = Correct answer!";
             wrongAnswer = " = Wrong, answer should be: ";
-        }
+        }//Author: Greg, Date: 07-04-15 11:30-14:30
 
-        public abstract void Grade();
+        public abstract void Grade();//Author: Greg, Date: 05-04-15 13:45 - 14:50 (van return int naar void: Date: 14-04-15 18:30-18:40)
 
         protected void ShowResults(int pts)
         {
             string result = String.Format("You earned {0}/{1} points.", pts, 10);//int 10 mag ook string "10" zijn
             MessageBox.Show(result);
-        }
+        }//Author: Greg, Date: 05-04-15 14:50 - 15:20
 
         protected void UpdateTimeLabel(Label time)
         {
             //time.Width = 100.0;
             time.Background = Brushes.LightGray;
-        }
+        }//Author: Greg, Date: 05-04-15 12:30 - 13:00
 
         protected void WriteRecords(int index, int points)
         {
             string[] records = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));
             records[index] = Convert.ToString(points);
             DB.ChangeFromRead(studentsFile, Convert.ToInt32(records[0]), records);
-        }
+        }//Author: Greg, Date: 05-04-15 13:00 - 13:45
 
         protected string[] LoadQuestions()
         {
@@ -209,14 +209,14 @@ namespace Project.Controllers.Courses
             }
 
             return questionsList;
-        }
+        }//Author: Greg, Date: 05-04-15 13:45 - 14:15
 
         protected void GradeButtonToExit(Button gradebutton, Label timeLabel)
         {
             gradebutton.Content = "Exit";
             timeLabel.Width = 90.0;
             timeLabel.Content = "Test Complete";
-        }
+        }//Author: Greg, Date: 30-04-15  18:00-19:00
         //add another method here...
     }
 }

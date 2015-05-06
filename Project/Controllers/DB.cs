@@ -519,12 +519,12 @@ namespace Project.Controllers
                 visibleLines = 0;
                 totalLines = 0;
             }
-            catch (IOException)//optional?
+            catch (IOException)//geen object van gemaakt omdat dit niet gebruikt word (IOException obj)
             {
                 visibleLines = 0;
                 totalLines = 0;
             }
-            finally
+            finally//Author: Greg, Date: 25-04-15: 11:30-11:45
             {
                 if (inputStream != null)
                 {

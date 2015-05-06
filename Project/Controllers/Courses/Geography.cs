@@ -68,7 +68,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        private void RandomizeQuestionLocations(RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4)
+        private void RandomizeQuestionLocations(RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4)//Author: Greg, Date: 12-04-15 16:30 - 18:30
         {
             string[,] answers = base.Answers;
             Random generator = new Random();
@@ -102,7 +102,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        private int GradeAnswers(int points, bool isAnswerCorrect)
+        private int GradeAnswers(int points, bool isAnswerCorrect)//Author: Greg, Date: 12-04-15 16:30-16:45
         {
             if (isAnswerCorrect)
             {
@@ -114,7 +114,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        public override void Grade()//21/04: aangepast dat geen ints gereturnd worden + fixed grading system for this one.
+        public override void Grade()//Author: Greg, Date: 12-04-15 14:30-16:30 --> 21/04: aangepast dat geen ints gereturnd worden + fixed grading system for this one.
         {
             dpTimer.Stop();
 
