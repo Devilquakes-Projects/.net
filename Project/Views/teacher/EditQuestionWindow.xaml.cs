@@ -1,5 +1,4 @@
 ﻿using Project.Controllers;
-using Project.Views.Teacher;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,8 +28,8 @@ namespace Project.Views
         public EditQuestionWindow()
         {
             InitializeComponent();
-            list =  QuestionsListBox.Items;
-            
+            list = QuestionsListBox.Items;
+
         }
 
         private void CoursesComboBox_Loaded(object sender, RoutedEventArgs e)
@@ -61,7 +60,7 @@ namespace Project.Views
                 case "Geography":
                     QuestionsListBox.Items.Clear();
                     List<string[]> geoQuestions = DB.GetDB(ProjectConfig.QuestionsFileGeo);
-                    for (int i = 0; i < geoQuestions.Count ; i++)
+                    for (int i = 0; i < geoQuestions.Count; i++)
                     {
                         string text = null;
                         string[] line = geoQuestions.ElementAt(i);
@@ -87,7 +86,7 @@ namespace Project.Views
                     }
                     break;
                 case "Math":
-                     QuestionsListBox.Items.Clear();
+                    QuestionsListBox.Items.Clear();
                     List<string[]> mathQuestions = DB.GetDB(ProjectConfig.QuestionsFileMath);
                     for (int i = 0; i < mathQuestions.Count; i++)
                     {
@@ -106,10 +105,9 @@ namespace Project.Views
         private void QuestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string textToChange = Convert.ToString(QuestionsListBox.SelectedItem);
-            changeWindow editwindow = new changeWindow(textToChange, course.ToString());
+            ChangeWindow editwindow = new ChangeWindow(textToChange, course.ToString());
             this.Close();
             editwindow.Show();
         }
-
     }
 }
