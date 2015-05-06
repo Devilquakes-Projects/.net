@@ -41,38 +41,6 @@ namespace Project.Controllers.Courses
             this.timer = 45 / difficulty;
         }
 
-        //Getter: answers
-        protected string[,] Answers
-        {
-            get { return answers; }
-        }
-
-        //Getters/Setters: Questions:
-        protected int SetAmountOfQuestions
-        {
-            set { amountOfQuestionsNeeded = value; }
-        }
-
-        public string QuestionsFile
-        {
-            get { return questions; }
-            set { questions = value; }
-        }
-
-
-        //Getter: difficulty to use in Grade subclasses:
-        protected int GetDifficulty
-        {
-            get { return difficulty; }
-        }
-
-        //Getter/Setter: to influence the amount of given time for the exercises:
-        protected int Timer
-        {
-            get { return timer; }
-            set { timer = value; }
-        }
-
         //Methods:
         protected bool ShouldTimerStopRunning(Label timeLabel)
         {
@@ -117,7 +85,7 @@ namespace Project.Controllers.Courses
             Random r1 = new Random();
             int[] array = new int[amountOfNumbers];
 
-            if (amountOfNumbers < maxValue - minValue) //check if there are enough unique numbers to choose from otherwise msgbox-popup
+            if (amountOfNumbers <= maxValue /*- minValue*/) //check if there are enough unique numbers to choose from otherwise msgbox-popup
             {
                 maxValue++;
 
@@ -179,7 +147,7 @@ namespace Project.Controllers.Courses
             DB.ChangeFromRead(studentsFile, Convert.ToInt32(records[0]), records);
         }//Author: Greg, Date: 05-04-15 13:00 - 13:45
 
-        protected string[] LoadQuestions()
+        protected string[] LoadQuestions()//Author: Greg, Date: 05-04-15 13:45 - 14:15
         {
             string[] questionsList = new string[answers.GetLength(0)];
 
@@ -205,18 +173,50 @@ namespace Project.Controllers.Courses
             }
             else
             {
-                MessageBox.Show("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this", "Error: Not enough Questions.");
+                MessageBox.Show("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this" + Environment.NewLine + "Application will now close", "Error: Not enough Questions.");
+                Environment.Exit(0);//Author: Greg, Date: 06-05-15 22:25 - 22:30
             }
 
             return questionsList;
-        }//Author: Greg, Date: 05-04-15 13:45 - 14:15
+        }
 
-        protected void GradeButtonToExit(Button gradebutton, Label timeLabel)
+        protected void GradeButtonToExit(Button gradebutton, Label timeLabel)//Author: Greg, Date: 30-04-15  18:00-19:00
         {
             gradebutton.Content = "Exit";
             timeLabel.Width = 90.0;
             timeLabel.Content = "Test Complete";
-        }//Author: Greg, Date: 30-04-15  18:00-19:00
-        //add another method here...
+        }
+
+        //Getter/Setter: to influence the amount of given time for the exercises:
+        public int Timer
+        {
+            get { return timer; }
+            set { timer = value; }
+        }
+
+        //Getter: answers
+        protected string[,] Answers
+        {
+            get { return answers; }
+        }
+
+        //Getters/Setters: Questions:
+        protected int SetAmountOfQuestions
+        {
+            set { amountOfQuestionsNeeded = value; }
+        }
+
+        public string QuestionsFile
+        {
+            get { return questions; }
+            set { questions = value; }
+        }
+
+        //Getter: difficulty to use in Grade subclasses (should be set already with constructor!):
+        protected int GetDifficulty
+        {
+            get { return difficulty; }
+        }
+
     }
 }

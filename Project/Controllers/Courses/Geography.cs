@@ -60,7 +60,7 @@ namespace Project.Controllers.Courses
             dpTimer.Start();
         }
 
-        void dpTimer_Tick(object sender, EventArgs e)
+        private void dpTimer_Tick(object sender, EventArgs e)
         {
             if (base.ShouldTimerStopRunning(timeLabel))
             {
