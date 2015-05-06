@@ -85,10 +85,10 @@ namespace Project.Controllers.Courses
             Random r1 = new Random();
             int[] array = new int[amountOfNumbers];
 
-            if (amountOfNumbers <= maxValue /*- minValue*/) //check if there are enough unique numbers to choose from otherwise msgbox-popup
-            {
-                maxValue++;
+            maxValue++;
 
+            if (amountOfNumbers <= maxValue - minValue) //check if there are enough unique numbers to choose from otherwise msgbox-popup
+            {
                 for (int i = 0; i < amountOfNumbers; i++)
                 {
                     array[i] = r1.Next(minValue, maxValue);
