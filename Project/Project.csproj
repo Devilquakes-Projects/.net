@@ -92,6 +92,9 @@
     <Compile Include="Views\Teacher\AddQuestionWindow.xaml.cs">
       <DependentUpon>AddQuestionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Teacher\changeWindow.xaml.cs">
+      <DependentUpon>changeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Teacher\EditQuestionWindow.xaml.cs">
       <DependentUpon>EditQuestionWindow.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Teacher\AddQuestionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Teacher\changeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
