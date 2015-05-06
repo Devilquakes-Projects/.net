@@ -1,6 +1,8 @@
 ﻿// Auther: Joris Meylaers
 // Date: 
 
+using Project.Controllers;
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +16,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Project.Controllers;
-using Project.Exceptions;
 
 namespace Project.Views
 {

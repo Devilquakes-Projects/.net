@@ -1,12 +1,12 @@
 ﻿// Auther: Joren Martens
 // Date: 31/03/2015 18:37
 
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Project.Exceptions;
 
 namespace Project.Controllers
 {
@@ -46,9 +46,10 @@ namespace Project.Controllers
 
             User.Logout();
 
-            string[] dbUser = DB.FindFirst(userDB, "username", userName);
-            if (dbUser != null)
+            try
             {
+                string[] dbUser = DB.FindFirst(userDB, "username", userName);
+
                 // 3 is het veld van het wachtwoord.
                 if (BCrypt.CheckPassword(pass, dbUser[3]))
                 {
@@ -66,7 +67,7 @@ namespace Project.Controllers
                     throw new InvalidPasswordException();
                 }
             }
-            else
+            catch (NoRecordFoundException)
             {
                 throw new UserNotFoundException();
             }
@@ -110,9 +111,12 @@ namespace Project.Controllers
 
             User.Logout();
 
-            // check als user bestaat
-            string[] userExists = DB.FindFirst(userDB, "username", userName);
-            if (userExists == null)
+            try
+            {
+                string[] userExists = DB.FindFirst(userDB, "username", userName);
+                throw new UserAlreadyExistsException();
+            }
+            catch (NoRecordFoundException)
             {
                 string salt = BCrypt.GenerateSalt();
                 pass = BCrypt.HashPassword(pass, salt);
@@ -133,10 +137,6 @@ namespace Project.Controllers
                 Class = dbUser[6];
                 Permission = Convert.ToInt32(dbUser[7]);
                 LoggedIn = true;
-            }
-            else
-            {
-                throw new UserAlreadyExistsException();
             }
         }
 
@@ -161,16 +161,16 @@ namespace Project.Controllers
             }
             else
             {
-                string[] dbUser = DB.FindFirst(userDB, "username", userName);
-                if (dbUser != null)
+                try
                 {
+                    string[] dbUser = DB.FindFirst(userDB, "username", userName);
                     string salt = BCrypt.GenerateSalt();
                     pass = BCrypt.HashPassword(pass, salt);
 
                     dbUser[3] = Convert.ToString(pass);
                     DB.ChangeFromRead(userDB, Convert.ToInt32(dbUser[0]), dbUser);
                 }
-                else
+                catch (NoRecordFoundException)
                 {
                     throw new UserNotFoundException();
                 }
@@ -179,13 +179,13 @@ namespace Project.Controllers
 
         public static void Promote(int id)
         {
-            string[] records = DB.FindFirst(userDB, "id", Convert.ToString(id));
-            if (records != null)
+            try
             {
+                string[] records = DB.FindFirst(userDB, "id", Convert.ToString(id));
                 records[7] = "1";
                 DB.ChangeRecord("users", id, records);
             }
-            else
+            catch (NoRecordFoundException)
             {
                 throw new UserNotFoundException();
             }
@@ -193,13 +193,13 @@ namespace Project.Controllers
 
         public static void Demote(int id)
         {
-            string[] records = DB.FindFirst(userDB, "id", Convert.ToString(id));
-            if (records != null)
+            try
             {
+                string[] records = DB.FindFirst(userDB, "id", Convert.ToString(id));
                 records[7] = "0";
                 DB.ChangeRecord("users", id, records);
             }
-            else
+            catch (NoRecordFoundException)
             {
                 throw new UserNotFoundException();
             }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Project.Views.Teacher.changeWindow"
+﻿<Window x:Class="Project.Views.ChangeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="changeWindow" Height="300" Width="300">

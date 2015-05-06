@@ -1,4 +1,5 @@
 ﻿using Project.Controllers;
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,17 +95,16 @@ namespace Project.Controllers.Courses
 
         protected void IsTestGraded(int index)//also tests if course has been completed!
         {
-            string[] studentTestCompleted = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));//opvragen db student
-            
-            if (studentTestCompleted != null)
+            try
             {
+                string[] studentTestCompleted = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));//opvragen db student
                 if (!studentTestCompleted[index].Equals("false"))
                 {
                     MessageBox.Show("NOTE: you already completed this test," + Environment.NewLine + "Closing application.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     System.Environment.Exit(0);//exitcode 0 means closed properly
                 }
             }
-            else
+            catch (NoRecordFoundException)
             {
                 string[] records = { Convert.ToString(User.Id), "false", "false", "false" };
                 DB.AddRecord(studentsFile, records);
@@ -125,9 +125,9 @@ namespace Project.Controllers.Courses
                 {
                     array[i] = r1.Next(minValue, maxValue);
 
-                    test = DB.FindFirst(questions, "ID", Convert.ToString(array[i]));
-                    if (test != null)
+                    try
                     {
+                        test = DB.FindFirst(questions, "ID", Convert.ToString(array[i]));
                         for (int j = 0; j < i; j++)
                         {
                             if (array[i] == array[j]) //if random number already in array, counter - 1 and break out of this for-loop
@@ -137,7 +137,7 @@ namespace Project.Controllers.Courses
                             }
                         }
                     }
-                    else
+                    catch (NoRecordFoundException)
                     {
                         i--;
                     }

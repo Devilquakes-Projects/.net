@@ -5,6 +5,7 @@
 //      @ https://msdn.microsoft.com/en-us/library/vstudio/cc148994%28v=vs.100%29.aspx
 //      @ Course .net
 
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,25 +36,17 @@ namespace Project.Controllers
                 throw new ArgumentNullException("Fields.");
             }
 
-            Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "01DBProject"));
             string newFile = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
 
-            if (File.Exists(newFile))
+            StreamWriter outputStream = File.CreateText(newFile);
+            outputStream.Write("ID");
+            outputStream.Write(String.Format("{0}VISIBLE", separator));
+            foreach (string field in fields)
             {
-                Console.WriteLine("DB already exists.");
+                outputStream.Write(String.Format("{0}{1}", separator, field.ToUpper()));
             }
-            else
-            {
-                StreamWriter outputStream = File.CreateText(newFile);
-                outputStream.Write("ID");
-                outputStream.Write(String.Format("{0}VISIBLE", separator));
-                foreach (string field in fields)
-                {
-                    outputStream.Write(String.Format("{0}{1}", separator, field.ToUpper()));
-                }
-                outputStream.WriteLine();
-                outputStream.Close();
-            }
+            outputStream.WriteLine();
+            outputStream.Close();
         }
 
         /// <summary>
@@ -67,15 +60,8 @@ namespace Project.Controllers
                 throw new ArgumentNullException("DB Name.");
             }
 
-            try
-            {
-                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                File.Delete(file);
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Console.WriteLine("DB not found.");
-            }
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            File.Delete(file);
         }
 
         /// <summary>
@@ -112,25 +98,11 @@ namespace Project.Controllers
             }
 
             StreamReader inputStream = null;
-            try
-            {
-                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                inputStream = File.OpenText(file);
-                string line = inputStream.ReadLine();
-                return line.Split(separator);
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("DB not found.");
-                return null;
-            }
-            finally
-            {
-                if (inputStream != null)
-                {
-                    inputStream.Close();
-                }
-            }
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            inputStream = File.OpenText(file);
+            string line = inputStream.ReadLine();
+            inputStream.Close();
+            return line.Split(separator);
         }
 
         /// <summary>
@@ -150,46 +122,40 @@ namespace Project.Controllers
                 throw new ArgumentNullException("Records.");
             }
 
-            try
+
+            // Check if records is the same length as structure
+            // error if it isn't
+            // + 2 for ID and visible
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            if (FileStructureLength(dbName) != ((records.Length) + 2))
             {
-                // Check if records is the same length as structure
-                // error if it isn't
-                // + 2 for ID and visible
-                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                if (FileStructureLength(dbName) != ((records.Length) + 2))
+                Console.WriteLine("Records is not the same length as the file structure (+2 for ID/VISIBILITY).");
+            }
+            else
+            {
+                string lastLine = File.ReadLines(file).Last();
+                string id = "";
+
+                if (lastLine.Split(separator)[0].Equals("ID"))
                 {
-                    Console.WriteLine("Records is not the same length as the file structure (+2 for ID/VISIBILITY).");
+                    id = "1";
                 }
                 else
                 {
-                    string lastLine = File.ReadLines(file).Last();
-                    string id = "";
-
-                    if (lastLine.Split(separator)[0].Equals("ID"))
-                    {
-                        id = "1";
-                    }
-                    else
-                    {
-                        id = Convert.ToString(Convert.ToInt32(lastLine.Split(separator)[0]) + 1);
-                    }
-
-                    using (StreamWriter stream = File.AppendText(file))
-                    {
-                        stream.Write(id);
-                        string visible = (isVisible) ? "true" : "false";
-                        stream.Write(String.Format("{0}{1}", separator, visible));
-                        foreach (string record in records)
-                        {
-                            stream.Write(String.Format("{0}{1}", separator, record));
-                        }
-                        stream.WriteLine();
-                    }
+                    id = Convert.ToString(Convert.ToInt32(lastLine.Split(separator)[0]) + 1);
                 }
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("DB not found.");
+
+                using (StreamWriter stream = File.AppendText(file))
+                {
+                    stream.Write(id);
+                    string visible = (isVisible) ? "true" : "false";
+                    stream.Write(String.Format("{0}{1}", separator, visible));
+                    foreach (string record in records)
+                    {
+                        stream.Write(String.Format("{0}{1}", separator, record));
+                    }
+                    stream.WriteLine();
+                }
             }
         }
 
@@ -238,15 +204,7 @@ namespace Project.Controllers
         /// <returns>Array of the first record.</returns>
         public static string[] FindFirst(string dbName, string colmName, string searchVar, bool caseSensitive = false, bool onlyVisible = true)
         {
-            List<string[]> data = SearchDB(dbName, colmName, searchVar, caseSensitive, onlyVisible, true);
-            if (data.Any())
-            {
-                return data.First();
-            }
-            else
-            {
-                return null;
-            }
+            return SearchDB(dbName, colmName, searchVar, caseSensitive, onlyVisible, true).First();
         }
 
         /// <summary>
@@ -277,35 +235,22 @@ namespace Project.Controllers
             }
 
             StreamReader inputStream = null;
-            try
-            {
-                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                inputStream = File.OpenText(file);
-                string[] foundRecord = new string[FileStructureLength(dbName)];
-                List<string[]> foundRecords = new List<string[]>();
 
-                string line = inputStream.ReadLine();
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            inputStream = File.OpenText(file);
+            string[] foundRecord = new string[FileStructureLength(dbName)];
+            List<string[]> foundRecords = new List<string[]>();
+
+            string line = inputStream.ReadLine();
+            line = inputStream.ReadLine();
+            while (line != null)
+            {
+                foundRecord = line.Split(separator);
+                foundRecords.Add(foundRecord);
                 line = inputStream.ReadLine();
-                while (line != null)
-                {
-                    foundRecord = line.Split(separator);
-                    foundRecords.Add(foundRecord);
-                    line = inputStream.ReadLine();
-                }
-                return foundRecords;
             }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("DB not found");
-                return null;
-            }
-            finally
-            {
-                if (inputStream != null)
-                {
-                    inputStream.Close();
-                }
-            }
+            inputStream.Close();
+            return foundRecords;
         }
 
         /// <summary>
@@ -321,17 +266,9 @@ namespace Project.Controllers
                 throw new ArgumentNullException("DB Name");
             }
 
-            try
-            {
-                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
-                string filestructure = File.ReadLines(file).First();
-                return filestructure.Split(separator).Length;
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("DB not found");
-                return 0;
-            }
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+            string filestructure = File.ReadLines(file).First();
+            return filestructure.Split(separator).Length;
         }
 
         /// <summary>
@@ -389,59 +326,45 @@ namespace Project.Controllers
             StreamReader inputStream = null;
             StreamWriter outputStream = null;
 
-            try
-            {
-                inputStream = File.OpenText(file);
-                outputStream = File.CreateText(tempFile);
 
-                string line = inputStream.ReadLine();
-                while (line != null)
+            inputStream = File.OpenText(file);
+            outputStream = File.CreateText(tempFile);
+
+            string line = inputStream.ReadLine();
+            while (line != null)
+            {
+                if (line.Split(separator)[0].Equals(Convert.ToString(id)))
                 {
-                    if (line.Split(separator)[0].Equals(Convert.ToString(id)))
+                    // change content
+                    foreach (string record in records)
                     {
-                        // change content
-                        foreach (string record in records)
+                        if (first)
                         {
-                            if (first)
-                            {
-                                outputStream.Write(String.Format("{0}", record));
-                                first = false;
-                            }
-                            else
-                            {
-                                outputStream.Write(String.Format("{0}{1}", separator, record));
-                            }
+                            outputStream.Write(String.Format("{0}", record));
+                            first = false;
                         }
-                        outputStream.WriteLine();
+                        else
+                        {
+                            outputStream.Write(String.Format("{0}{1}", separator, record));
+                        }
                     }
-                    else
-                    {
-                        // copy content
-                        outputStream.WriteLine(line);
-                    }
-                    line = inputStream.ReadLine();
+                    outputStream.WriteLine();
                 }
-                // delete temp file and rename back to original
-                outputStream.Close();
-                inputStream.Close();
-                File.Delete(file);
-                File.Move(tempFile, file);
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("DB not found.");
-            }
-            finally
-            {
-                if (outputStream != null)
+                else
                 {
-                    outputStream.Close();
+                    // copy content
+                    outputStream.WriteLine(line);
                 }
-                if (inputStream != null)
-                {
-                    inputStream.Close();
-                }
+                line = inputStream.ReadLine();
             }
+            // delete temp file and rename back to original
+            outputStream.Close();
+            inputStream.Close();
+            File.Delete(file);
+            File.Move(tempFile, file);
+
+            outputStream.Close();
+            inputStream.Close();
         }
 
         /// <summary>
@@ -471,101 +394,86 @@ namespace Project.Controllers
 
             StreamReader inputStream = null;
 
-            try
+            string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+
+            inputStream = File.OpenText(file);
+            string line = inputStream.ReadLine();
+            string[] foundRecord = new string[FileStructureLength(dbName)];
+            string word = null;
+            bool colmExists = false;
+            bool checkVisible;
+            int colmIndex = 0;
+            colmName = (caseSensitive) ? colmName : colmName.ToLower();
+            searchVar = (caseSensitive) ? searchVar : searchVar.ToLower();
+            bool stopSearch = false;
+            List<string[]> foundRecords = new List<string[]>();
+
+            for (int i = 0; i < FileStructureLength(dbName); i++)
             {
-                string file = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
+                word = line.Split(separator)[i].ToLower();
 
-                inputStream = File.OpenText(file);
-                string line = inputStream.ReadLine();
-                string[] foundRecord = new string[FileStructureLength(dbName)];
-                string word = null;
-                bool colmExists = false;
-                bool checkVisible;
-                int colmIndex = 0;
-                colmName = (caseSensitive) ? colmName : colmName.ToLower();
-                searchVar = (caseSensitive) ? searchVar : searchVar.ToLower();
-                bool stopSearch = false;
-                List<string[]> foundRecords = new List<string[]>();
-
-                for (int i = 0; i < FileStructureLength(dbName); i++)
+                if (word == colmName)
                 {
-                    word = line.Split(separator)[i].ToLower();
-
-                    if (word == colmName)
-                    {
-                        colmExists = true;
-                        colmIndex = i;
-                    }
+                    colmExists = true;
+                    colmIndex = i;
                 }
+            }
 
-                if (colmExists)
+            if (colmExists)
+            {
+                while ((line != null) && stopSearch == false)
                 {
-                    while ((line != null) && stopSearch == false)
+                    word = line.Split(separator)[colmIndex];
+                    word = (caseSensitive) ? word : word.ToLower();
+
+                    if (searchVar.Equals(word))
                     {
-                        word = line.Split(separator)[colmIndex];
-                        word = (caseSensitive) ? word : word.ToLower();
+                        foundRecord = null;
 
-                        if (searchVar.Equals(word))
+                        if (onlyVisible)
                         {
-                            foundRecord = null;
-
-                            if (onlyVisible)
-                            {
-                                checkVisible = Convert.ToBoolean(line.Split(separator)[1]);
-                                if (checkVisible)
-                                {
-                                    foundRecord = line.Split(separator);
-                                    foundRecords.Add(foundRecord);
-                                    line = inputStream.ReadLine();
-                                    stopSearch = (onlyFirst) ? true : false;
-                                }
-                                else
-                                {
-                                    line = inputStream.ReadLine();
-                                }
-                            }
-                            else
+                            checkVisible = Convert.ToBoolean(line.Split(separator)[1]);
+                            if (checkVisible)
                             {
                                 foundRecord = line.Split(separator);
                                 foundRecords.Add(foundRecord);
                                 line = inputStream.ReadLine();
                                 stopSearch = (onlyFirst) ? true : false;
                             }
+                            else
+                            {
+                                line = inputStream.ReadLine();
+                            }
                         }
                         else
                         {
+                            foundRecord = line.Split(separator);
+                            foundRecords.Add(foundRecord);
                             line = inputStream.ReadLine();
+                            stopSearch = (onlyFirst) ? true : false;
                         }
-                    }
-
-                    if (foundRecords.Any())
-                    {
-                        inputStream.Close();
-                        return foundRecords;
                     }
                     else
                     {
-                        inputStream.Close();
-                        return new List<string[]>();
+                        line = inputStream.ReadLine();
                     }
+                }
+
+                if (foundRecords.Any())
+                {
+                    inputStream.Close();
+                    return foundRecords;
                 }
                 else
                 {
                     inputStream.Close();
-                    return new List<string[]>();
+                    throw new NoRecordFoundException();
                 }
             }
-            catch (FileNotFoundException)
+            else
             {
-                Console.WriteLine("DB not found.");
-                return new List<string[]>();
-            }
-            finally
-            {
-                if (inputStream != null)
-                {
-                    inputStream.Close();
-                }
+                inputStream.Close();
+                throw new NoRecordFoundException();
             }
         }
 

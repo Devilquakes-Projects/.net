@@ -29,8 +29,14 @@ namespace Project.Views
         {
             InitializeComponent();
             Snake s = new Snake(snakeCanvas, totalPointsLabel);
-            s.TimeLeft = 10000000;
-            s.startGame();
+
+            ProjectConfig.CheckPlayTime();
+
+            if (ProjectConfig.PlayTime != 0)
+            {
+                s.TimeLeft = ProjectConfig.PlayTime;
+                s.startGame();
+            }
         }
 
         private void snakeCanvas_KeyDown(object sender, KeyEventArgs e)

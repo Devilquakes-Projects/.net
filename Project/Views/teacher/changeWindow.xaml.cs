@@ -13,16 +13,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Project.Views.Teacher
+namespace Project.Views
 {
     /// <summary>
     /// Interaction logic for changeWindow.xaml
     /// </summary>
-    public partial class changeWindow : Window
+    public partial class ChangeWindow : Window
     {
 
         private string course;
-        public changeWindow(string content, string subject)
+        public ChangeWindow(string content, string subject)
         {
             InitializeComponent();
             oldQuestionLabel.Content = content;

@@ -2,6 +2,7 @@
 // Date: 03/05/2015
 
 using Project.Controllers;
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ namespace Project
     {
         public static string DBDestinationPath { get; private set; }
         public static string TeacherCode { get; private set; }
+        public static int PlayTime { get; private set; }
         public static string UserFile { get; private set; }
         public static string StudentsFile { get; private set; }
         public static string StudentPointsFile { get; private set; }
@@ -44,7 +46,7 @@ namespace Project
             }
             catch (DirectoryNotFoundException)
             {
-                System.IO.Directory.CreateDirectory(DBDestinationPath);
+                Directory.CreateDirectory(DBDestinationPath);
             }
 
             // Teacher code
@@ -98,6 +100,39 @@ namespace Project
 
             // Set snakeDB
             BallFile = pointsBallDB[0];
+        }
+
+        public static void CheckPlayTime()
+        {
+            if (PlayTime == 0)
+            {
+                try
+                {
+                    string[] userString = DB.FindFirst(ProjectConfig.StudentsFile, "userID", Convert.ToString(User.Id));
+                    bool completedAllCourses = true;
+                    for (int i = 3; i <= 5; i++)
+                    {
+                        if (userString[i] != "false")
+                        {
+                            PlayTime += Convert.ToInt32(userString[i]);
+                        }
+                        else
+                        {
+                            completedAllCourses = false;
+                            MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
+                        }
+                    }
+                    if (completedAllCourses)
+                        PlayTime *= 10;
+                    else
+                        PlayTime = 0;
+                }
+                catch (NoRecordFoundException)
+                {
+                    PlayTime = 0;
+                    MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
+                }
+            }
         }
 
         private static void CheckDB()
