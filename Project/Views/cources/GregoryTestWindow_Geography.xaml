@@ -17,7 +17,7 @@
             </Canvas>
         </GroupBox>
 
-        <Label Name="timeLabel" HorizontalAlignment="Left" Margin="20,262,0,0" VerticalAlignment="Top"/>
+        <Label Name="timeLabel" Content=" " HorizontalAlignment="Left" Margin="20,262,0,0" VerticalAlignment="Top"/>
         <Button Name="gradeButton" Content="Button" HorizontalAlignment="Left" Margin="20,293,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

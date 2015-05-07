@@ -1,5 +1,6 @@
 ﻿using Project.Controllers;
 using Project.Controllers.Courses;
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,22 @@ namespace Project.Views
             //onderstaande int's moeten van buitenaf doorgegeven worden (via constructor), ik set deze tijdelijk op deze manier:
             int studentId = User.Id;
             int difficulty = 3;
-            
-            geography = new Geography(studentId, difficulty, gradeButton, timeLabel, firstQuestionBoxTitle, rButton1_1, rButton1_2, secondQuestionBoxTitle, rButton2_1, rButton2_2);
+
+            try
+            {
+                geography = new Geography(studentId, difficulty, gradeButton, timeLabel, firstQuestionBoxTitle, rButton1_1, rButton1_2, secondQuestionBoxTitle, rButton2_1, rButton2_2);
+            }
+            catch (CourseAlreadyCompletedException exeptionObject)
+            {
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close");
+                Environment.Exit(1);
+            }
+            catch (NotEnoughQuestionsException exceptionObject)
+            {
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close");
+                Environment.Exit(1);
+            }
+
             //geography.LoadQuestions();
         }
 
@@ -40,7 +55,7 @@ namespace Project.Views
             if (gradeButton.Content.Equals("Grade"))
             {
                 geography.Grade();
-                
+
             }
             else
             {

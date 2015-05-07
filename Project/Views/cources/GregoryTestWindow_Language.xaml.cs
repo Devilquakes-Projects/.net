@@ -1,5 +1,6 @@
 ﻿using Project.Controllers;
 using Project.Controllers.Courses;
+using Project.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,20 @@ namespace Project.Views
             int studentId = User.Id;
             int difficulty = 3;
 
-            lang = new Languages(studentId, difficulty, gradeButton, timeLabel, title, question1Label, question2Label, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6);
+            try
+            {
+                lang = new Languages(studentId, difficulty, gradeButton, timeLabel, title, question1Label, question2Label, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6);
+            }
+            catch (CourseAlreadyCompletedException exeptionObject)
+            {
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close");
+                Environment.Exit(1);
+            }
+            catch (NotEnoughQuestionsException exceptionObject)
+            {
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close");
+                Environment.Exit(1);
+            }
         }
 
         private void Button_Click_Grade(object sender, RoutedEventArgs e)

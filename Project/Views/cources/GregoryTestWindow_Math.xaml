@@ -11,7 +11,7 @@
         <Label Name="l3" Content="l3" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
         <Label Name="l4" Content="l4" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
         <Label Name="l5" Content="l5" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <Label Name="timeLabel" Content="timeLabel" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Name="timeLabel" Content=" " HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="100"/>
 
         <TextBox Name="tb1" HorizontalAlignment="Left" Margin="141,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBox Name="tb2" HorizontalAlignment="Left" Margin="141,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>

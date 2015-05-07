@@ -66,10 +66,9 @@ namespace Project.Controllers.Courses
             try
             {
                 string[] studentTestCompleted = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));//opvragen db student
-                if (studentTestCompleted[index].Equals("true"))
+                if (!studentTestCompleted[index].Equals("false"))
                 {
-                    MessageBox.Show("NOTE: you already completed this test," + Environment.NewLine + "Closing application.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                    System.Environment.Exit(0);//exitcode 0 means closed properly
+                    throw new CourseAlreadyCompletedException();
                 }
             }
             catch (NoRecordFoundException)
@@ -113,8 +112,8 @@ namespace Project.Controllers.Courses
             }
             else
             {
-                string errorMsg = String.Format("You requested {0} numbers, there are only {1} numbers available!", amountOfNumbers, maxValue - minValue);
-                MessageBox.Show(errorMsg);
+                string errorMsg = String.Format("You requested {0} numbers, there are only {1} numbers available!", amountOfNumbers, maxValue - minValue);//info for the programmer, the user won't notice this!
+                Console.WriteLine(errorMsg);
             }
 
             return array;
@@ -173,8 +172,9 @@ namespace Project.Controllers.Courses
             }
             else
             {
-                MessageBox.Show("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this" + Environment.NewLine + "Application will now close", "Error: Not enough Questions.");
-                Environment.Exit(0);//Author: Greg, Date: 06-05-15 22:25 - 22:30
+                string s = String.Format("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this" + Environment.NewLine + "Application will now close", "Error: Not enough Questions.");
+                //Environment.Exit(0);//Author: Greg, Date: 06-05-15 22:25 - 22:30
+                throw new NotEnoughQuestionsException();
             }
 
             return questionsList;
