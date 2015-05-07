@@ -490,13 +490,13 @@ namespace Project.Controllers
         /// <param name="dbName">Name of DB File.</param>
         public static void LineCount(string dbName, out int visibleLines, out int totalLines)
         {
-            StreamReader inputStream = null;
+            StreamReader inputStream;
 
-            try
-            {
+            //try
+            //{
                 string[] test;
                 visibleLines = 0;
-                totalLines = -1;
+                totalLines = -1;//start @ -1 because the information bar: ID|VISIBLE|... isn't a line that you can use!
 
                 string readFile = Path.Combine(destination, String.Format("{0}.txt", dbName.ToUpper()));
                 inputStream = File.OpenText(readFile);
@@ -513,24 +513,24 @@ namespace Project.Controllers
                     totalLines++;
                     line = inputStream.ReadLine();
                 }
-            }
-            catch (FileNotFoundException)
-            {
-                visibleLines = 0;
-                totalLines = 0;
-            }
-            catch (IOException)//geen object van gemaakt omdat dit niet gebruikt word (IOException obj)
-            {
-                visibleLines = 0;
-                totalLines = 0;
-            }
-            finally//Author: Greg, Date: 25-04-15: 11:30-11:45
-            {
-                if (inputStream != null)
-                {
-                    inputStream.Close();
-                }
-            }
+            //}
+            //catch (FileNotFoundException)//07/05/15: gewijzigd omdat tijdens start van programma hier al op getest word
+            //{
+            //    visibleLines = 0;
+            //    totalLines = 0;
+            //}
+            //catch (IOException)//geen object van gemaakt omdat dit niet gebruikt word (IOException obj)
+            //{
+            //    visibleLines = 0;
+            //    totalLines = 0;
+            //}
+            //finally//Author: Greg, Date: 25-04-15: 11:30-11:45
+            //{
+            //    if (inputStream != null)
+            //    {
+            //        inputStream.Close();
+            //    }
+            //}
         }
 
         /// <summary>

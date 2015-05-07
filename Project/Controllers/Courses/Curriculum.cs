@@ -66,7 +66,7 @@ namespace Project.Controllers.Courses
             try
             {
                 string[] studentTestCompleted = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));//opvragen db student
-                if (!studentTestCompleted[index].Equals("false"))
+                if (studentTestCompleted[index].Equals("true"))
                 {
                     MessageBox.Show("NOTE: you already completed this test," + Environment.NewLine + "Closing application.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     System.Environment.Exit(0);//exitcode 0 means closed properly
