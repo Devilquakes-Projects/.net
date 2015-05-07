@@ -18,7 +18,7 @@ namespace Project.Controllers
     public static class DB
     {
         private static string destination = ProjectConfig.DBDestinationPath;
-        private static char separator = '|';
+        private static char separator = ProjectConfig.DBSeparator;
 
         /// <summary>
         /// Creates a new database with fields.

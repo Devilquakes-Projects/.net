@@ -22,12 +22,15 @@ namespace Project.Views
     {
 
         private string course;
+        private int id;
         public ChangeWindow(string content, string subject)
         {
             InitializeComponent();
             oldQuestionLabel.Content = content;
             course = subject;
             setLabels();
+            id = Convert.ToInt32(content.Split(ProjectConfig.DBSeparator)[0]);
+
         }
 
         private void setLabels()
@@ -96,7 +99,7 @@ namespace Project.Views
                             else
                             {
                                 string[] recordsGeography = { questionTextBox.Text, solutionTextBox1.Text, solutionTextBox2.Text };
-                                DB.AddRecord(ProjectConfig.QuestionsFileGeo, recordsGeography);
+                                DB.ChangeRecord(ProjectConfig.QuestionsFileGeo,id,recordsGeography);
                             }
                             break;
                         case "Language":
@@ -112,12 +115,12 @@ namespace Project.Views
                                 else
                                 {
                                     string[] recordsLanguage = { questionTextBox.Text, solutionTextBox1.Text, solutionTextBox2.Text, solutionTextBox3.Text };
-                                    DB.AddRecord(ProjectConfig.QuestionsFileLang, recordsLanguage);
+                                    DB.ChangeRecord(ProjectConfig.QuestionsFileLang, id, recordsLanguage);
                                 }
                             break;
                         case "Math":
                             string[] recordsMath = { questionTextBox.Text, solutionTextBox1.Text };
-                            DB.AddRecord(ProjectConfig.QuestionsFileMath, recordsMath);
+                            DB.ChangeRecord(ProjectConfig.QuestionsFileMath, id, recordsMath);
                             break;
                     }
                 }

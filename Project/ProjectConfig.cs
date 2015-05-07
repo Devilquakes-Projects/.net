@@ -16,6 +16,7 @@ namespace Project
     static class ProjectConfig
     {
         public static string DBDestinationPath { get; private set; }
+        public static char DBSeparator { get; private set; }
         public static string TeacherCode { get; private set; }
         public static int PlayTime { get; private set; }
         public static string UserFile { get; private set; }
@@ -32,6 +33,7 @@ namespace Project
         public static void StartUp()
         {
             DBDestinationPath = Path.Combine("01DBProject");
+            DBSeparator = '|';
 
             // Check for write permissions
             try
@@ -163,7 +165,6 @@ namespace Project
                     } else {
                         structureOk = false;
                     }
-
 
                     if (!structureOk)
                     {
