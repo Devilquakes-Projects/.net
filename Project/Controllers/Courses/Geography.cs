@@ -39,7 +39,6 @@ namespace Project.Controllers.Courses
             gradeButton.Content = "Grade";
 
             this.timeLabel = time;
-            base.UpdateTimeLabel(time);
 
             this.qBoxTitle1 = qBoxTitle1;
             this.qBoxTitle2 = qBoxTitle2;

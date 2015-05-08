@@ -132,13 +132,7 @@ namespace Project.Controllers.Courses
             string result = String.Format("You earned {0}/{1} points.", pts, 10);//int 10 mag ook string "10" zijn
             MessageBox.Show(result);
         }//Author: Greg, Date: 05-04-15 14:50 - 15:20
-
-        protected void UpdateTimeLabel(Label time)
-        {
-            //time.Width = 100.0;
-            time.Background = Brushes.LightGray;
-        }//Author: Greg, Date: 05-04-15 12:30 - 13:00
-
+        
         protected void WriteRecords(int index, int points)
         {
             string[] records = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));
