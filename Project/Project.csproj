@@ -64,13 +64,20 @@
     <Compile Include="Exceptions\NotEnoughQuestionsException.cs" />
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Games\BallGame\Ball.cs" />
+    <Compile Include="Games\BallGame\BallGame.cs" />
+    <Compile Include="Games\BallGame\ComputerBall.cs" />
+    <Compile Include="Games\BallGame\PlayerBall.cs" />
     <Compile Include="ProjectConfig.cs" />
-    <Compile Include="SnakeGame\Snake.cs" />
-    <Compile Include="SnakeGame\SnakePart.cs" />
+    <Compile Include="Games\SnakeGame\Snake.cs" />
+    <Compile Include="Games\SnakeGame\SnakePart.cs" />
     <Compile Include="ThirdParty\BCrypt.cs" />
     <Compile Include="Controllers\Courses\Curriculum.cs" />
     <Compile Include="Views\Auth\PasswordRecoveryWindow.xaml.cs">
       <DependentUpon>PasswordRecoveryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Games\BallWindow.xaml.cs">
+      <DependentUpon>BallWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Games\SnakeWindow.xaml.cs">
       <DependentUpon>SnakeWindow.xaml</DependentUpon>
@@ -102,6 +109,10 @@
       <DependentUpon>EditQuestionWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Auth\PasswordRecoveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Games\BallWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

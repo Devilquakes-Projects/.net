@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.SnakeGame
+namespace Project.Games.SnakeGame
 {
     class SnakePart
     {

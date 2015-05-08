@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Project.Controllers;
-using Project.SnakeGame;
+using Project.Games.SnakeGame;
 
 namespace Project.Views
 {

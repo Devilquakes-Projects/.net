@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Project.SnakeGame
+namespace Project.Games.SnakeGame
 {
     class Snake
     {
