@@ -38,12 +38,12 @@ namespace Project.Views
             }
             catch (CourseAlreadyCompletedException exeptionObject)
             {
-                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close");
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
                 Environment.Exit(1);
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
-                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close");
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(1);
             }
 

@@ -35,16 +35,16 @@ namespace Project
             try
             {
                 m1 = new Mathematics(studentId, difficulty, timeLabel, gradeButton, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5);
-                m1.SetTextboxStartSize(185, 1.1, 30, tb1, tb2, tb3, tb4, tb5);//setup textboxes
+                m1.SetTextboxStartSize(185, 1.1, 20, tb1, tb2, tb3, tb4, tb5);//setup textboxes
             }
             catch (CourseAlreadyCompletedException exeptionObject)
             {
-                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close");
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
                 Environment.Exit(1);
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
-                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close");
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(1);
             }
         }

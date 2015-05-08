@@ -34,16 +34,16 @@ namespace Project.Views
             try
             {
                 lang = new Languages(studentId, difficulty, gradeButton, timeLabel, title, question1Label, question2Label, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6);
-                lang.SetTextboxStartSize(200, 1.25, 74, tb1, tb2, tb3, tb4, tb5, tb6);//setup textboxes
+                lang.SetTextboxStartSize(200, 1.25, 50, tb1, tb2, tb3, tb4, tb5, tb6);//setup textboxes
             }
             catch (CourseAlreadyCompletedException exeptionObject)
             {
-                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close");
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
                 Environment.Exit(1);
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
-                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close");
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(1);
             }
         }
