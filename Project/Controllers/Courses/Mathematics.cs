@@ -39,7 +39,6 @@ namespace Project.Controllers.Courses
             base.IsTestGraded(3);//3: index of Mathematics
 
             this.timeLabel = timeLabel;
-            base.UpdateTimeLabel(timeLabel);
 
             this.gradeButton = gradeButton;
             gradeButton.Content = "Grade";

@@ -43,7 +43,6 @@ namespace Project.Controllers.Courses
             gradeButton.Content = "Grade";
 
             this.time = time;
-            base.UpdateTimeLabel(time);
 
             this.title = title;
             this.question1 = question1;
