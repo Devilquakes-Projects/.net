@@ -52,7 +52,6 @@ namespace Project.Controllers.Courses
             this.header2 = header2;
             this.header3 = header3;
 
-            base.SetTextboxStartSize(200, 1.25, 74, tb1, tb2, tb3, tb4, tb5, tb6);//setup textboxes
             this.tb[0] = tb1;
             this.tb[1] = tb2;
             this.tb[2] = tb3;
