@@ -99,9 +99,18 @@ namespace Project
 
         private void snakeButton_Click(object sender, RoutedEventArgs e)
         {
-            SnakeWindow newView = new SnakeWindow();
-            newView.Show();
-            this.Close();
+            ProjectConfig.CheckPlayTime();
+
+            if (ProjectConfig.PlayTime != 0)
+            {
+                SnakeWindow newView = new SnakeWindow();
+                newView.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
+            }
         }
     }
 }

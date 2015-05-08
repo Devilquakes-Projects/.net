@@ -30,13 +30,9 @@ namespace Project.Views
             InitializeComponent();
             Snake s = new Snake(snakeCanvas, totalPointsLabel);
 
-            ProjectConfig.CheckPlayTime();
-
-            if (ProjectConfig.PlayTime != 0)
-            {
-                s.TimeLeft = ProjectConfig.PlayTime;
-                s.startGame();
-            }
+            s.TimeLeft = ProjectConfig.PlayTime;
+            s.startGame();
+            
         }
 
         private void snakeCanvas_KeyDown(object sender, KeyEventArgs e)
@@ -47,11 +43,6 @@ namespace Project.Views
         private void snakeCanvas_KeyUp(object sender, KeyEventArgs e)
         {
             Input.ChangeState(e.Key, false);
-        }
-
-        public void closeWindow()
-        {
-            Environment.Exit(0);
         }
     }
 }

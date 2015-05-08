@@ -73,16 +73,15 @@ namespace Project.Games.SnakeGame
         public void timeTimer_Tick(object sender, EventArgs e)
         {
             timeLeft--;
+            Console.WriteLine(timeLeft);
             timePlayed++;
             if (timeLeft == 0)
             {
                 moveTimer.Stop();
                 snakeTimer.Stop();
-                if (MessageBox.Show("You ran out of time!", "No time left", MessageBoxButton.OK) == MessageBoxResult.OK)
-                {
-                    SnakeWindow window = new SnakeWindow();
-                    window.closeWindow();
-                }
+                timeTimer.Stop();
+
+                SaveAndClose("You ran out of time!", "No time left");
             }
         }
 
@@ -319,27 +318,46 @@ namespace Project.Games.SnakeGame
         {
             moveTimer.Stop();
             snakeTimer.Stop();
+            timeTimer.Stop();
 
+            SaveAndClose("You died!" + Environment.NewLine + "Score: " + points, "You died");
+
+        }
+
+        private void SaveAndClose(string message, string title)
+        {
             // save score
             string[] records = { Convert.ToString(User.Id), Convert.ToString(DateTime.Now), Convert.ToString(timePlayed), Convert.ToString(points) };
             DB.AddRecord(ProjectConfig.SnakeFile, records);
 
-            // save cource in progress to default db. and reset cource in progress
-            string[] studentCourcePointsTemp = DB.FindFirst(ProjectConfig.StudentsFile, "userID", Convert.ToString(User.Id));
-            string[] studentCourcePoints = new string[4];
-            studentCourcePoints[0] = Convert.ToString(DateTime.Now);
-            for (int i = 1; i <= 3; i++)
-			{
-                studentCourcePoints[i] = studentCourcePointsTemp[i + 2];
-                studentCourcePointsTemp[i + 2] = "false";
-			}
-            DB.AddRecord(ProjectConfig.StudentPointsFile, studentCourcePoints);
-            DB.ChangeRecord(ProjectConfig.StudentsFile, Convert.ToInt32(studentCourcePointsTemp[0]), studentCourcePointsTemp);
-
-            if (MessageBox.Show("You died!" + Environment.NewLine + "Score: " + points, "You died", MessageBoxButton.OK) == MessageBoxResult.OK)
+            if (timeLeft <= 0)
             {
-                SnakeWindow window = new SnakeWindow();
-                window.closeWindow();
+                // save cource in progress to default db. and reset cource in progress
+                string[] studentCourcePointsTemp = DB.FindFirst(ProjectConfig.StudentsFile, "userID", Convert.ToString(User.Id));
+                string[] studentCourcePoints = new string[5];
+                studentCourcePoints[0] = Convert.ToString(User.Id);
+                studentCourcePoints[1] = Convert.ToString(DateTime.Now);
+                for (int i = 2; i <= 4; i++)
+                {
+                    studentCourcePoints[i] = studentCourcePointsTemp[i + 1];
+                }
+                DB.AddRecord(ProjectConfig.StudentPointsFile, studentCourcePoints);
+
+                string[] newStudentCourcePoints = { Convert.ToString(User.Id), "false", "false", "false" };
+                DB.ChangeRecord(ProjectConfig.StudentsFile, Convert.ToInt32(studentCourcePointsTemp[0]), newStudentCourcePoints);
+            }
+
+            string[] timeArray = DB.FindFirst(ProjectConfig.PlayTimeFile, "userID", Convert.ToString(User.Id));
+            timeArray[3] = Convert.ToString(timeLeft);
+            DB.ChangeFromRead(ProjectConfig.PlayTimeFile, Convert.ToInt32(timeArray[0]), timeArray);
+            ProjectConfig.PlayTime = timeLeft;
+
+            if (MessageBox.Show(message, title, MessageBoxButton.OK) == MessageBoxResult.OK)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                for (int intCounter = App.Current.Windows.Count - 2; intCounter >= 0; intCounter--)
+                    App.Current.Windows[intCounter].Close();
             }
         }
 

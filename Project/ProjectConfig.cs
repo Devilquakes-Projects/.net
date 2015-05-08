@@ -18,7 +18,7 @@ namespace Project
         public static string DBDestinationPath { get; private set; }
         public static char DBSeparator { get; private set; }
         public static string TeacherCode { get; private set; }
-        public static int PlayTime { get; private set; }
+        public static int PlayTime { get; set; }
         public static string UserFile { get; private set; }
         public static string StudentsFile { get; private set; }
         public static string StudentPointsFile { get; private set; }
@@ -27,6 +27,7 @@ namespace Project
         public static string QuestionsFileMath { get; private set; }
         public static string SnakeFile { get; private set; }
         public static string BallFile { get; private set; }
+        public static string PlayTimeFile { get; private set; }
 
         private static List<string[]> DBs;
 
@@ -63,9 +64,11 @@ namespace Project
             string[] coursesGeographyDB = { "courses_geography", "question", "correct_solution", "wrong_solution" };
             string[] coursesLangDB = { "courses_lang", "question", "solution1", "solution2", "solution3" };
             string[] coursesMathDB = { "courses_math", "question", "solution" };
-            
+
             string[] pointsSnakeDB = { "points_snake", "userID", "date", "time_played", "points" };
             string[] pointsBallDB = { "points_ball", "userID", "date", "time_played", "points" };
+
+            string[] playTimeDB = { "play_time", "userID", "time" };
 
             DBs = new List<string[]>();
             DBs.Add(userDB);
@@ -79,6 +82,8 @@ namespace Project
 
             DBs.Add(pointsSnakeDB);
             DBs.Add(pointsBallDB);
+
+            DBs.Add(playTimeDB);
 
             // check saved DB
             ProjectConfig.CheckDB();
@@ -102,10 +107,23 @@ namespace Project
 
             // Set snakeDB
             BallFile = pointsBallDB[0];
+
+            // Set TimeLeftDB
+            PlayTimeFile = playTimeDB[0];
         }
 
         public static void CheckPlayTime()
         {
+            try
+            {
+                PlayTime = Convert.ToInt32(DB.FindFirst(ProjectConfig.PlayTimeFile, "userID", Convert.ToString(User.Id))[3]);
+            }
+            catch (NoRecordFoundException)
+            {
+                string[] records = { Convert.ToString(User.Id), Convert.ToString(0) };
+                DB.AddRecord(ProjectConfig.PlayTimeFile, records);
+            }
+
             if (PlayTime == 0)
             {
                 try
@@ -121,18 +139,24 @@ namespace Project
                         else
                         {
                             completedAllCourses = false;
-                            MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
                         }
                     }
                     if (completedAllCourses)
+                    {
                         PlayTime *= 10;
+                        string[] timeArray = DB.FindFirst(ProjectConfig.PlayTimeFile, "userID", Convert.ToString(User.Id));
+                        timeArray[3] = Convert.ToString(PlayTime);
+                        DB.ChangeFromRead(ProjectConfig.PlayTimeFile, Convert.ToInt32(timeArray[0]), timeArray);
+                        ProjectConfig.PlayTime = PlayTime;
+                    }
                     else
+                    {
                         PlayTime = 0;
+                    }
                 }
                 catch (NoRecordFoundException)
                 {
                     PlayTime = 0;
-                    MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
                 }
             }
         }
@@ -157,12 +181,14 @@ namespace Project
                     {
                         for (int i = 0; i < fields.Length; i++)
                         {
-                            if (!fields[i].ToUpper().Equals(structure[i+2]))
+                            if (!fields[i].ToUpper().Equals(structure[i + 2]))
                             {
                                 structureOk = false;
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         structureOk = false;
                     }
 

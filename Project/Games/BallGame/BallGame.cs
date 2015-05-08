@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,8 @@ namespace Project.Games.BallGame
         private Ball ballPlayer;
         private int lives;
         private int points = 0;
-        private int time;
+        private int timePlayed = 0;
+        private int timeLeft;
         Random random;
 
         public BallGame(List<Ball> ballList, Ball playerBall, int lives, int time, Canvas canvas)
@@ -28,7 +30,7 @@ namespace Project.Games.BallGame
             this.ballPlayer = playerBall;
             this.canvas = canvas;
             this.lives = lives;
-            this.time = time;
+            this.timeLeft = time;
 
             random = new Random();
 
@@ -40,13 +42,11 @@ namespace Project.Games.BallGame
 
         private void timeLeftTimer_Tick(object sender, EventArgs e)
         {
-            time--;
-            if (time == 0)
+            timeLeft--;
+            timePlayed++;
+            if (timeLeft == 0)
             {
-                if (MessageBox.Show("You ran out of time!", "No time left", MessageBoxButton.OK) == MessageBoxResult.OK)
-                {
-                    StopGame();
-                }
+                StopGame("You ran out of time!", "No time left");
             }
             // tijd in label aanpassen
         }
@@ -57,10 +57,47 @@ namespace Project.Games.BallGame
             gameFrameTimer.Start();
         }
 
-        public void StopGame()
+        public void StopGame(string message, string title)
         {
             gameFrameTimer.Stop();
             timeLeftTimer.Stop();
+
+            if (MessageBox.Show(message, title, MessageBoxButton.OK) == MessageBoxResult.OK)
+            {
+                // save score
+                string[] records = { Convert.ToString(User.Id), Convert.ToString(DateTime.Now), Convert.ToString(timePlayed), Convert.ToString(points) };
+                DB.AddRecord(ProjectConfig.BallFile, records);
+
+                if (timeLeft <= 0)
+                {
+                    // save cource in progress to default db. and reset cource in progress
+                    string[] studentCourcePointsTemp = DB.FindFirst(ProjectConfig.StudentsFile, "userID", Convert.ToString(User.Id));
+                    string[] studentCourcePoints = new string[5];
+                    studentCourcePoints[0] = Convert.ToString(User.Id);
+                    studentCourcePoints[1] = Convert.ToString(DateTime.Now);
+                    for (int i = 2; i <= 4; i++)
+                    {
+                        studentCourcePoints[i] = studentCourcePointsTemp[i + 1];
+                    }
+                    DB.AddRecord(ProjectConfig.StudentPointsFile, studentCourcePoints);
+
+                    string[] newStudentCourcePoints = { Convert.ToString(User.Id), "false", "false", "false" };
+                    DB.ChangeRecord(ProjectConfig.StudentsFile, Convert.ToInt32(studentCourcePointsTemp[0]), newStudentCourcePoints);
+                }
+
+                string[] timeArray = DB.FindFirst(ProjectConfig.PlayTimeFile, "userID", Convert.ToString(User.Id));
+                timeArray[3] = Convert.ToString(timeLeft);
+                DB.ChangeFromRead(ProjectConfig.PlayTimeFile, Convert.ToInt32(timeArray[0]), timeArray);
+                ProjectConfig.PlayTime = timeLeft;
+
+                if (MessageBox.Show(message, title, MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    for (int intCounter = App.Current.Windows.Count - 2; intCounter >= 0; intCounter--)
+                        App.Current.Windows[intCounter].Close();
+                }
+            }
         }
 
         private void gameFrameTimer_Tick(object sender, EventArgs e)
@@ -225,8 +262,7 @@ namespace Project.Games.BallGame
                     spawnBall(ballList[i], ballPlayer);
                     if (lives == 0)
                     {
-                        MessageBox.Show("You ran out of lives! You died!", "You died!", MessageBoxButton.OK);
-                        StopGame();
+                        StopGame("You ran out of lives! You died!", "You died!");
                     }
                     // label levens aanpassen
                 }
