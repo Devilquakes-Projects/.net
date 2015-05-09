@@ -11,14 +11,14 @@
 
         <Label Name="question1Label" Content="question1Label" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top"/>
 
-        <TextBox Name="tb1" HorizontalAlignment="Left" Margin="132,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb2" HorizontalAlignment="Left" Margin="395,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb3" HorizontalAlignment="Left" Margin="667,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Name="tb1" HorizontalAlignment="Left" Margin="132,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="200" MaxWidth="250" MaxLength="37"/>
+        <TextBox Name="tb2" HorizontalAlignment="Left" Margin="395,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="200" MaxWidth="250" MaxLength="37"/>
+        <TextBox Name="tb3" HorizontalAlignment="Left" Margin="667,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="200" MaxWidth="250" MaxLength="37"/>
 
         <Label Name="question2Label" Content="question2Label" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb4" HorizontalAlignment="Left" Margin="132,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb5" HorizontalAlignment="Left" Margin="395,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb6" HorizontalAlignment="Left" Margin="667,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Name="tb4" HorizontalAlignment="Left" Margin="132,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="200" MaxWidth="250" MaxLength="37"/>
+        <TextBox Name="tb5" HorizontalAlignment="Left" Margin="395,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="200" MaxWidth="250" MaxLength="37"/>
+        <TextBox Name="tb6" HorizontalAlignment="Left" Margin="667,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="200" MaxWidth="250" MaxLength="37"/>
 
         <Button Name="gradeButton" Content="Grade" HorizontalAlignment="Left" Margin="842,239,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Grade"/>
         <Label Name="timeLabel" Content=" " MinWidth="80" MaxWidth="200" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Background="LightGray"/>

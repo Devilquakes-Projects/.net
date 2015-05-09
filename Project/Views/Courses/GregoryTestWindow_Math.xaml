@@ -14,11 +14,11 @@
         <Label Name="l5" Content="l5" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
         <Label Name="timeLabel" Content=" " MinWidth="80" MaxWidth="200" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Background="LightGray"/>
 
-        <TextBox Name="tb1" HorizontalAlignment="Left" Margin="141,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb2" HorizontalAlignment="Left" Margin="141,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb3" HorizontalAlignment="Left" Margin="141,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb4" HorizontalAlignment="Left" Margin="141,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="tb5" HorizontalAlignment="Left" Margin="141,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Name="tb1" HorizontalAlignment="Left" Margin="141,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="175" MaxWidth="210" MaxLength="30"/>
+        <TextBox Name="tb2" HorizontalAlignment="Left" Margin="141,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="175" MaxWidth="210" MaxLength="30"/>
+        <TextBox Name="tb3" HorizontalAlignment="Left" Margin="141,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="175" MaxWidth="210" MaxLength="30"/>
+        <TextBox Name="tb4" HorizontalAlignment="Left" Margin="141,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="175" MaxWidth="210" MaxLength="30"/>
+        <TextBox Name="tb5" HorizontalAlignment="Left" Margin="141,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="175" MaxWidth="210" MaxLength="30"/>
 
         <Button Name="gradeButton" Content="Grade" HorizontalAlignment="Left" Margin="10,275,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Grade"/>
     </Grid>
