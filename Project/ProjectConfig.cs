@@ -15,21 +15,6 @@ namespace Project
 {
     static class ProjectConfig
     {
-        public static string DBDestinationPath { get; private set; }
-        public static char DBSeparator { get; private set; }
-        public static string TeacherCode { get; private set; }
-        public static int QuestionDifficulty { get; private set; }
-        public static int PlayTime { get; set; }
-        public static string UserFile { get; private set; }
-        public static string StudentsFile { get; private set; }
-        public static string StudentPointsFile { get; private set; }
-        public static string QuestionsFileGeo { get; private set; }
-        public static string QuestionsFileLang { get; private set; }
-        public static string QuestionsFileMath { get; private set; }
-        public static string SnakeFile { get; private set; }
-        public static string BallFile { get; private set; }
-        public static string PlayTimeFile { get; private set; }
-
         private static List<string[]> DBs;
 
         public static void StartUp()
@@ -208,5 +193,33 @@ namespace Project
                 }
             }
         }
+        
+        public static string DBDestinationPath { get; private set; }
+        
+        public static char DBSeparator { get; private set; }
+        
+        public static string TeacherCode { get; private set; }
+        
+        public static int QuestionDifficulty { get; private set; }
+        
+        public static int PlayTime { get; set; }
+        
+        public static string UserFile { get; private set; }
+        
+        public static string StudentsFile { get; private set; }
+        
+        public static string StudentPointsFile { get; private set; }
+        
+        public static string QuestionsFileGeo { get; private set; }
+        
+        public static string QuestionsFileLang { get; private set; }
+        
+        public static string QuestionsFileMath { get; private set; }
+        
+        public static string SnakeFile { get; private set; }
+        
+        public static string BallFile { get; private set; }
+        
+        public static string PlayTimeFile { get; private set; }
     }
 }

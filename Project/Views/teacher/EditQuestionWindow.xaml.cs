@@ -1,5 +1,5 @@
 ﻿// Author: Joris Meylaers
-// Date: 28/04/2015
+
 using Project.Controllers;
 using System;
 using System.Collections;
@@ -24,8 +24,8 @@ namespace Project.Views
     public partial class EditQuestionWindow : Window
     {
         private string course;
-        IList list;
-        List<string> data;
+        private IList list;
+        private List<string> data;
 
         public EditQuestionWindow()
         {

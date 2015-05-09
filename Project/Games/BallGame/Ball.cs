@@ -12,16 +12,7 @@ namespace Project.Games.BallGame
 {
     abstract class Ball: IBall
     {
-        public double Speed { get; set; }
-        public bool Hitted { get; set; }
-        public Point Position { get; set; }
-        public String ColorString { get; set; }
-        public int Radius { get; set; }
-        public double XChange { get; set; }
-        public double YChange { get; set; }
-        public bool IsEnemy { get; set; }
-
-        public Ellipse ellipse;
+        private Ellipse ellipse;
 
         public void CreateEllipse()
         {
@@ -41,5 +32,21 @@ namespace Project.Games.BallGame
         {
             ellipse.Margin = new Thickness(Position.X - Radius, Position.Y - Radius, 0, 0);
         }
+
+        public double Speed { get; set; }
+        
+        public bool Hitted { get; set; }
+        
+        public Point Position { get; set; }
+        
+        public String ColorString { get; set; }
+        
+        public int Radius { get; set; }
+        
+        public double XChange { get; set; }
+        
+        public double YChange { get; set; }
+        
+        public bool IsEnemy { get; set; }
     }
 }

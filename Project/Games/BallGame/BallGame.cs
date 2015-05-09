@@ -1,4 +1,6 @@
-﻿using Project.Controllers;
+﻿// Complete BallGame made by: Joren Martens and Joris Meylaers
+
+using Project.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +63,7 @@ namespace Project.Games.BallGame
         {
             SpawnBalls();
             gameFrameTimer.Start();
+            timeLeftTimer.Start();
         }
 
         public void StopGame(string message, string title)
@@ -279,9 +282,9 @@ namespace Project.Games.BallGame
 
                     if (points < 200)
                     {
-                        if (points > 10)
+                        if (points > 20)
                         {
-                            UpdateSpeed(points / 10);
+                            UpdateSpeed(points / 10.0);
                         }
                         if (points == 50)
                         {

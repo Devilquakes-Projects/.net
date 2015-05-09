@@ -24,12 +24,10 @@ namespace Project.Views
     /// </summary>
     public partial class GlobalHighscores : Window
     {
-        private string userHighscore;
         private IList list;
         private List<string> data;
         private string selectedGame;
         private List<string[]> fullDB;
-        private string[,] all;
 
         public GlobalHighscores()
         {
@@ -68,23 +66,7 @@ namespace Project.Views
 
         private void showButton_Click(object sender, RoutedEventArgs e)
         {
-            /*all = new string[fullDB.Count, 2];
-            try
-            {
-                for (int i = 0; i < fullDB.Count; i++)
-                {
-                    string[] row = fullDB[i];
-                    string username = DB.FindFirst(ProjectConfig.UserFile, "id", row[1])[3];
-                    userHighscore = row[0];
-                    all[i, 0] = username;
-                    all[i, 1] = userHighscore;
-                }
-            }
-            catch (NoRecordFoundException)
-            {
-                MessageBox.Show("Unable to download highscores");
-            }*/
-
+            // Added by: Joren Martens
             int userID;
             List<int> allUsers = new List<int>();
             bool addUser = true;
@@ -108,6 +90,7 @@ namespace Project.Views
 
             int highscore;
             int score;
+            string username;
 
             for (int i = 0; i < allUsers.Count; i++)
             {
@@ -121,7 +104,8 @@ namespace Project.Views
                     }
                 }
 
-                list.Add(allUsers[i] + "\t-\t" + highscore);
+                username = DB.FindFirst(ProjectConfig.UserFile, "id", Convert.ToString(allUsers[i]))[2];
+                list.Add(username + "\t-\t" + highscore);
             }
         }
 

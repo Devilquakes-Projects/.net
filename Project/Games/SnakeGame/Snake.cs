@@ -36,7 +36,7 @@ namespace Project.Games.SnakeGame
         private List<SnakePart> snake;
         private int direction; // Down = 0, Left = 1, Right = 2, Up = 3
         private bool eaten = true;
-        double difficulty = 1;
+        private double difficulty = 1;
 
         /// <summary>
         /// Constructor of the Snake class
@@ -72,7 +72,7 @@ namespace Project.Games.SnakeGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void timeTimer_Tick(object sender, EventArgs e)
+        private void timeTimer_Tick(object sender, EventArgs e)
         {
             timeLeft--;
             Console.WriteLine(timeLeft);
@@ -103,7 +103,7 @@ namespace Project.Games.SnakeGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void snakeTimer_Tick(object sender, EventArgs e)
+        private void snakeTimer_Tick(object sender, EventArgs e)
         {
             UpdateSnake();
             hit();
@@ -114,7 +114,7 @@ namespace Project.Games.SnakeGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void moveTimer_Tick(object sender, EventArgs e)
+        private void moveTimer_Tick(object sender, EventArgs e)
         {
             if (Input.KeyPressed(Key.Right) && direction != 1)
             {
@@ -250,7 +250,7 @@ namespace Project.Games.SnakeGame
         /// <summary>
         /// check if snake hits something
         /// </summary>
-        public void hit()
+        private void hit()
         {
             // check hitting borders
             if (snake[0].X < 0 || snake[0].Y < 0
@@ -287,7 +287,7 @@ namespace Project.Games.SnakeGame
         /// <summary>
         /// increases level, points and adds a snakePart
         /// </summary>
-        public void Eat()
+        private void Eat()
         {
             eaten = true;
             points++;

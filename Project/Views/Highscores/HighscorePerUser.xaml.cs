@@ -1,5 +1,4 @@
-﻿// Joris Meylaers
-// Date 08/05/2015
+﻿// Author: Joris Meylaers
 using Project.Controllers;
 using Project.Exceptions;
 using System;

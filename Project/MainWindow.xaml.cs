@@ -1,4 +1,6 @@
-﻿using Project.Views;
+﻿// Author: Joris Meylaers
+
+using Project.Views;
 using Project.Controllers;
 using System;
 using System.Collections.Generic;

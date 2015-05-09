@@ -1,5 +1,4 @@
 ﻿// Auther: Joris Meylaers
-// Date: 
 
 using Project.Controllers;
 using Project.Exceptions;

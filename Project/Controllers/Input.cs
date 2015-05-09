@@ -1,6 +1,5 @@
 ﻿// Author: Joris Meylaers
 // Date: 14/04/2015
-// Time: 14:21
 
 using System;
 using System.Collections;

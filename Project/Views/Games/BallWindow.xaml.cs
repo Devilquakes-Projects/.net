@@ -1,4 +1,5 @@
-﻿using Project.Games.BallGame;
+﻿// Complete BallGame made by: Joren Martens and Joris Meylaers
+using Project.Games.BallGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;

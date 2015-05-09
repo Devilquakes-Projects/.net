@@ -1,5 +1,5 @@
 ﻿// Author: Joris Meylaers
-// Date: 28/04/2015
+
 using Project.Controllers;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,6 @@ namespace Project.Views
     /// </summary>
     public partial class ChangeWindow : Window
     {
-
         private string course;
         private int id;
 
@@ -134,15 +133,16 @@ namespace Project.Views
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
+            // Added by: Joren Martens
             switch (course)
             {
-                case "Geography":
+                case "Aardrijkskunde":
                     DB.HideRecord(ProjectConfig.QuestionsFileGeo, id);
                     break;
-                case "Language":
+                case "Nederlands":
                     DB.HideRecord(ProjectConfig.QuestionsFileLang, id);
                     break;
-                case "Math":
+                case "Wiskunde":
                     DB.HideRecord(ProjectConfig.QuestionsFileMath, id);
                     break;
             }

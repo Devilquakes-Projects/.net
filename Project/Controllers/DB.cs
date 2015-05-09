@@ -240,13 +240,14 @@ namespace Project.Controllers
             inputStream = File.OpenText(file);
             string[] foundRecord = new string[FileStructureLength(dbName)];
             List<string[]> foundRecords = new List<string[]>();
+            string visible = (onlyVisible) ? "true" : "false";
 
             string line = inputStream.ReadLine();
             line = inputStream.ReadLine();
             while (line != null)
             {
                 foundRecord = line.Split(separator);
-                if (foundRecord[1].Equals(Convert.ToString(onlyVisible)))
+                if (foundRecord[1].Equals(visible))
                 {
                     foundRecords.Add(foundRecord);
                 }

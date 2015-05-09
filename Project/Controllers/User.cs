@@ -12,14 +12,6 @@ namespace Project.Controllers
 {
     public static class User
     {
-        public static bool LoggedIn { get; private set; }
-        public static int Id { get; private set; }
-        public static string Username { get; private set; }
-        public static string Name { get; private set; }
-        public static string LastName { get; private set; }
-        public static string Class { get; private set; }
-        public static int Permission { get; private set; }
-
         private static string userDB = ProjectConfig.UserFile;
 
         public static void Logout()
@@ -204,5 +196,18 @@ namespace Project.Controllers
                 throw new UserNotFoundException();
             }
         }
+        public static bool LoggedIn { get; private set; }
+
+        public static int Id { get; private set; }
+        
+        public static string Username { get; private set; }
+        
+        public static string Name { get; private set; }
+        
+        public static string LastName { get; private set; }
+        
+        public static string Class { get; private set; }
+        
+        public static int Permission { get; private set; }
     }
 }
