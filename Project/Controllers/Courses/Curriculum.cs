@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 
 // Auther: Gregory Malomgré
-// Date: 04/04/2015 10:00   --> NOTE: deze vernieuwde versie: Date: 08-04-15 tot 11-04-15
+// Date: 04/04/2015 10:00
 namespace Project.Controllers.Courses
 {
     public abstract class Curriculum
@@ -49,7 +49,7 @@ namespace Project.Controllers.Courses
             return timer <= 0;
         }
 
-        protected void InitializeArray(int maxAmountOfAnswersPerQuestion)
+        protected void SetAmountOfAnswersPerQuestion(int maxAmountOfAnswersPerQuestion)
         {
             answers = new string[amountOfQuestionsNeeded, maxAmountOfAnswersPerQuestion];
         }
@@ -61,7 +61,7 @@ namespace Project.Controllers.Courses
             return timer;
         }
 
-        protected void IsTestGraded(int index)//also tests if course has been completed!
+        protected void IsTestGraded(int index)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue) //author: Greg, Date: 04/04/15 10:00 - 11:00 | make array with amount of variables and return it
+        private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue)
         {
             string[] test;
             Random r1 = new Random();
@@ -86,7 +86,7 @@ namespace Project.Controllers.Courses
 
             maxValue++;
 
-            if (amountOfNumbers <= maxValue - minValue) //check if there are enough unique numbers to choose from otherwise msgbox-popup
+            if (amountOfNumbers <= maxValue - minValue) //check if there are enough unique numbers to choose from otherwise Console.Writeline for programmers info.
             {
                 for (int i = 0; i < amountOfNumbers; i++)
                 {
@@ -112,33 +112,33 @@ namespace Project.Controllers.Courses
             }
             else
             {
-                string errorMsg = String.Format("You requested {0} numbers, there are only {1} numbers available!", amountOfNumbers, maxValue - minValue);//info for the programmer, the user won't notice this!
+                string errorMsg = String.Format("You requested {0} numbers, there are only {1} numbers available! (in SelectRandomQuestions method of Curriculum.cs class)", amountOfNumbers, maxValue - minValue);//info for the programmer, the user won't notice this!
                 Console.WriteLine(errorMsg);
             }
 
             return array;
         }
 
-        protected void StartGradeValues(out string correctAnswer, out string wrongAnswer)
+        protected void StartGradeValues(out string correctAnswer, out string wrongAnswer)//Author: Greg, Date: 07-04-15
         {
             correctAnswer = " = Correct answer!";
             wrongAnswer = " = Wrong, answer should be: ";
-        }//Author: Greg, Date: 07-04-15 11:30-14:30
+        }
 
-        public abstract void Grade();//Author: Greg, Date: 05-04-15 13:45 - 14:50 (van return int naar void: Date: 14-04-15 18:30-18:40)
+        public abstract void Grade();//Author: Greg, Date: 05-04-15
 
-        protected void ShowResults(int pts)
+        protected void ShowResults(int pts)//Author: Greg, Date: 05-04-15 14:50 - 15:20
         {
-            string result = String.Format("You earned {0}/{1} points.", pts, 10);//int 10 mag ook string "10" zijn
+            string result = String.Format("You earned {0}/{1} points.", pts, 10);//show result in msgbox
             MessageBox.Show(result);
-        }//Author: Greg, Date: 05-04-15 14:50 - 15:20
-        
-        protected void WriteRecords(int index, int points)
+        }
+
+        protected void WriteRecords(int index, int points)//Author: Greg, Date: 05-04-15
         {
             string[] records = DB.FindFirst(studentsFile, "userID", Convert.ToString(studentId));
             records[index] = Convert.ToString(points);
             DB.ChangeFromRead(studentsFile, Convert.ToInt32(records[0]), records);
-        }//Author: Greg, Date: 05-04-15 13:00 - 13:45
+        }
 
         protected string[] LoadQuestions()//Author: Greg, Date: 05-04-15 13:45 - 14:15
         {
@@ -167,7 +167,6 @@ namespace Project.Controllers.Courses
             else
             {
                 string s = String.Format("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this" + Environment.NewLine + "Application will now close", "Error: Not enough Questions.");
-                //Environment.Exit(0);//Author: Greg, Date: 06-05-15 22:25 - 22:30
                 throw new NotEnoughQuestionsException();
             }
 

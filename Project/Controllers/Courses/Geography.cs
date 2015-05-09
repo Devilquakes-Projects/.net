@@ -32,7 +32,7 @@ namespace Project.Controllers.Courses
             base.QuestionsFile = ProjectConfig.QuestionsFileGeo;
 
             base.SetAmountOfQuestions = 2;  //2 questions
-            base.InitializeArray(2);        //2 answers per question
+            base.SetAmountOfAnswersPerQuestion(2);        //2 answers per question
             base.IsTestGraded(5);           //5 is index of file Courses (pts for geography are in this index)
 
             this.gradeButton = gradeButton;

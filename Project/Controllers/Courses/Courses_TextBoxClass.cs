@@ -28,7 +28,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        protected void LockTextBlock(TextBox tb, bool isCorrect)
+        protected void LockTextBoxAndIsAnswerCorrect(TextBox tb, bool isCorrect)
         {
             tb.IsReadOnly = true;
 

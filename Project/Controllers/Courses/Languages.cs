@@ -35,9 +35,9 @@ namespace Project.Controllers.Courses
             base.QuestionsFile = ProjectConfig.QuestionsFileLang;
 
             base.SetAmountOfQuestions = 2;
-            base.InitializeArray(3);
+            base.SetAmountOfAnswersPerQuestion(3);
 
-            base.IsTestGraded(4);//4: index of Languages
+            base.IsTestGraded(4);   //4: index of Languages
 
             this.gradeButton = gradeButton;
             gradeButton.Content = "Grade";
@@ -89,11 +89,11 @@ namespace Project.Controllers.Courses
             }
         }
 
-        public override void Grade()//makes sure that answers are stored in uppercase, is this necessary!?
+        public override void Grade()
         {
             dpTimer.Stop();
 
-            ConvertInputToCapitals();
+            //ConvertInputToCapitals();//makes sure that answers are stored in uppercase.
 
             int points = 0;
             string[,] answers = base.Answers;
@@ -109,18 +109,18 @@ namespace Project.Controllers.Courses
                 if (x >= 3)
                 {
                     x = 0;
-                    y = 1;
+                    y++;
                 }
-                if (tb[i].Text.Equals(Answers[y, x]))
+                if (tb[i].Text.ToUpper().Equals(Answers[y, x]))
                 {
                     points++;
                     tb[i].Text += correctAnswer;
-                    LockTextBlock(tb[i], true);//color + lock textbox
+                    LockTextBoxAndIsAnswerCorrect(tb[i], true);//color + lock textbox
                 }
                 else
                 {
                     tb[i].Text += wrongAnswer + Answers[y, x];
-                    LockTextBlock(tb[i], false);
+                    LockTextBoxAndIsAnswerCorrect(tb[i], false);
                 }
                 x++;
             }
@@ -128,7 +128,7 @@ namespace Project.Controllers.Courses
             //pts forumule Languages:
             if (Timer > 0 && points > 0)//bonus points if test complete before end of time!
             {
-                    points = (int)(Math.Round((points * 1.25 + GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
+                points = (int)(Math.Round((points * 1.25 + GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
             }
             else
             {
@@ -141,13 +141,13 @@ namespace Project.Controllers.Courses
             base.ShowResults(points);
         }
 
-        private void ConvertInputToCapitals()//Author: Greg, Date:14-04-15 14:00 - 15:00
-        {
-            //ingave op hoofdletters zetten:
-            for (int i = 0; i < tb.Length; i++)
-            {
-                tb[i].Text = tb[i].Text.ToUpper();
-            }
-        }
+        //private void ConvertInputToCapitals()//Author: Greg, Date:14-04-15
+        //{
+        //    //ingave op hoofdletters zetten:
+        //    for (int i = 0; i < tb.Length; i++)
+        //    {
+        //        tb[i].Text = tb[i].Text.ToUpper();
+        //    }
+        //}
     }
 }

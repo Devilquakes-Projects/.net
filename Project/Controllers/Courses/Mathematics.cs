@@ -11,7 +11,7 @@ using Project.Controllers;
 using System.Globalization;
 
 // Auther: Gregory Malomgré
-// Date: 07/04/2015 16:00 (note: de vernieuwde versie, de oude versie schreef ik op 05/04)
+// Date: 07/04/2015 (note: de vernieuwde versie, de oude versie schreef ik op 05/04)
 namespace Project.Controllers.Courses
 {
     class Mathematics : Courses_TextBoxClass //onderliggend van abstracte klasse Curriculum
@@ -35,7 +35,7 @@ namespace Project.Controllers.Courses
         {
             base.QuestionsFile = ProjectConfig.QuestionsFileMath;
             base.SetAmountOfQuestions = 5;
-            base.InitializeArray(1);//1 answer per question
+            base.SetAmountOfAnswersPerQuestion(1);//1 answer per question
             base.IsTestGraded(3);//3: index of Mathematics
 
             this.timeLabel = timeLabel;
@@ -49,7 +49,7 @@ namespace Project.Controllers.Courses
             this.tb[3] = tb4;
             this.tb[4] = tb5;
 
-            string[] questions = base.LoadQuestions();//Author: Greg, Date: 14:30-14:32
+            string[] questions = base.LoadQuestions();
 
             l1.Content = questions[0];
             l2.Content = questions[1];
@@ -70,7 +70,7 @@ namespace Project.Controllers.Courses
             }
         }
 
-        public override void Grade()//Author: Greg, Date: 06-04-15 16:00 - 17:00  //accepts decimal numbers, note: stored with a '.' NOTATION)
+        public override void Grade()//Author: Greg, Date: 06-04-15 //accepts decimal numbers, note: stored with a '.' NOTATION)
         {
             timer.Stop();
             ConvertToDecimal();
@@ -83,18 +83,18 @@ namespace Project.Controllers.Courses
 
             base.StartGradeValues(out correctAnswer, out wrongAnswer);//Author: Greg, Date: 07-04-15 11:30-14:30
 
-            for (int i = 0; i < tb.Length; i++)//Author: Joren Martens, Date: ???
+            for (int i = 0; i < tb.Length; i++)
             {
-                if (tb[i].Text.Equals(answers[i, 0]))
-                {//Author: Greg, Date 06-04-15 17:00 - 18:00
+                if (tb[i].Text.Equals(answers[i, 0]))//Author: Greg, Date 06-04-15
+                {
                     points++;
                     tb[i].Text += correctAnswer;
-                    base.LockTextBlock(tb[i], true);
+                    base.LockTextBoxAndIsAnswerCorrect(tb[i], true);
                 }
                 else
                 {
                     tb[i].Text += wrongAnswer + answers[i, 0];
-                    base.LockTextBlock(tb[i], false);
+                    base.LockTextBoxAndIsAnswerCorrect(tb[i], false);
                 }
             }
 
@@ -119,9 +119,9 @@ namespace Project.Controllers.Courses
             MessageBox.Show(String.Format("Invalid input in box {0}, you receive 0 points for this question!", questionNumber));
         }
 
-        private void ConvertToDecimal()//Author: Greg, Date: 05/04/15 10:30 - 12:00
+        private void ConvertToDecimal()//Author: Greg, Date: 05/04/15
         {
-            try//Author: Greg, Date: 12-04-15 13:30 - 13:40
+            try//Author: Greg, Date: 12-04-15
             {
                 double result;
                 NumberStyles style = NumberStyles.AllowDecimalPoint;
@@ -131,7 +131,7 @@ namespace Project.Controllers.Courses
                 {
                     if (Double.TryParse(tb[i].Text.Replace('.', ','), style, culture, out result))
                     {
-                        tb[i].Text = Convert.ToString(result);//25.0 word 25!
+                        tb[i].Text = Convert.ToString(result);//25.0 becomes 25!
                     }
                     else
                     {
