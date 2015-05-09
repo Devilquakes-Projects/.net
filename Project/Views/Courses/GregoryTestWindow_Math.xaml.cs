@@ -40,12 +40,12 @@ namespace Project
             }
             catch (CourseAlreadyCompletedException exeptionObject)
             {
-                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will stay at the main screen", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
                 ThrowWindowClosedException();
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
-                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will stay at to the main screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 ThrowWindowClosedException();
             }
         }
@@ -67,7 +67,7 @@ namespace Project
         private void ThrowWindowClosedException()
         {
             this.Close();
-            throw new WindowClosedInSubclassException();
+            throw new NoWindowEnabledException();
         }
     }
 }

@@ -86,7 +86,7 @@ namespace Project
                 GregoryTestWindow newView = new GregoryTestWindow();
                 newView.Show();
             }
-            catch (WindowClosedInSubclassException exceptionObject)
+            catch (NoWindowEnabledException exceptionObject)
             {
                 //Console.WriteLine("you threw an exception in the class Curriculum in the IsTestGraded() Method" + Environment.NewLine + "exception details: " + Environment.NewLine + exceptionObject.ToString());
                 MainWindow newView = new MainWindow();
@@ -103,7 +103,7 @@ namespace Project
                 GregoryTestWindow_Language newView = new GregoryTestWindow_Language();
                 newView.Show();
             }
-            catch (WindowClosedInSubclassException exceptionObject)
+            catch (NoWindowEnabledException exceptionObject)
             {
                 //Console.WriteLine("you threw an exception in the class Curriculum in the IsTestGraded() Method" + Environment.NewLine + "exception details: " + Environment.NewLine + exceptionObject.ToString());
                 MainWindow newView = new MainWindow();
@@ -120,7 +120,7 @@ namespace Project
                 GregoryTestWindow_Geography newView = new GregoryTestWindow_Geography();
                 newView.Show();
             }
-            catch (WindowClosedInSubclassException exceptionObject)
+            catch (NoWindowEnabledException exceptionObject)
             {
                 //Console.WriteLine("you threw an exception in the class Curriculum in the IsTestGraded() Method" + Environment.NewLine + "exception details: " + Environment.NewLine + exceptionObject.ToString());
                 MainWindow newView = new MainWindow();

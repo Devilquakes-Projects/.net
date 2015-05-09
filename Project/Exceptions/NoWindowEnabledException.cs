@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Project.Exceptions
 {
-    class WindowClosedInSubclassException : ApplicationException
+    class NoWindowEnabledException : ApplicationException
     {
-        public WindowClosedInSubclassException() : base("Window was: Closed in subclass") { }
+        public NoWindowEnabledException() : base("Window was: Closed in subclass") { }
     }
 }
