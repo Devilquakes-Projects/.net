@@ -23,7 +23,7 @@ namespace Project.Views
         private int amountBalls = 15;
         private int radius = 15;
         private Point mousePoint;
-        private int time = 3000;
+        private int time = ProjectConfig.PlayTime;
         private List<Ball> ballList = new List<Ball>();
         private BallGame game;
         private Random randomNumber = new Random();

@@ -23,6 +23,7 @@ namespace Project.Views
 
         private string course;
         private int id;
+
         public ChangeWindow(string content, string subject)
         {
             InitializeComponent();
@@ -127,6 +128,22 @@ namespace Project.Views
             EditQuestionWindow questionWindow = new EditQuestionWindow();
             questionWindow.Show();
             this.Close();
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (course)
+            {
+                case "Geography":
+                    DB.HideRecord(ProjectConfig.QuestionsFileGeo, id);
+                    break;
+                case "Language":
+                    DB.HideRecord(ProjectConfig.QuestionsFileLang, id);
+                    break;
+                case "Math":
+                    DB.HideRecord(ProjectConfig.QuestionsFileMath, id);
+                    break;
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Project
         public static string DBDestinationPath { get; private set; }
         public static char DBSeparator { get; private set; }
         public static string TeacherCode { get; private set; }
+        public static int QuestionDifficulty { get; private set; }
         public static int PlayTime { get; set; }
         public static string UserFile { get; private set; }
         public static string StudentsFile { get; private set; }
@@ -54,6 +55,9 @@ namespace Project
 
             // Teacher code
             TeacherCode = "123";
+
+            // Question Difficulty
+            QuestionDifficulty = 3;
 
             // dbName + fields
             string[] userDB = { "users", "username", "password", "name", "lastname", "class", "permissions" };

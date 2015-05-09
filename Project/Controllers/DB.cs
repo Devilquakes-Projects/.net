@@ -227,7 +227,7 @@ namespace Project.Controllers
         /// </summary>
         /// <param name="dbName">Name of the database.</param>
         /// <returns>List of all record.</returns>
-        public static List<string[]> GetDB(string dbName)
+        public static List<string[]> GetDB(string dbName, bool onlyVisible = true)
         {
             if (dbName == null)
             {
@@ -246,7 +246,10 @@ namespace Project.Controllers
             while (line != null)
             {
                 foundRecord = line.Split(separator);
-                foundRecords.Add(foundRecord);
+                if (foundRecord[1].Equals(Convert.ToString(onlyVisible)))
+                {
+                    foundRecords.Add(foundRecord);
+                }
                 line = inputStream.ReadLine();
             }
             inputStream.Close();
@@ -295,7 +298,7 @@ namespace Project.Controllers
             {
                 // get line and change visibility
                 records = FindFirst(dbName, "id", Convert.ToString(id));
-                records[1] = (recordsAll[1].Equals("true")) ? "false" : "true";
+                records[1] = (recordsAll[0].Equals("true")) ? "true" : "false";
             }
             else
             {
