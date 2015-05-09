@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Project.Exceptions;
 
 namespace Project
 {
@@ -80,23 +81,53 @@ namespace Project
 
         private void gregoryButton_Click_Math(object sender, RoutedEventArgs e)
         {
-            GregoryTestWindow newView = new GregoryTestWindow();
-            newView.Show();
-            this.Close();
+            try
+            {
+                GregoryTestWindow newView = new GregoryTestWindow();
+                newView.Show();
+            }
+            catch (WindowClosedInSubclassException exceptionObject)
+            {
+                //Console.WriteLine("you threw an exception in the class Curriculum in the IsTestGraded() Method" + Environment.NewLine + "exception details: " + Environment.NewLine + exceptionObject.ToString());
+                MainWindow newView = new MainWindow();
+                newView.Show();
+            }
+
+                this.Close();
         }
 
         private void gregoryButton_Click_Language(object sender, RoutedEventArgs e)
         {
-            GregoryTestWindow_Language newView = new GregoryTestWindow_Language();
-            newView.Show();
-            this.Close();
+            try
+            {
+                GregoryTestWindow_Language newView = new GregoryTestWindow_Language();
+                newView.Show();
+            }
+            catch (WindowClosedInSubclassException exceptionObject)
+            {
+                //Console.WriteLine("you threw an exception in the class Curriculum in the IsTestGraded() Method" + Environment.NewLine + "exception details: " + Environment.NewLine + exceptionObject.ToString());
+                MainWindow newView = new MainWindow();
+                newView.Show();
+            }
+
+                this.Close();
         }
 
         private void gregoryButton_Click_Geography(object sender, RoutedEventArgs e)
         {
-            GregoryTestWindow_Geography newView = new GregoryTestWindow_Geography();
-            newView.Show();
-            this.Close();
+            try
+            {
+                GregoryTestWindow_Geography newView = new GregoryTestWindow_Geography();
+                newView.Show();
+            }
+            catch (WindowClosedInSubclassException exceptionObject)
+            {
+                //Console.WriteLine("you threw an exception in the class Curriculum in the IsTestGraded() Method" + Environment.NewLine + "exception details: " + Environment.NewLine + exceptionObject.ToString());
+                MainWindow newView = new MainWindow();
+                newView.Show();
+            }
+
+                this.Close();
         }
 
         private void SnakeButtonButton_Click(object sender, RoutedEventArgs e)
@@ -158,7 +189,5 @@ namespace Project
             newView.Show();
             this.Close();
         }
-
-       
     }
 }

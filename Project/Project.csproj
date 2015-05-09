@@ -60,6 +60,7 @@
     <Compile Include="Exceptions\CourseAlreadyCompletedException.cs" />
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
     <Compile Include="Exceptions\InvalidTeacherCodeException.cs" />
+    <Compile Include="Exceptions\WindowClosedInSubclassException.cs" />
     <Compile Include="Exceptions\NoRecordFoundException.cs" />
     <Compile Include="Exceptions\NotEnoughQuestionsException.cs" />
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />

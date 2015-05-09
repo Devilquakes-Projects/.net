@@ -37,13 +37,15 @@ namespace Project.Views
             }
             catch (CourseAlreadyCompletedException exeptionObject)
             {
-                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now close", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
-                Environment.Exit(1);
+                MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
+                ThrowWindowClosedException();
+                //Environment.Exit(1);
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
-                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now close", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
-                Environment.Exit(1);
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
+                ThrowWindowClosedException();
+                //Environment.Exit(1);
             }
         }
 
@@ -59,6 +61,12 @@ namespace Project.Views
                 newView.Show();
                 this.Close();
             }
+        }
+
+        private void ThrowWindowClosedException()
+        {
+            this.Close();
+            throw new WindowClosedInSubclassException();
         }
     }
 }
