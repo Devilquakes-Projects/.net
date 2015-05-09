@@ -90,5 +90,11 @@ namespace Project.Views
                 MessageBox.Show("Unable to download highscores");
             }
         }
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow newView = new MainWindow();
+            newView.Show();
+            this.Close();
+        }
     }
 }
