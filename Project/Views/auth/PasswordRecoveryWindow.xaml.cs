@@ -43,15 +43,18 @@ namespace Project.Views
             }
             catch (ArgumentNullException)
             {
-                
+                errorLabel.Content = "Gelieve alle velden in te vullen";
+                errorLabel.Visibility = Visibility.Visible;
             }
             catch (InvalidTeacherCodeException)
             {
-                
+                errorLabel.Content = "foutieve leerkrachtcode";
+                errorLabel.Visibility = Visibility.Visible;
             }
             catch (UserNotFoundException)
             {
-                
+                errorLabel.Content = "Gebruiker niet gevonden";
+                errorLabel.Visibility = Visibility.Visible;
             }
         }
     }

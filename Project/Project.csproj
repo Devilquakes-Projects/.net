@@ -82,13 +82,13 @@
     <Compile Include="Views\Games\SnakeWindow.xaml.cs">
       <DependentUpon>SnakeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Cources\GregoryTestWindow_Geography.xaml.cs">
+    <Compile Include="Views\Courses\GregoryTestWindow_Geography.xaml.cs">
       <DependentUpon>GregoryTestWindow_Geography.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Cources\GregoryTestWindow_Language.xaml.cs">
+    <Compile Include="Views\Courses\GregoryTestWindow_Language.xaml.cs">
       <DependentUpon>GregoryTestWindow_Language.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Cources\GregoryTestWindow_Math.xaml.cs">
+    <Compile Include="Views\Courses\GregoryTestWindow_Math.xaml.cs">
       <DependentUpon>GregoryTestWindow_Math.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Auth\LoginWindow.xaml.cs">
@@ -99,6 +99,12 @@
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\User.cs" />
+    <Compile Include="Views\Highscores\GlobalHighscores.xaml.cs">
+      <DependentUpon>GlobalHighscores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Highscores\HighscorePerUser.xaml.cs">
+      <DependentUpon>HighscorePerUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Teacher\AddQuestionWindow.xaml.cs">
       <DependentUpon>AddQuestionWindow.xaml</DependentUpon>
     </Compile>
@@ -120,15 +126,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Cources\GregoryTestWindow_Geography.xaml">
+    <Page Include="Views\Courses\GregoryTestWindow_Geography.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Cources\GregoryTestWindow_Language.xaml">
+    <Page Include="Views\Courses\GregoryTestWindow_Language.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Cources\GregoryTestWindow_Math.xaml">
+    <Page Include="Views\Courses\GregoryTestWindow_Math.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,6 +156,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Auth\RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Highscores\GlobalHighscores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Highscores\HighscorePerUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

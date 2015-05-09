@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+// Bij Views-Teacher: Wat is die ChangeWindow.xaml???
+
 namespace Project
 {
     /// <summary>
@@ -36,6 +38,9 @@ namespace Project
             else
             {
                 loginButton.Visibility = Visibility.Visible;
+                vakkenMenu.Visibility = Visibility.Collapsed;
+                gameMenu.Visibility = Visibility.Collapsed;
+                highscoresMenu.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -49,9 +54,27 @@ namespace Project
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
             User.Logout();
-
             MainWindow newView = new MainWindow();
             newView.Show();
+            this.Close();
+        }
+
+        private void registreerButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow regWindow = new RegisterWindow();
+            regWindow.Show();
+            this.Close();
+        }
+
+        private void passwordrecoveryButton_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordRecoveryWindow pasWindow = new PasswordRecoveryWindow();
+            pasWindow.Show();
+            this.Close();
+        }
+
+        private void exitButton_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
 
@@ -61,50 +84,29 @@ namespace Project
             newView.Show();
             this.Close();
         }
-        private void gregoryButton_Click_Language(object sender, RoutedEventArgs e)//added by greg on 10/04
+
+        private void gregoryButton_Click_Language(object sender, RoutedEventArgs e)
         {
             GregoryTestWindow_Language newView = new GregoryTestWindow_Language();
             newView.Show();
             this.Close();
         }
 
-        private void gregoryButton_Click_Geography(object sender, RoutedEventArgs e)//added by greg on 10/04
+        private void gregoryButton_Click_Geography(object sender, RoutedEventArgs e)
         {
             GregoryTestWindow_Geography newView = new GregoryTestWindow_Geography();
             newView.Show();
             this.Close();
         }
 
-        private void addQuestionButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void editQuestionButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MathematicsButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("test");
-        }
-
-        private void testButton_Click(object sender, RoutedEventArgs e)
-        {
-            EditQuestionWindow newView = new EditQuestionWindow();
-            newView.Show();
-            this.Close();
-        }
-
-        private void snakeButton_Click(object sender, RoutedEventArgs e)
+        private void SnakeButtonButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectConfig.CheckPlayTime();
 
             if (ProjectConfig.PlayTime != 0)
             {
-                SnakeWindow newView = new SnakeWindow();
-                newView.Show();
+                SnakeWindow snakeView = new SnakeWindow();
+                snakeView.Show();
                 this.Close();
             }
             else
@@ -112,5 +114,51 @@ namespace Project
                 MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
             }
         }
+
+        private void BallGameButtonButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectConfig.CheckPlayTime();
+
+            if (ProjectConfig.PlayTime != 0)
+            {
+                BallWindow ballView = new BallWindow();
+                ballView.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Voor te spelen moet je eerst alle oefeningen maken.");
+            }
+        }
+
+        private void GlobalHighscoresButton_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalHighscores newView = new GlobalHighscores();
+            newView.Show();
+            this.Close();
+        }
+
+        private void highscorePerUserButtonButton_Click(object sender, RoutedEventArgs e)
+        {
+            HighscorePerUser newView = new HighscorePerUser();
+            newView.Show();
+            this.Close();
+        }
+
+        private void addQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddQuestionWindow newView = new AddQuestionWindow();
+            newView.Show();
+            this.Close();
+        }
+
+        private void editQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditQuestionWindow newView = new EditQuestionWindow();
+            newView.Show();
+            this.Close();
+        }
+
+       
     }
 }

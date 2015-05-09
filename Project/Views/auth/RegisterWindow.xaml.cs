@@ -49,17 +49,20 @@ namespace Project.Views
                 hoofdvenster.Show();
                 this.Close();
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
-                // Doe iets in gui als veld null is
+                errorLabel.Content = "Gelieve alle velden in te vullen";
+                errorLabel.Visibility = Visibility.Visible;
             }
             catch (InvalidTeacherCodeException)
             {
-                // Teacher Code is niet juist
+                errorLabel.Content = "Foutieve leerkrachtcode";
+                errorLabel.Visibility = Visibility.Visible;
             }
             catch (UserAlreadyExistsException)
             {
-                // doe iets in gui als user al bestaat
+                errorLabel.Content = "Gebruiker bestaat al";
+                errorLabel.Visibility = Visibility.Visible;
             }
             
         }

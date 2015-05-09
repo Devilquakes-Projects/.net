@@ -45,17 +45,20 @@ namespace Project.Views
                 mainwindow.Show();
                 this.Close();
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
-                // een veld = 0
+                errorLabel.Content = "Gelieve alle velden in te vullen";
+                errorLabel.Visibility = Visibility.Visible;
             }
             catch (UserNotFoundException)
             {
-                // user niet gevonden
+                errorLabel.Content = "Gebruiker en/of wachtwoord foutief";
+                errorLabel.Visibility = Visibility.Visible;
             }
             catch(InvalidPasswordException)
             {
-                // password klopt niet
+                errorLabel.Content = "Gebruiker en/of wachtwoord foutief";
+                errorLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -63,6 +66,13 @@ namespace Project.Views
         {
             RegisterWindow register = new RegisterWindow();
             register.Show();
+            this.Close();
+        }
+
+        private void vergetenButton_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordRecoveryWindow newView = new PasswordRecoveryWindow();
+            newView.Show();
             this.Close();
         }
     }

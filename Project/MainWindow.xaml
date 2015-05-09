@@ -1,36 +1,36 @@
 ﻿<Window x:Class="Project.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        WindowStartupLocation="CenterScreen"
+        Title="Welkom" Height="350" Width="550">
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Testing">
-                <MenuItem Header="_Joris">
-                    <MenuItem Header="_Snake" Click="snakeButton_Click"/>
-                </MenuItem>
-                <MenuItem Header="_Joren" />
-                <MenuItem Header="_Christiaan" />
-                <MenuItem Header="_Gregory">
-                    <MenuItem Header="Math" Click="gregoryButton_Click_Math"/>
-                    <MenuItem Header="Languages" Click="gregoryButton_Click_Language" />
-                    <MenuItem Header="Geography" Click="gregoryButton_Click_Geography" />
-                </MenuItem>
+            <MenuItem Header="Account">
+                <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
+                <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
+                <MenuItem Header="_Sluiten" x:Name="exitButton" Click="exitButton_Click" />
             </MenuItem>
-
-            <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
-            <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
-            <MenuItem Header="_Teacher" x:Name="teacherMenu" Visibility="Collapsed">
+            <MenuItem Header="Vakken" Name="vakkenMenu">
+                <MenuItem Header="_Wiskunde" x:Name="MathematicsButton" Click="gregoryButton_Click_Math"/>
+                <MenuItem Header="_Nederlands" x:Name="LanguageButton" Click="gregoryButton_Click_Language"/>
+                <MenuItem Header="_Aardrijkskunde" x:Name="GeographyButton" Click="gregoryButton_Click_Geography"/>
+            </MenuItem>
+            <MenuItem Header="Games" Name="gameMenu">
+                <MenuItem Header="_Snake" x:Name="SnakeButton" Click="SnakeButtonButton_Click"/>
+                <MenuItem Header="_Ballgame" x:Name="BallGameButton" Click="BallGameButtonButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="Highscores" Name="highscoresMenu">
+                <MenuItem Header="_GlobalHighscores" x:Name="GlobalHighscoresButton" Click="GlobalHighscoresButton_Click"/>
+                <MenuItem Header="_HighscorePerUser" x:Name="highscorePerUserButton" Click="highscorePerUserButtonButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Leerkracht" x:Name="teacherMenu" Visibility="Collapsed">
                 <MenuItem Header="_Add Question" x:Name="addQuestionButton" Click="addQuestionButton_Click"/>
                 <MenuItem Header="_Edit Question" x:Name="editQuestionButton" Click="editQuestionButton_Click"/>
             </MenuItem>
-            <MenuItem Header="_Cources" Visibility="Collapsed">
-                <MenuItem Header="_Mathematics" x:Name="MathematicsButton" Click="MathematicsButton_Click"/>
-            </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">
-            <Label Content="Testomgevingen vind u terug onder testing. log in via login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="testButton" Content="Test Button" HorizontalAlignment="Left" Margin="73,134,0,0" VerticalAlignment="Top" Width="75" Click="testButton_Click"/>
+            <Label Content="Welkom" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>            
         </Grid>
     </DockPanel>
 </Window>

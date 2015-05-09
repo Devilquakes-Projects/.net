@@ -1,4 +1,5 @@
 ﻿using Project.Controllers;
+using Project.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,8 +24,8 @@ namespace Project
             ProjectConfig.StartUp();
 
             // load window
-            MainWindow mainwindow = new MainWindow();
-            mainwindow.Show();
+            LoginWindow startWindow = new LoginWindow();
+            startWindow.Show();
         }
     }
 }
