@@ -1,9 +1,16 @@
 ﻿<Window x:Class="Project.Views.BallWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BallWindow" Height="600" Width="1200">
+        WindowStartupLocation="CenterScreen"
+        Title="BallGame" Height="600" Width="1200">
     <Grid Margin="0,0,0,0">
         <Canvas Name="canvas" Background="LightGray" HorizontalAlignment="Left" Height="500" Margin="53,32,0,0" VerticalAlignment="Top" Width="1000" MouseMove="canvas_MouseMove" MouseEnter="canvas_MouseEnter" MouseLeave="canvas_MouseLeave"/>
         <Button Name="startButton" Content="Start" HorizontalAlignment="Left" Height="38" Margin="1089,42,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.5,0.405" Click="startButton_Click"/>
+        <Label x:Name="timeLabel" Content="Resterende tijd:" HorizontalAlignment="Left" Height="32" Margin="1072,97,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="timeLeftLabel" Content="" HorizontalAlignment="Left" Height="43" Margin="1072,134,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="pointsLabel" Content="Punten:" HorizontalAlignment="Left" Height="32" Margin="1072,182,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="totalPointsLabel" Content="0" HorizontalAlignment="Left" Height="43" Margin="1072,219,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="liveLabel" Content="Levens:" HorizontalAlignment="Left" Height="32" Margin="1072,267,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="totalLivesLabel" Content="" HorizontalAlignment="Left" Height="43" Margin="1072,304,0,0" VerticalAlignment="Top" Width="95"/>
     </Grid>
 </Window>

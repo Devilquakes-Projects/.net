@@ -27,6 +27,7 @@ namespace Project.Views
         public LoginWindow()
         {
             InitializeComponent();
+            usernameTextBox.Focus();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

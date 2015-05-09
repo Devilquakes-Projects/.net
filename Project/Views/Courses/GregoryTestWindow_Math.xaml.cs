@@ -57,7 +57,9 @@ namespace Project
             }
             else
             {
-                Environment.Exit(0);
+                MainWindow newView = new MainWindow();
+                newView.Show();
+                this.Close();
             }
         }
     }

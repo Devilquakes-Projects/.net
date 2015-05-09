@@ -7,26 +7,26 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Account">
-                <MenuItem Header="_Login" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
-                <MenuItem Header="_Logout" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
-                <MenuItem Header="_Sluiten" x:Name="exitButton" Click="exitButton_Click" />
+                <MenuItem Header="_Inloggen" x:Name="loginButton" Click="loginButton_Click" Visibility="Collapsed"/>
+                <MenuItem Header="_Uitloggen" x:Name="logoutButton" Click="logoutButton_Click" Visibility="Collapsed"/>
+                <MenuItem Header="_Afsluiten" x:Name="exitButton" Click="exitButton_Click" />
             </MenuItem>
             <MenuItem Header="Vakken" Name="vakkenMenu">
                 <MenuItem Header="_Wiskunde" x:Name="MathematicsButton" Click="gregoryButton_Click_Math"/>
                 <MenuItem Header="_Nederlands" x:Name="LanguageButton" Click="gregoryButton_Click_Language"/>
                 <MenuItem Header="_Aardrijkskunde" x:Name="GeographyButton" Click="gregoryButton_Click_Geography"/>
             </MenuItem>
-            <MenuItem Header="Games" Name="gameMenu">
+            <MenuItem Header="Spelletjes" Name="gameMenu">
                 <MenuItem Header="_Snake" x:Name="SnakeButton" Click="SnakeButtonButton_Click"/>
                 <MenuItem Header="_Ballgame" x:Name="BallGameButton" Click="BallGameButtonButton_Click"/>
             </MenuItem>
             <MenuItem Header="Highscores" Name="highscoresMenu">
-                <MenuItem Header="_GlobalHighscores" x:Name="GlobalHighscoresButton" Click="GlobalHighscoresButton_Click"/>
-                <MenuItem Header="_HighscorePerUser" x:Name="highscorePerUserButton" Click="highscorePerUserButtonButton_Click"/>
+                <MenuItem Header="_Highscore algemeen" x:Name="GlobalHighscoresButton" Click="GlobalHighscoresButton_Click"/>
+                <MenuItem Header="_Highscore per gebruiker" x:Name="highscorePerUserButton" Click="highscorePerUserButtonButton_Click"/>
             </MenuItem>
             <MenuItem Header="_Leerkracht" x:Name="teacherMenu" Visibility="Collapsed">
-                <MenuItem Header="_Add Question" x:Name="addQuestionButton" Click="addQuestionButton_Click"/>
-                <MenuItem Header="_Edit Question" x:Name="editQuestionButton" Click="editQuestionButton_Click"/>
+                <MenuItem Header="_Vraag toevoegen" x:Name="addQuestionButton" Click="addQuestionButton_Click"/>
+                <MenuItem Header="_Vraag wijzigen" x:Name="editQuestionButton" Click="editQuestionButton_Click"/>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">

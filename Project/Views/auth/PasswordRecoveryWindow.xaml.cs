@@ -33,13 +33,16 @@ namespace Project.Views
         {
             string userName = usernameTextBox.Text;
             string pass = passwordTextBox.Password;
-            string teacherCode = teacherTextBox.Text;
+            string teacherCode = leerkrachtCodePasswordBox.Password;
 
             try
             {
                 User.Recover(userName, pass, teacherCode);
 
-                MessageBox.Show("Oke");
+                MessageBox.Show("Wachtwoord is gewijzigd");
+                MainWindow newView = new MainWindow();
+                newView.Show();
+                this.Close();
             }
             catch (ArgumentNullException)
             {

@@ -1,4 +1,6 @@
-﻿using Project.Controllers;
+﻿// Author: Joris Meylaers
+// Date: 28/04/2015
+using Project.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,103 +32,109 @@ namespace Project.Views
             course = subject;
             setLabels();
             id = Convert.ToInt32(content.Split(ProjectConfig.DBSeparator)[0]);
-
+            questionTextBox.Text = null;
+            solutionTextBox1.Text = null;
+            solutionTextBox2.Text = null;
+            solutionTextBox3.Text = null;
         }
 
         private void setLabels()
         {
-            if (String.IsNullOrEmpty(questionTextBox.Text))
+            switch (course)
             {
-                // is null
+                case "Aardrijkskunde":
+                    solutionLabel1.Content = "Correct solution:";
+                    solutionLabel2.Visibility = Visibility.Visible;
+                    solutionLabel2.Content = "Wrong solution:";
+                    solutionTextBox2.Visibility = Visibility.Visible;
+                    solutionLabel3.Visibility = Visibility.Hidden;
+                    solutionTextBox3.Visibility = Visibility.Hidden;
+                    break;
+                case "Nederlands":
+                    solutionLabel1.Content = "Solution TT:";
+                    solutionLabel2.Visibility = Visibility.Visible;
+                    solutionLabel2.Content = "Solution VT:";
+                    solutionTextBox2.Visibility = Visibility.Visible;
+                    solutionLabel3.Visibility = Visibility.Visible;
+                    solutionLabel3.Content = "Solution VD:";
+                    solutionTextBox3.Visibility = Visibility.Visible;
+                    break;
+                case "Wiskunde":
+                    solutionLabel1.Content = "Solution:";
+                    solutionLabel2.Visibility = Visibility.Hidden;
+                    solutionTextBox2.Visibility = Visibility.Hidden;
+                    solutionLabel3.Visibility = Visibility.Hidden;
+                    solutionTextBox3.Visibility = Visibility.Hidden;
+                    break;
+
             }
-            else
-                if (String.IsNullOrEmpty(solutionTextBox1.Text))
-                {
-                    // is null
-                }
-                else
-                {
-                    switch (course)
-                    {
-                        case "Geography":
-                            solutionLabel1.Content = "Correct solution:";
-                            solutionLabel2.Visibility = Visibility.Visible;
-                            solutionLabel2.Content = "Wrong solution:";
-                            solutionTextBox2.Visibility = Visibility.Visible;
-                            solutionLabel3.Visibility = Visibility.Hidden;
-                            solutionTextBox3.Visibility = Visibility.Hidden;
-                            break;
-                        case "Language":
-                            solutionLabel1.Content = "Solution TT:";
-                            solutionLabel2.Visibility = Visibility.Visible;
-                            solutionLabel2.Content = "Solution VT:";
-                            solutionTextBox2.Visibility = Visibility.Visible;
-                            solutionLabel3.Visibility = Visibility.Visible;
-                            solutionLabel3.Content = "Solution VD:";
-                            solutionTextBox3.Visibility = Visibility.Visible;
-                            break;
-                        case "Math":
-                            solutionLabel1.Content = "Solution:";
-                            solutionLabel2.Visibility = Visibility.Hidden;
-                            solutionTextBox2.Visibility = Visibility.Hidden;
-                            solutionLabel3.Visibility = Visibility.Hidden;
-                            solutionTextBox3.Visibility = Visibility.Hidden;
-                            break;
-                    }
-                }
         }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrEmpty(questionTextBox.Text))
             {
-                // is null
+                dataIncomplete();
             }
             else
                 if (String.IsNullOrEmpty(solutionTextBox1.Text))
                 {
-                    // is null
+                    dataIncomplete();
                 }
                 else
                 {
                     switch (course)
                     {
-                        case "Geography":
+                        case "Aardrijkskunde":
                             if (String.IsNullOrEmpty(solutionTextBox2.Text))
                             {
-                                // is null
+                                dataIncomplete();
                             }
                             else
                             {
                                 string[] recordsGeography = { questionTextBox.Text, solutionTextBox1.Text, solutionTextBox2.Text };
-                                DB.ChangeRecord(ProjectConfig.QuestionsFileGeo,id,recordsGeography);
+                                DB.ChangeRecord(ProjectConfig.QuestionsFileGeo, id, recordsGeography);
+                                dataSuccesfull();
                             }
                             break;
-                        case "Language":
+                        case "Nederlands":
                             if (String.IsNullOrEmpty(solutionTextBox2.Text))
                             {
-                                // is null
+                                dataIncomplete();
                             }
                             else
                                 if (String.IsNullOrEmpty(solutionTextBox3.Text))
                                 {
-                                    // is null
+                                    dataIncomplete();
                                 }
                                 else
                                 {
                                     string[] recordsLanguage = { questionTextBox.Text, solutionTextBox1.Text, solutionTextBox2.Text, solutionTextBox3.Text };
                                     DB.ChangeRecord(ProjectConfig.QuestionsFileLang, id, recordsLanguage);
+                                    dataSuccesfull();
                                 }
                             break;
-                        case "Math":
+                        case "Wiskunde":
                             string[] recordsMath = { questionTextBox.Text, solutionTextBox1.Text };
                             DB.ChangeRecord(ProjectConfig.QuestionsFileMath, id, recordsMath);
+                            dataSuccesfull();
                             break;
                     }
                 }
+
+        }
+        private void dataSuccesfull()
+        {
+            MessageBox.Show("Vraag succesvol gewijzigd");
             EditQuestionWindow questionWindow = new EditQuestionWindow();
             questionWindow.Show();
             this.Close();
+        }
+
+        private void dataIncomplete()
+        {
+            confirmLabel.Content = "Gelieve alle velden in te vullen";
+            confirmLabel.Visibility = Visibility.Visible;
         }
     }
 }

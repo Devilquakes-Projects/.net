@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace Project.Games.BallGame
 {
-    abstract class Ball
+    abstract class Ball: IBall
     {
         public double Speed { get; set; }
         public bool Hitted { get; set; }

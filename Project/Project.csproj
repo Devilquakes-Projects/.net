@@ -67,6 +67,7 @@
     <Compile Include="Games\BallGame\Ball.cs" />
     <Compile Include="Games\BallGame\BallGame.cs" />
     <Compile Include="Games\BallGame\ComputerBall.cs" />
+    <Compile Include="Games\BallGame\IBall.cs" />
     <Compile Include="Games\BallGame\PlayerBall.cs" />
     <Compile Include="ProjectConfig.cs" />
     <Compile Include="Games\SnakeGame\Snake.cs" />

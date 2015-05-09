@@ -28,7 +28,7 @@ namespace Project.Views
         public SnakeWindow()
         {
             InitializeComponent();
-            Snake s = new Snake(snakeCanvas, totalPointsLabel);
+            Snake s = new Snake(snakeCanvas, totalPointsLabel, timeLeftLabel);
 
             s.TimeLeft = ProjectConfig.PlayTime;
             s.startGame();

@@ -14,6 +14,9 @@ namespace Project.Games.BallGame
     {
         private DispatcherTimer gameFrameTimer = new DispatcherTimer(DispatcherPriority.Render);
         private DispatcherTimer timeLeftTimer = new DispatcherTimer();
+        private Label timeLeftLabel;
+        private Label totalLivesLabel;
+        private Label totalPointsLabel;
         private List<Ball> ballList;
         private Canvas canvas;
         private bool constantSpeed = true;
@@ -22,10 +25,13 @@ namespace Project.Games.BallGame
         private int points = 0;
         private int timePlayed = 0;
         private int timeLeft;
-        Random random;
+        private Random random;
 
-        public BallGame(List<Ball> ballList, Ball playerBall, int lives, int time, Canvas canvas)
+        public BallGame(List<Ball> ballList, Ball playerBall, int lives, int time, Canvas canvas, Label timeLeftLabel, Label totalLivesLabel, Label totalPointsLabel)
         {
+            this.timeLeftLabel = timeLeftLabel;
+            this.totalLivesLabel = totalLivesLabel;
+            this.totalPointsLabel = totalPointsLabel;
             this.ballList = ballList;
             this.ballPlayer = playerBall;
             this.canvas = canvas;
@@ -43,12 +49,12 @@ namespace Project.Games.BallGame
         private void timeLeftTimer_Tick(object sender, EventArgs e)
         {
             timeLeft--;
+            timeLeftLabel.Content = timeLeft;
             timePlayed++;
             if (timeLeft == 0)
             {
                 StopGame("You ran out of time!", "No time left");
-            }
-            // tijd in label aanpassen
+            }           
         }
 
         public void StartGame()
@@ -259,12 +265,12 @@ namespace Project.Games.BallGame
                 if (ballList[i].IsEnemy)
                 {
                     lives--;
+                    totalLivesLabel.Content = lives;
                     spawnBall(ballList[i], ballPlayer);
                     if (lives == 0)
                     {
                         StopGame("You ran out of lives! You died!", "You died!");
-                    }
-                    // label levens aanpassen
+                    }                  
                 }
                 else
                 {
@@ -282,15 +288,13 @@ namespace Project.Games.BallGame
                             constantSpeed = false;
                         }
                     }
-                    // label punten aanpassen
+                    totalPointsLabel.Content = points;
                 }
             }
         }
 
         private void spawnBall(Ball ball, Ball balls)
         {
-
-
             ball.XChange = 0;
             ball.YChange = 0;
 

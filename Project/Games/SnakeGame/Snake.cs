@@ -21,6 +21,7 @@ namespace Project.Games.SnakeGame
     {
         private Canvas drawOnCanvas;
         private Label pointsLabel;
+        private Label timeLeftLabel;
         private DispatcherTimer snakeTimer;
         private DispatcherTimer moveTimer;
         private DispatcherTimer timeTimer;
@@ -42,10 +43,11 @@ namespace Project.Games.SnakeGame
         /// </summary>
         /// <param name="canvas"></param>
         /// <param name="totalPointsLabel"></param>
-        public Snake(Canvas canvas, Label totalPointsLabel)
+        public Snake(Canvas canvas, Label totalPointsLabel, Label timeLeftLabel)
         {
             drawOnCanvas = canvas;
             pointsLabel = totalPointsLabel;
+            this.timeLeftLabel = timeLeftLabel;
             random = new Random();
             direction = 0;
             timePlayed = 0;
@@ -80,9 +82,9 @@ namespace Project.Games.SnakeGame
                 moveTimer.Stop();
                 snakeTimer.Stop();
                 timeTimer.Stop();
-
                 SaveAndClose("You ran out of time!", "No time left");
             }
+            timeLeftLabel.Content = timeLeft;
         }
 
         /// <summary>
@@ -97,7 +99,7 @@ namespace Project.Games.SnakeGame
         }
 
         /// <summary>
-        /// moving the snake
+        /// moving the snake and check if it hits something
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -167,7 +169,6 @@ namespace Project.Games.SnakeGame
                 }
                 eaten = false;
             }
-
             food.Margin = new Thickness(foodX, foodY, 0, 0);
             drawOnCanvas.Children.Add(food);
         }
@@ -212,7 +213,7 @@ namespace Project.Games.SnakeGame
         }
 
         /// <summary>
-        /// move snake + check hit
+        /// moves snake
         /// </summary>
         public void UpdateSnake()
         {
@@ -284,10 +285,7 @@ namespace Project.Games.SnakeGame
         }
 
         /// <summary>
-        /// removes food
-        /// adds 1 Snakepart
-        /// adds 1 point
-        /// adds a new foodpiece
+        /// increases level, points and adds a snakePart
         /// </summary>
         public void Eat()
         {
@@ -319,11 +317,14 @@ namespace Project.Games.SnakeGame
             moveTimer.Stop();
             snakeTimer.Stop();
             timeTimer.Stop();
-
             SaveAndClose("You died!" + Environment.NewLine + "Score: " + points, "You died");
-
         }
 
+        /// <summary>
+        /// save score and close game
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
         private void SaveAndClose(string message, string title)
         {
             // save score

@@ -37,6 +37,7 @@ namespace Project.Views
         public BallWindow()
         {
             InitializeComponent();
+            totalLivesLabel.Content = lives;
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +58,7 @@ namespace Project.Views
 
                 ballList.Add(ball);
             }
-            game = new BallGame(ballList, ballPlayer, lives, time, canvas);
+            game = new BallGame(ballList, ballPlayer, lives, time, canvas, timeLeftLabel, totalLivesLabel, totalPointsLabel);
             game.StartGame();
             gameStarted = true;
         }

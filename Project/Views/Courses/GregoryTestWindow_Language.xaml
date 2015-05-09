@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Project.Views.GregoryTestWindow_Language"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Language" Height="300" Width="940">
+        WindowStartupLocation="CenterScreen"
+        Title="Nederlands" Height="300" Width="940">
     <Grid>
         <Label Name="title" Content="languages" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="36"/>
         <Label Name="header1" Content="Header1" HorizontalAlignment="Left" Margin="132,68,0,0" VerticalAlignment="Top" Width="250"/>

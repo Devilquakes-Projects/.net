@@ -1,4 +1,6 @@
-﻿using Project.Controllers;
+﻿// Author: Joris Meylaers
+// Date: 28/04/2015
+using Project.Controllers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,15 +31,14 @@ namespace Project.Views
         {
             InitializeComponent();
             list = QuestionsListBox.Items;
-
         }
 
         private void CoursesComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             data = new List<string>();
-            data.Add("Geography");
-            data.Add("Language");
-            data.Add("Math");
+            data.Add("Aardrijkskunde");
+            data.Add("Nederlands");
+            data.Add("Wiskunde");
 
             var comboBox = sender as ComboBox;
             comboBox.ItemsSource = data;
@@ -57,7 +58,7 @@ namespace Project.Views
         {
             switch (course)
             {
-                case "Geography":
+                case "Aardrijkskunde":
                     QuestionsListBox.Items.Clear();
                     List<string[]> geoQuestions = DB.GetDB(ProjectConfig.QuestionsFileGeo);
                     for (int i = 0; i < geoQuestions.Count; i++)
@@ -71,11 +72,11 @@ namespace Project.Views
                         QuestionsListBox.Items.Add(text);
                     }
                     break;
-                case "Language":
+                case "Nederlands":
                     QuestionsListBox.Items.Clear();
                     List<string[]> lanQuestions = DB.GetDB(ProjectConfig.QuestionsFileLang);
                     for (int i = 0; i < lanQuestions.Count; i++)
-                    {
+                    {         
                         string text = null;
                         string[] line = lanQuestions.ElementAt(i);
                         for (int j = 0; j < line.Length; j++)
@@ -85,7 +86,7 @@ namespace Project.Views
                         QuestionsListBox.Items.Add(text);
                     }
                     break;
-                case "Math":
+                case "Wiskunde":
                     QuestionsListBox.Items.Clear();
                     List<string[]> mathQuestions = DB.GetDB(ProjectConfig.QuestionsFileMath);
                     for (int i = 0; i < mathQuestions.Count; i++)
@@ -106,8 +107,8 @@ namespace Project.Views
         {
             string textToChange = Convert.ToString(QuestionsListBox.SelectedItem);
             ChangeWindow editwindow = new ChangeWindow(textToChange, course.ToString());
-            this.Close();
             editwindow.Show();
+            this.Close();        
         }
 
         private void homeButton_Click(object sender, RoutedEventArgs e)
