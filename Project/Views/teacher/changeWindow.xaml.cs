@@ -25,6 +25,7 @@ namespace Project.Views
 
         private string course;
         private int id;
+
         public ChangeWindow(string content, string subject)
         {
             InitializeComponent();
@@ -40,35 +41,35 @@ namespace Project.Views
 
         private void setLabels()
         {
-            switch (course)
-            {
+                    switch (course)
+                    {
                 case "Aardrijkskunde":
-                    solutionLabel1.Content = "Correct solution:";
-                    solutionLabel2.Visibility = Visibility.Visible;
-                    solutionLabel2.Content = "Wrong solution:";
-                    solutionTextBox2.Visibility = Visibility.Visible;
-                    solutionLabel3.Visibility = Visibility.Hidden;
-                    solutionTextBox3.Visibility = Visibility.Hidden;
-                    break;
+                            solutionLabel1.Content = "Correct solution:";
+                            solutionLabel2.Visibility = Visibility.Visible;
+                            solutionLabel2.Content = "Wrong solution:";
+                            solutionTextBox2.Visibility = Visibility.Visible;
+                            solutionLabel3.Visibility = Visibility.Hidden;
+                            solutionTextBox3.Visibility = Visibility.Hidden;
+                            break;
                 case "Nederlands":
-                    solutionLabel1.Content = "Solution TT:";
-                    solutionLabel2.Visibility = Visibility.Visible;
-                    solutionLabel2.Content = "Solution VT:";
-                    solutionTextBox2.Visibility = Visibility.Visible;
-                    solutionLabel3.Visibility = Visibility.Visible;
-                    solutionLabel3.Content = "Solution VD:";
-                    solutionTextBox3.Visibility = Visibility.Visible;
-                    break;
+                            solutionLabel1.Content = "Solution TT:";
+                            solutionLabel2.Visibility = Visibility.Visible;
+                            solutionLabel2.Content = "Solution VT:";
+                            solutionTextBox2.Visibility = Visibility.Visible;
+                            solutionLabel3.Visibility = Visibility.Visible;
+                            solutionLabel3.Content = "Solution VD:";
+                            solutionTextBox3.Visibility = Visibility.Visible;
+                            break;
                 case "Wiskunde":
-                    solutionLabel1.Content = "Solution:";
-                    solutionLabel2.Visibility = Visibility.Hidden;
-                    solutionTextBox2.Visibility = Visibility.Hidden;
-                    solutionLabel3.Visibility = Visibility.Hidden;
-                    solutionTextBox3.Visibility = Visibility.Hidden;
-                    break;
+                            solutionLabel1.Content = "Solution:";
+                            solutionLabel2.Visibility = Visibility.Hidden;
+                            solutionTextBox2.Visibility = Visibility.Hidden;
+                            solutionLabel3.Visibility = Visibility.Hidden;
+                            solutionTextBox3.Visibility = Visibility.Hidden;
+                            break;
 
-            }
-        }
+                    }
+                }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
@@ -122,13 +123,29 @@ namespace Project.Views
                     }
                 }
 
-        }
+                }
         private void dataSuccesfull()
         {
             MessageBox.Show("Vraag succesvol gewijzigd");
             EditQuestionWindow questionWindow = new EditQuestionWindow();
             questionWindow.Show();
             this.Close();
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (course)
+            {
+                case "Geography":
+                    DB.HideRecord(ProjectConfig.QuestionsFileGeo, id);
+                    break;
+                case "Language":
+                    DB.HideRecord(ProjectConfig.QuestionsFileLang, id);
+                    break;
+                case "Math":
+                    DB.HideRecord(ProjectConfig.QuestionsFileMath, id);
+                    break;
+            }
         }
 
         private void dataIncomplete()

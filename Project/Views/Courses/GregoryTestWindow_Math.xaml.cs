@@ -30,7 +30,7 @@ namespace Project
 
             //onderstaande int's moeten van buitenaf doorgegeven worden (via constructor), ik set deze tijdelijk op deze manier:
             int studentId = User.Id;
-            int difficulty = 3;
+            int difficulty = ProjectConfig.QuestionDifficulty;
 
             try
             {

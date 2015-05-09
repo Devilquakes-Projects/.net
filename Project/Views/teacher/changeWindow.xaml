@@ -15,6 +15,7 @@
         <TextBox Name="solutionTextBox2" HorizontalAlignment="Left" Height="23" Margin="103,151,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label Name="solutionLabel3" Content="" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top"/>
         <TextBox Name="solutionTextBox3" HorizontalAlignment="Left" Height="23" Margin="103,179,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Name="confirmLabel" Content="" HorizontalAlignment="Left" Height="38" Margin="103,222,0,0" VerticalAlignment="Top" Width="181" Background="Pink" Visibility="Hidden"/>
+        <Button Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Margin="167,222,0,0" VerticalAlignment="Top" Width="117" Height="38" Click="deleteButton_Click"/>
+
     </Grid>
 </Window>

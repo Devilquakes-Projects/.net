@@ -57,7 +57,7 @@ namespace Project.Games.SnakeGame
             head.Y = ((int)(drawOnCanvas.Height / 2) / 10) * 10; // zorgt voor een veelvoud van 10
             snake.Add(head);
             snakeTimer = new DispatcherTimer();
-            snakeTimer.Interval = TimeSpan.FromSeconds(0.4 - (difficulty / 10));
+            snakeTimer.Interval = TimeSpan.FromSeconds(0.4 - (difficulty / 10.0));
             snakeTimer.Tick += snakeTimer_Tick;
             moveTimer = new DispatcherTimer();
             moveTimer.Interval = TimeSpan.FromMilliseconds(5);

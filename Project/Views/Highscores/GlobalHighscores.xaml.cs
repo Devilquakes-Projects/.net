@@ -68,7 +68,7 @@ namespace Project.Views
 
         private void showButton_Click(object sender, RoutedEventArgs e)
         {
-            all = new string[fullDB.Count, 2];
+            /*all = new string[fullDB.Count, 2];
             try
             {
                 for (int i = 0; i < fullDB.Count; i++)
@@ -83,6 +83,45 @@ namespace Project.Views
             catch (NoRecordFoundException)
             {
                 MessageBox.Show("Unable to download highscores");
+            }*/
+
+            int userID;
+            List<int> allUsers = new List<int>();
+            bool addUser = true;
+
+            for (int i = 0; i < fullDB.Count; i++)
+            {
+                userID = Convert.ToInt32(fullDB[i][2]);
+                for (int j = 0; j < allUsers.Count; j++)
+                {
+                    if (userID == allUsers[j])
+                    {
+                        addUser = false;
+                    }
+                }
+                if (addUser)
+                {
+                    allUsers.Add(userID);
+                }
+                addUser = true;
+            }
+
+            int highscore;
+            int score;
+
+            for (int i = 0; i < allUsers.Count; i++)
+            {
+                highscore = 0;
+                for (int j = 0; j < fullDB.Count; j++)
+                {
+                    score = Convert.ToInt32(fullDB[j][5]);
+                    if (Convert.ToInt32(fullDB[j][2]) == allUsers[i] && score > highscore)
+                    {
+                        highscore = score;
+                    }
+                }
+
+                list.Add(allUsers[i] + "\t-\t" + highscore);
             }
         }
 
