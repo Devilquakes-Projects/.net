@@ -166,7 +166,6 @@ namespace Project.Controllers.Courses
             }
             else
             {
-                string s = String.Format("Not enough questions in the questions-list," + Environment.NewLine + "ask a teacher to fix this" + Environment.NewLine + "Application will now close", "Error: Not enough Questions.");
                 throw new NotEnoughQuestionsException();
             }
 
