@@ -16,8 +16,6 @@ namespace Project.Controllers.Courses
 {
     public abstract class Curriculum
     {
-        //Instance Variables:
-        //timer:
         private int timer;
 
         //questions:
@@ -29,9 +27,6 @@ namespace Project.Controllers.Courses
         private string questions;
         private int amountOfQuestionsNeeded;
         private int difficulty;
-
-        //Constructors:
-        public Curriculum() { }
 
         public Curriculum(int studentId, int difficulty)
         {
@@ -78,54 +73,11 @@ namespace Project.Controllers.Courses
             }
         }
 
-        private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue)
-        {
-            string[] test;
-            Random r1 = new Random();
-            int[] array = new int[amountOfNumbers];
-
-            maxValue++;
-
-            if (amountOfNumbers <= maxValue - minValue) //check if there are enough unique numbers to choose from otherwise Console.Writeline for programmers info.
-            {
-                for (int i = 0; i < amountOfNumbers; i++)
-                {
-                    array[i] = r1.Next(minValue, maxValue);
-
-                    try
-                    {
-                        test = DB.FindFirst(questions, "ID", Convert.ToString(array[i]));
-                        for (int j = 0; j < i; j++)
-                        {
-                            if (array[i] == array[j]) //if random number already in array, counter - 1 and break out of this for-loop
-                            {
-                                i--;
-                                break;
-                            }
-                        }
-                    }
-                    catch (NoRecordFoundException)
-                    {
-                        i--;
-                    }
-                }
-            }
-            else
-            {
-                string errorMsg = String.Format("You requested {0} numbers, there are only {1} numbers available! (in SelectRandomQuestions method of Curriculum.cs class)", amountOfNumbers, maxValue - minValue);//info for the programmer, the user won't notice this!
-                Console.WriteLine(errorMsg);
-            }
-
-            return array;
-        }
-
         protected void StartGradeValues(out string correctAnswer, out string wrongAnswer)//Author: Greg, Date: 07-04-15
         {
             correctAnswer = " = Correct answer!";
             wrongAnswer = " = Wrong, answer should be: ";
         }
-
-        public abstract void Grade();//Author: Greg, Date: 05-04-15
 
         protected void ShowResults(int pts)//Author: Greg, Date: 05-04-15 14:50 - 15:20
         {
@@ -179,11 +131,60 @@ namespace Project.Controllers.Courses
             timeLabel.Content = "Test Complete";
         }
 
+        public abstract void Grade();//Author: Greg, Date: 05-04-15
+
+        private int[] SelectRandomQuestions(int amountOfNumbers, int minValue, int maxValue)
+        {
+            string[] test;
+            Random r1 = new Random();
+            int[] array = new int[amountOfNumbers];
+
+            maxValue++;
+
+            if (amountOfNumbers <= maxValue - minValue) //check if there are enough unique numbers to choose from otherwise Console.Writeline for programmers info.
+            {
+                for (int i = 0; i < amountOfNumbers; i++)
+                {
+                    array[i] = r1.Next(minValue, maxValue);
+
+                    try
+                    {
+                        test = DB.FindFirst(questions, "ID", Convert.ToString(array[i]));
+                        for (int j = 0; j < i; j++)
+                        {
+                            if (array[i] == array[j]) //if random number already in array, counter - 1 and break out of this for-loop
+                            {
+                                i--;
+                                break;
+                            }
+                        }
+                    }
+                    catch (NoRecordFoundException)
+                    {
+                        i--;
+                    }
+                }
+            }
+            else
+            {
+                string errorMsg = String.Format("You requested {0} numbers, there are only {1} numbers available! (in SelectRandomQuestions method of Curriculum.cs class)", amountOfNumbers, maxValue - minValue);//info for the programmer, the user won't notice this!
+                Console.WriteLine(errorMsg);
+            }
+
+            return array;
+        }
+
         //Getter/Setter: to influence the amount of given time for the exercises:
         public int Timer
         {
             get { return timer; }
             set { timer = value; }
+        }
+
+        public string QuestionsFile
+        {
+            get { return questions; }
+            set { questions = value; }
         }
 
         //Getter: answers
@@ -198,17 +199,10 @@ namespace Project.Controllers.Courses
             set { amountOfQuestionsNeeded = value; }
         }
 
-        public string QuestionsFile
-        {
-            get { return questions; }
-            set { questions = value; }
-        }
-
         //Getter: difficulty to use in Grade subclasses (should be set already with constructor!):
         protected int GetDifficulty
         {
             get { return difficulty; }
         }
-
     }
 }

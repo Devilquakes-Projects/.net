@@ -12,7 +12,6 @@ namespace Project.Controllers.Courses
 {
     public abstract class Courses_TextBoxClass : Curriculum
     {
-
         public Courses_TextBoxClass(int studentId, int difficulty)
             : base(studentId, difficulty)
         { }//create a top-class object, so do nothing here

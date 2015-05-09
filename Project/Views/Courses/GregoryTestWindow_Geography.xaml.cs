@@ -40,16 +40,12 @@ namespace Project.Views
             {
                 MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
                 ThrowWindowClosedException();
-                //Environment.Exit(1);
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
                 MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 ThrowWindowClosedException();
-                //Environment.Exit(1);
             }
-
-            //geography.LoadQuestions();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -57,7 +53,6 @@ namespace Project.Views
             if (gradeButton.Content.Equals("Grade"))
             {
                 geography.Grade();
-
             }
             else
             {

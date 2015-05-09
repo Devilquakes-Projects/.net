@@ -11,25 +11,18 @@ using Project.Controllers;
 using System.Globalization;
 
 // Auther: Gregory Malomgré
-// Date: 07/04/2015 (note: de vernieuwde versie, de oude versie schreef ik op 05/04)
+// Date: 07/04/2015
 namespace Project.Controllers.Courses
 {
-    class Mathematics : Courses_TextBoxClass //onderliggend van abstracte klasse Curriculum
+    class Mathematics : Courses_TextBoxClass
     {
         //instance variables:
         //labels:
         private Label timeLabel;
-
-        //textboxes:
         private TextBox[] tb = new TextBox[5];
-
-        //GradeButton:
         private Button gradeButton;
-
-        //timer:
         private DispatcherTimer timer;
 
-        //Constructors:
         public Mathematics(int studentId, int difficulty, Label timeLabel, Button gradeButton, Label l1, Label l2, Label l3, Label l4, Label l5, TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5)
             : base(studentId, difficulty)
         {
@@ -62,14 +55,6 @@ namespace Project.Controllers.Courses
             timer.Start();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            if (base.ShouldTimerStopRunning(timeLabel))
-            {
-                Grade();
-            }
-        }
-
         public override void Grade()//Author: Greg, Date: 06-04-15 //accepts decimal numbers, note: stored with a '.' NOTATION)
         {
             timer.Stop();
@@ -81,11 +66,11 @@ namespace Project.Controllers.Courses
             string wrongAnswer;
             string[,] answers = base.Answers;
 
-            base.StartGradeValues(out correctAnswer, out wrongAnswer);//Author: Greg, Date: 07-04-15 11:30-14:30
+            base.StartGradeValues(out correctAnswer, out wrongAnswer);
 
             for (int i = 0; i < tb.Length; i++)
             {
-                if (tb[i].Text.Equals(answers[i, 0]))//Author: Greg, Date 06-04-15
+                if (tb[i].Text.Equals(answers[i, 0]))
                 {
                     points++;
                     tb[i].Text += correctAnswer;
@@ -101,7 +86,7 @@ namespace Project.Controllers.Courses
             //pts formule math:
             if (Timer > 0 && points > 0)//bonus points if test complete before end of time!
             {
-                    points = (int)(Math.Round((points * 1.5 + base.GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
+                points = (int)(Math.Round((points * 1.5 + base.GetDifficulty * 0.84), MidpointRounding.AwayFromZero));
             }
             else
             {
@@ -112,6 +97,14 @@ namespace Project.Controllers.Courses
             base.WriteRecords(3, points);//index 3 is for column of math points!
 
             base.ShowResults(points);
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (base.ShouldTimerStopRunning(timeLabel))
+            {
+                Grade();
+            }
         }
 
         private void MsgPopupBox(int questionNumber)
@@ -129,7 +122,7 @@ namespace Project.Controllers.Courses
 
                 for (int i = 0; i < tb.Length; i++)
                 {
-                    if (Double.TryParse(tb[i].Text.Replace('.', ','), style, culture, out result))
+                    if (Double.TryParse(tb[i].Text.Replace('.', ','), style, culture, out result))//25,0 / 25.0 becomes 25.0
                     {
                         tb[i].Text = Convert.ToString(result);//25.0 becomes 25!
                     }

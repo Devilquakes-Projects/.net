@@ -28,6 +28,8 @@ namespace Project
         {
             InitializeComponent();
 
+            tb1.Focus();
+
             //onderstaande int's moeten van buitenaf doorgegeven worden (via constructor), ik set deze tijdelijk op deze manier:
             int studentId = User.Id;
             int difficulty = ProjectConfig.QuestionDifficulty;
@@ -40,13 +42,11 @@ namespace Project
             {
                 MessageBox.Show(exeptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Notification:", MessageBoxButton.OK, MessageBoxImage.Information);
                 ThrowWindowClosedException();
-                //Environment.Exit(1);
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
                 MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will now go to the previous screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 ThrowWindowClosedException();
-                //Environment.Exit(1);
             }
         }
 

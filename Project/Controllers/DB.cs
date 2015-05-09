@@ -558,7 +558,7 @@ namespace Project.Controllers
                 //ChangeRecord(dbName, colmName, newArray);   //not performant: fixed at 07/04: 12:10-12:15 by Gregory
                 RewriteRecord(dbName, colmName, newArray);
             }
-            catch (IndexOutOfRangeException obj)
+            catch (IndexOutOfRangeException obj)//impossible in the current context, however: if someone uses this without knowing what it does...
             {
                 Console.WriteLine(obj);
                 throw new IndexOutOfRangeException();

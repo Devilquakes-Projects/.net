@@ -72,23 +72,6 @@ namespace Project.Controllers.Courses
             dpTimer.Start();
         }
 
-        private void LoadHeaderLabels()
-        {
-            string[] headers = DB.FindFirst(base.QuestionsFile, "ID", "1", onlyVisible: false);
-            title.Content = headers[2];
-            header1.Content = headers[3];
-            header2.Content = headers[4];
-            header3.Content = headers[5];
-        }
-
-        private void dpTimer_Tick(object sender, EventArgs e)
-        {
-            if (base.ShouldTimerStopRunning(time))
-            {
-                Grade();
-            }
-        }
-
         public override void Grade()
         {
             dpTimer.Stop();
@@ -141,13 +124,21 @@ namespace Project.Controllers.Courses
             base.ShowResults(points);
         }
 
-        //private void ConvertInputToCapitals()//Author: Greg, Date:14-04-15
-        //{
-        //    //ingave op hoofdletters zetten:
-        //    for (int i = 0; i < tb.Length; i++)
-        //    {
-        //        tb[i].Text = tb[i].Text.ToUpper();
-        //    }
-        //}
+        private void LoadHeaderLabels()
+        {
+            string[] headers = DB.FindFirst(base.QuestionsFile, "ID", "1", onlyVisible: false);
+            title.Content = headers[2];
+            header1.Content = headers[3];
+            header2.Content = headers[4];
+            header3.Content = headers[5];
+        }
+
+        private void dpTimer_Tick(object sender, EventArgs e)
+        {
+            if (base.ShouldTimerStopRunning(time))
+            {
+                Grade();
+            }
+        }
     }
 }
