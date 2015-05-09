@@ -139,5 +139,11 @@ namespace Project.Views
                     }
                 }
         }
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow newView = new MainWindow();
+            newView.Show();
+            this.Close();
+        }
     }
 }

@@ -109,5 +109,12 @@ namespace Project.Views
             this.Close();
             editwindow.Show();
         }
+
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow newView = new MainWindow();
+            newView.Show();
+            this.Close();
+        }
     }
 }

@@ -15,8 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-// Bij Views-Teacher: Wat is die ChangeWindow.xaml???
-
 namespace Project
 {
     /// <summary>
