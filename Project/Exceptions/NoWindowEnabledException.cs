@@ -8,6 +8,6 @@ namespace Project.Exceptions
 {
     class NoWindowEnabledException : ApplicationException
     {
-        public NoWindowEnabledException() : base("Window was: Closed in subclass") { }
+        public NoWindowEnabledException() : base("There is no window enabled at this time") { }
     }
 }
