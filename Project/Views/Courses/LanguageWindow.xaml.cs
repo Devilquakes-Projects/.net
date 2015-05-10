@@ -15,16 +15,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Project
+namespace Project.Views
 {
     /// <summary>
-    /// Interaction logic for GregoryTest.xaml
+    /// Interaction logic for GregoryTestWindow_Language.xaml
     /// </summary>
-    public partial class GregoryTestWindow : Window
+    public partial class LanguageWindow : Window
     {
-        private Mathematics m1;
-
-        public GregoryTestWindow()
+        private Languages lang;
+        public LanguageWindow()
         {
             InitializeComponent();
 
@@ -36,7 +35,7 @@ namespace Project
 
             try
             {
-                m1 = new Mathematics(studentId, difficulty, timeLabel, gradeButton, l1, l2, l3, l4, l5, tb1, tb2, tb3, tb4, tb5);
+                lang = new Languages(studentId, difficulty, gradeButton, timeLabel, title, question1Label, question2Label, header1, header2, header3, tb1, tb2, tb3, tb4, tb5, tb6);
             }
             catch (CourseAlreadyCompletedException exeptionObject)
             {
@@ -45,7 +44,7 @@ namespace Project
             }
             catch (NotEnoughQuestionsException exceptionObject)
             {
-                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will stay at to the main screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(exceptionObject.Message + Environment.NewLine + "Application will stay at the main screen", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
                 ThrowWindowClosedException();
             }
         }
@@ -54,7 +53,7 @@ namespace Project
         {
             if (gradeButton.Content.Equals("Grade"))
             {
-                m1.Grade();
+                lang.Grade();
             }
             else
             {

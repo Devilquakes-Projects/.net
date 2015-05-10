@@ -83,7 +83,7 @@ namespace Project
         {
             try
             {
-                GregoryTestWindow newView = new GregoryTestWindow();
+                MathWindow newView = new MathWindow();
                 newView.Show();
             }
             catch (NoWindowEnabledException exceptionObject)
@@ -100,7 +100,7 @@ namespace Project
         {
             try
             {
-                GregoryTestWindow_Language newView = new GregoryTestWindow_Language();
+                LanguageWindow newView = new LanguageWindow();
                 newView.Show();
             }
             catch (NoWindowEnabledException exceptionObject)
@@ -117,7 +117,7 @@ namespace Project
         {
             try
             {
-                GregoryTestWindow_Geography newView = new GregoryTestWindow_Geography();
+                GeographyWindow newView = new GeographyWindow();
                 newView.Show();
             }
             catch (NoWindowEnabledException exceptionObject)

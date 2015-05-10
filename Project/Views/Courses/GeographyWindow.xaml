@@ -1,4 +1,4 @@
-﻿<Window x:Class="Project.Views.GregoryTestWindow_Geography"
+﻿<Window x:Class="Project.Views.GeographyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen"

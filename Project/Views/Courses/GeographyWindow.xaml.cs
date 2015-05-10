@@ -20,11 +20,11 @@ namespace Project.Views
     /// <summary>
     /// Interaction logic for GregoryTestWindow_Geography.xaml
     /// </summary>
-    public partial class GregoryTestWindow_Geography : Window
+    public partial class GeographyWindow : Window
     {
         private Geography geography;
 
-        public GregoryTestWindow_Geography()
+        public GeographyWindow()
         {
             InitializeComponent();
 

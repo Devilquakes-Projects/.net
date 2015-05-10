@@ -84,14 +84,14 @@
     <Compile Include="Views\Games\SnakeWindow.xaml.cs">
       <DependentUpon>SnakeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Courses\GregoryTestWindow_Geography.xaml.cs">
-      <DependentUpon>GregoryTestWindow_Geography.xaml</DependentUpon>
+    <Compile Include="Views\Courses\GeographyWindow.xaml.cs">
+      <DependentUpon>GeographyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Courses\GregoryTestWindow_Language.xaml.cs">
-      <DependentUpon>GregoryTestWindow_Language.xaml</DependentUpon>
+    <Compile Include="Views\Courses\LanguageWindow.xaml.cs">
+      <DependentUpon>LanguageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Courses\GregoryTestWindow_Math.xaml.cs">
-      <DependentUpon>GregoryTestWindow_Math.xaml</DependentUpon>
+    <Compile Include="Views\Courses\MathWindow.xaml.cs">
+      <DependentUpon>MathWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Auth\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -128,15 +128,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Courses\GregoryTestWindow_Geography.xaml">
+    <Page Include="Views\Courses\GeographyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Courses\GregoryTestWindow_Language.xaml">
+    <Page Include="Views\Courses\LanguageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Courses\GregoryTestWindow_Math.xaml">
+    <Page Include="Views\Courses\MathWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
